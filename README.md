@@ -9,15 +9,6 @@ It is part of the effort to bridge the Bitcoin network to the scion internet arc
 
 ![The Web UI](docs/assets/web-ui.png)
 
-## Links
-
--  [Getting Started](#getting-started)
--  [Documentation](#documentation)
--  [Contributing](#contributing)
--  [License](#license)
-
-## Contributing
-
 Contributions to SEED-Emulator are always welcome. For contribution guidelines, please see [CONTRIBUTING](./CONTRIBUTING.md).
 
 ## License

@@ -4,6 +4,7 @@ from seedemu.compiler import Docker
 from seedemu.core import Emulator, Binding, Filter
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion
 from seedemu.layers.Scion import LinkType as ScLinkType
+from seedemu.services import ScionHelloquicService
 
 # Initialize
 emu = Emulator()
@@ -11,6 +12,7 @@ base = ScionBase()
 routing = ScionRouting()
 scion_isd = ScionIsd()
 scion = Scion()
+helloquic = ScionHelloquicService()
 
 # SCION ISDs
 base.createIsolationDomain(1)
@@ -27,11 +29,15 @@ as150_router = as150.createRouter('br0')
 as150_router.joinNetwork('net0').joinNetwork('ix100')
 as150_router.crossConnect(153, 'br0', '10.50.0.2/29')
 
-# AS-15ß - create h01 running helloquic service
-as150.createHost('helloquic').joinNetwork('net0')
-h01 = as150.getHost('helloquic')
+# AS-150 - create h01 running helloquic service
+as150.createHost('h01').joinNetwork('net0')
+h01 = as150.getHost('h01')
 h01.importFile('/home/justus/seed-emulator/examples/scion/S05-helloquic/helloquic','/bin/helloquic')
 h01.appendStartCommand('chmod +x /bin/helloquic', False)
+
+# AS-150 - add helloquic service, port 9000 is default anyway
+helloquic.install('h01').setPort(9000)
+emu.addBinding(Binding('h01', filter=Filter(nodeName="h01", asn=150)))
 
 # AS-151
 as151 = base.createAutonomousSystem(151)
@@ -41,7 +47,7 @@ as151.createControlService('cs1').joinNetwork('net0')
 as151.createRouter('br0').joinNetwork('net0').joinNetwork('ix100')
 
 # AS-151 - create h02 running helloquic service
-h02 = as151.createHost('helloquic').joinNetwork('net0')
+h02 = as151.createHost('h02').joinNetwork('net0')
 h02.importFile('/home/justus/seed-emulator/examples/scion/S05-helloquic/helloquic','/bin/helloquic')
 h02.appendStartCommand('chmod +x /bin/helloquic', False)
 
@@ -63,7 +69,7 @@ as153_router.joinNetwork('net0')
 as153_router.crossConnect(150, 'br0', '10.50.0.3/29')
 
 # AS-153 - create h03 running helloquic service
-h03 = as153.createHost('helloquic').joinNetwork('net0')
+h03 = as153.createHost('h03').joinNetwork('net0')
 h03.importFile('/home/justus/seed-emulator/examples/scion/S05-helloquic/helloquic','/bin/helloquic')
 h03.appendStartCommand('chmod +x /bin/helloquic', False)
 
@@ -78,6 +84,7 @@ emu.addLayer(base)
 emu.addLayer(routing)
 emu.addLayer(scion_isd)
 emu.addLayer(scion)
+emu.addLayer(helloquic)
 
 emu.render()
 
