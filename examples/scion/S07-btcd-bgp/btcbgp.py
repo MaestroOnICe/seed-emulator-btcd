@@ -3,8 +3,8 @@
 
 from seedemu.layers import Base, Routing, Ebgp
 from seedemu.services import WebService
-from seedemu.compiler import Docker
-from seedemu.core import Emulator, Binding, Filter
+from seedemu.compiler import Docker, Graphviz
+from seedemu.core import Emulator
 
 
 # Initialize the emulator and layers
@@ -15,53 +15,43 @@ ebgp    = Ebgp()
 web     = WebService()
 
 ###############################################################################
-# Create an Internet Exchange
+# Create two Internet Exchange
 base.createInternetExchange(100)
+base.createInternetExchange(101)
 
 ###############################################################################
-# Create and set up AS-150
-
-as150 = base.createAutonomousSystem(150)
-as150.createNetwork('net0')
-as150.createRouter('router0').joinNetwork('net0').joinNetwork('ix100')
-h01 = as150.createHost('h01').joinNetwork('net0')
-h01.addSoftware("screen")
-h01.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcd','/bin/btcd')
-h01.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcwallet','/bin/btcwallet')
-h01.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcctl','/bin/btcctl')
-h01.appendStartCommand('chmod +x /bin/btcd', False)
-h01.appendStartCommand('chmod +x /bin/btcwallet', False)
-h01.appendStartCommand('chmod +x /bin/btcctl', False)
-
-###############################################################################
-# Create and set up AS-151
-
-as151 = base.createAutonomousSystem(151)
-as151.createNetwork('net0')
-as151.createRouter('router0').joinNetwork('net0').joinNetwork('ix100')
-h02 = as151.createHost('h02').joinNetwork('net0')
-h02.addSoftware("screen")
-h02.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcd','/bin/btcd')
-h02.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcwallet','/bin/btcwallet')
-h02.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcctl','/bin/btcctl')
-h02.appendStartCommand('chmod +x /bin/btcd', False)
-h02.appendStartCommand('chmod +x /bin/btcwallet', False)
-h02.appendStartCommand('chmod +x /bin/btcctl', False)
+# Core ASes in ISD 1
+asn_ix = {
+    150: 100,
+    151: 100,
+    152: 100,
+    153: 100,
+    154: 100,
+    155: 100,
+    156: 101,
+    157: 101,
+    158: 101,
+    159: 101,
+    160: 101
+}
 
 ###############################################################################
-# Create and set up AS-152
+# import permission commands
+with open("/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/scripts/permissions.sh", 'r') as file:
+         permissions = file.read()
 
-as152 = base.createAutonomousSystem(152)
-as152.createNetwork('net0')
-as152.createRouter('router0').joinNetwork('net0').joinNetwork('ix100')
-h03 = as152.createHost('h01').joinNetwork('net0')
-h03.addSoftware("screen")
-h03.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcd','/bin/btcd')
-h03.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcwallet','/bin/btcwallet')
-h03.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/binary/btcctl','/bin/btcctl')
-h03.appendStartCommand('chmod +x /bin/btcd', False)
-h03.appendStartCommand('chmod +x /bin/btcwallet', False)
-h03.appendStartCommand('chmod +x /bin/btcctl', False)
+###############################################################################
+# create ASes with btcd node in host
+for asn, ix in asn_ix.items():
+    as_ = base.createAutonomousSystem(asn)
+    as_.createNetwork("net0")
+    as_.createControlService("cs1").joinNetwork("net0")
+    as_.createRouter("br0").joinNetwork("net0").joinNetwork(f"ix{ix}")
+    host = as_.createHost("host").joinNetwork("net0")
+    host.addSharedFolder('/shared/','/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/bin/')
+    host.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/scripts/run.sh', '/run.sh')
+    host.appendStartCommand(permissions, False)
+
 
 ###############################################################################
 # Peering these ASes at Internet Exchange IX-100
@@ -69,7 +59,15 @@ h03.appendStartCommand('chmod +x /bin/btcctl', False)
 ebgp.addRsPeer(100, 150)
 ebgp.addRsPeer(100, 151)
 ebgp.addRsPeer(100, 152)
-
+ebgp.addRsPeer(100, 153)
+ebgp.addRsPeer(100, 154)
+ebgp.addRsPeer(100, 155)
+ebgp.addRsPeer(100, 156)
+ebgp.addRsPeer(101, 156)
+ebgp.addRsPeer(101, 157)
+ebgp.addRsPeer(101, 158)
+ebgp.addRsPeer(101, 159)
+ebgp.addRsPeer(101, 160)
 
 ###############################################################################
 # Rendering 
