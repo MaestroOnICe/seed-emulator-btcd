@@ -45,13 +45,16 @@ with open("/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/scripts/permis
 for asn, ix in asn_ix.items():
     as_ = base.createAutonomousSystem(asn)
     as_.createNetwork("net0")
-    as_.createControlService("cs1").joinNetwork("net0")
     as_.createRouter("br0").joinNetwork("net0").joinNetwork(f"ix{ix}")
     host = as_.createHost("host").joinNetwork("net0")
     host.addSharedFolder('/shared/','/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/bin/')
     host.importFile('/home/justus/seed-emulator/examples/scion/S07-btcd-bgp/scripts/run.sh', '/run.sh')
     host.appendStartCommand(permissions, False)
 
+###############################################################################
+# manually add AS156
+as156 = base.getAutonomousSystem(156)
+as156.getRouter("br0").joinNetwork("ix100")
 
 ###############################################################################
 # Peering these ASes at Internet Exchange IX-100

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from seedemu.compiler import Docker, Graphviz
-from seedemu.core import Emulator, Binding, Filter
+from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion
 from seedemu.layers.Scion import LinkType as ScLinkType
 
@@ -12,13 +12,16 @@ routing = ScionRouting()
 scion_isd = ScionIsd()
 scion = Scion()
 
+###############################################################################
 # SCION ISDs
 base.createIsolationDomain(1)
 
+###############################################################################
 # Internet Exchange
 base.createInternetExchange(100)
 base.createInternetExchange(101)
 
+###############################################################################
 # Core ASes in ISD 1
 asn_ix = {
     150: 100,
@@ -34,10 +37,12 @@ asn_ix = {
     160: 101
 }
 
+###############################################################################
 # import permission commands
 with open("/home/justus/seed-emulator/examples/scion/S06-btcd/scripts/permissions.sh", 'r') as file:
          permissions = file.read()
 
+###############################################################################
 # create ASes with btcd node in host
 for asn, ix in asn_ix.items():
     as_ = base.createAutonomousSystem(asn)
@@ -50,10 +55,12 @@ for asn, ix in asn_ix.items():
     host.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/scripts/run.sh', '/run.sh')
     host.appendStartCommand(permissions, False)
 
+###############################################################################
 # add ix connections
 as156 = base.getAutonomousSystem(156)
 as156.getRouter("br0").joinNetwork("ix100")
 
+###############################################################################
 # Inter-AS routing IX 100
 scion.addIxLink(100, (1, 150), (1, 151), ScLinkType.Core)
 scion.addIxLink(100, (1, 150), (1, 152), ScLinkType.Core)
@@ -85,6 +92,7 @@ scion.addIxLink(101, (1, 159), (1, 160), ScLinkType.Core)
 scion.addIxLink(100, (1, 150), (1, 156), ScLinkType.Core)
 
 
+###############################################################################
 # Rendering
 emu.addLayer(base)
 emu.addLayer(routing)
