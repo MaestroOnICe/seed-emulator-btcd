@@ -28,12 +28,16 @@ as150_router.joinNetwork('net0').joinNetwork('ix100')
 as150_router.crossConnect(153, 'br0', '10.50.0.2/29')
 
 # AS-150 - create h01 with btcd installed
-as150.createHost('h01').joinNetwork('net0')
-h01 = as150.getHost('h01')
-h01.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcd','/bin/btcd')
-h01.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcwallet','/bin/btcwallet')
-h01.appendStartCommand('chmod +x /bin/btcd', False)
-h01.appendStartCommand('chmod +x /bin/btcwallet', False)
+h00 = as150.createHost('h00').joinNetwork('net0')
+h00.addSoftware("screen")
+h00.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcd','/bin/btcd')
+h00.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcwallet','/bin/btcwallet')
+h00.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcctl','/bin/btcctl')
+h00.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/scripts/btcd_run.sh', '/btcd_run.sh')
+h00.appendStartCommand('chmod +x /bin/btcd', False)
+h00.appendStartCommand('chmod +x /bin/btcwallet', False)
+h00.appendStartCommand('chmod +x /bin/btcctl', False)
+h00.appendStartCommand('chmod +x /btcd_run.sh', False)
 
 # AS-151
 as151 = base.createAutonomousSystem(151)
@@ -43,12 +47,14 @@ as151.createControlService('cs1').joinNetwork('net0')
 as151.createRouter('br0').joinNetwork('net0').joinNetwork('ix100')
 
 # AS-151 - create h02 with btcd installed
-h02 = as151.createHost('h02').joinNetwork('net0')
-h02.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcd','/bin/btcd')
-h02.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcwallet','/bin/btcwallet')
-h02.appendStartCommand('chmod +x /bin/btcd', False)
-h02.appendStartCommand('chmod +x /bin/btcwallet', False)
-
+h01 = as151.createHost('h01').joinNetwork('net0')
+h01.addSoftware("screen")
+h01.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcd','/bin/btcd')
+h01.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcwallet','/bin/btcwallet')
+h01.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcctl','/bin/btcctl')
+h01.appendStartCommand('chmod +x /bin/btcd', False)
+h01.appendStartCommand('chmod +x /bin/btcwallet', False)
+h01.appendStartCommand('chmod +x /bin/btcctl', False)
 
 # AS-152
 as152 = base.createAutonomousSystem(152)
@@ -57,7 +63,18 @@ as152.createNetwork('net0')
 as152.createControlService('cs1').joinNetwork('net0')
 as152.createRouter('br0').joinNetwork('net0').joinNetwork('ix100')
 
-# AS-153
+# AS-152 - create h02 with btcd installed
+h02 = as152.createHost('h02').joinNetwork('net0')
+h02.addSoftware("screen")
+h02.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcd','/bin/btcd')
+h02.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcwallet','/bin/btcwallet')
+h02.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcctl','/bin/btcctl')
+h02.appendStartCommand('chmod +x /bin/btcd', False)
+h02.appendStartCommand('chmod +x /bin/btcwallet', False)
+h02.appendStartCommand('chmod +x /bin/btcctl', False)
+
+
+# AS-153 - cross connected AS
 as153 = base.createAutonomousSystem(153)
 scion_isd.addIsdAs(1, 153, is_core=False)
 scion_isd.setCertIssuer((1, 153), issuer=150)
@@ -71,14 +88,35 @@ as153_router.crossConnect(150, 'br0', '10.50.0.3/29')
 h03 = as153.createHost('h03').joinNetwork('net0')
 h03.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcd','/bin/btcd')
 h03.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcwallet','/bin/btcwallet')
+h03.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcctl','/bin/btcctl')
 h03.appendStartCommand('chmod +x /bin/btcd', False)
 h03.appendStartCommand('chmod +x /bin/btcwallet', False)
+h03.appendStartCommand('chmod +x /bin/btcctl', False)
+
+# AS-154
+as154 = base.createAutonomousSystem(154)
+scion_isd.addIsdAs(1, 154, is_core=True)
+as154.createNetwork('net0')
+as154.createControlService('cs1').joinNetwork('net0')
+as154.createRouter('br0').joinNetwork('net0').joinNetwork('ix100')
+
+# AS-154 - create h04 with btcd installed
+h04 = as154.createHost('h04').joinNetwork('net0')
+h04.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcd','/bin/btcd')
+h04.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcwallet','/bin/btcwallet')
+h04.importFile('/home/justus/seed-emulator/examples/scion/S06-btcd/bin/btcctl','/bin/btcctl')
+h04.appendStartCommand('chmod +x /bin/btcd', False)
+h04.appendStartCommand('chmod +x /bin/btcwallet', False)
+h04.appendStartCommand('chmod +x /bin/btcctl', False)
 
 
 # Inter-AS routing
 scion.addIxLink(100, (1, 150), (1, 151), ScLinkType.Core)
+scion.addIxLink(100, (1, 150), (1, 152), ScLinkType.Core)
+scion.addIxLink(100, (1, 150), (1, 154), ScLinkType.Core)
 scion.addIxLink(100, (1, 151), (1, 152), ScLinkType.Core)
-scion.addIxLink(100, (1, 152), (1, 150), ScLinkType.Core)
+scion.addIxLink(100, (1, 151), (1, 154), ScLinkType.Core)
+scion.addIxLink(100, (1, 152), (1, 154), ScLinkType.Core)
 scion.addXcLink((1, 150), (1, 153), ScLinkType.Transit)
 
 # Rendering

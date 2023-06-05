@@ -26,3 +26,7 @@ client/backend/bin
 *.bin
 output
 project-words.txt
+examples/scion/*/logs
+examples/scion/*/scripts
+examples/scion/*/binary
+examples/scion/*/bin
