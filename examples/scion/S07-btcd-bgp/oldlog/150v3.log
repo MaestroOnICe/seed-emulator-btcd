@@ -1,0 +1,879 @@
+2023-07-11 15:17:52.391 [INF] BTCD: RPC service is disabled
+2023-07-11 15:17:52.391 [WRN] BTCD: open /root/.btcd/btcd.conf: no such file or directory
+2023-07-11 15:17:52.391 [INF] BTCD: Version 0.23.3-beta
+2023-07-11 15:17:52.391 [INF] BTCD: Loading block database from '/root/.btcd/data/mainnet/blocks_ffldb'
+2023-07-11 15:17:52.411 [INF] BTCD: Block database loaded
+2023-07-11 15:17:52.413 [INF] INDX: Committed filter index is enabled
+2023-07-11 15:17:52.414 [INF] CHAN: Loading block index...
+2023-07-11 15:17:52.415 [DBG] INDX: Current committed filter index tip (height 149, hash 000000446715d0a180df957686e36ad2516e00a40cf46bf2f05b29954244fc99)
+2023-07-11 15:17:52.415 [INF] CHAN: Chain state (height 149, hash 000000446715d0a180df957686e36ad2516e00a40cf46bf2f05b29954244fc99, totaltx 150, work 944502350)
+2023-07-11 15:17:52.415 [INF] MINR: CPU miner started
+2023-07-11 15:17:52.415 [INF] AMGR: Loaded 2 addresses from file '/root/.btcd/data/mainnet/peers.json'
+2023-07-11 15:17:52.415 [INF] CMGR: Server listening on 10.150.0.71:6000
+2023-07-11 15:17:52.416 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 1)
+2023-07-11 15:17:52.417 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 6)
+2023-07-11 15:17:52.417 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 3)
+2023-07-11 15:17:52.418 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 5)
+2023-07-11 15:17:52.418 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 8)
+2023-07-11 15:17:52.418 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 2)
+2023-07-11 15:17:52.419 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 10)
+2023-07-11 15:17:52.419 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 7)
+2023-07-11 15:17:52.420 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 12)
+2023-07-11 15:17:52.420 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 4)
+2023-07-11 15:17:52.420 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 13)
+2023-07-11 15:17:52.422 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 15)
+2023-07-11 15:17:52.422 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 9)
+2023-07-11 15:17:52.423 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 14)
+2023-07-11 15:17:52.424 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 11)
+2023-07-11 15:17:52.424 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 18)
+2023-07-11 15:17:52.424 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 16)
+2023-07-11 15:17:52.424 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 19)
+2023-07-11 15:17:52.425 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 17)
+2023-07-11 15:17:52.426 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 23)
+2023-07-11 15:17:52.427 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 20)
+2023-07-11 15:17:52.427 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 21)
+2023-07-11 15:17:52.427 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 26)
+2023-07-11 15:17:52.429 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 22)
+2023-07-11 15:17:52.429 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 28)
+2023-07-11 15:17:52.429 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 27)
+2023-07-11 15:17:52.430 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 24)
+2023-07-11 15:17:52.430 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 30)
+2023-07-11 15:17:52.431 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 32)
+2023-07-11 15:17:52.431 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 29)
+2023-07-11 15:17:52.431 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 25)
+2023-07-11 15:17:52.431 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 31)
+2023-07-11 15:17:57.003 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [DBG] CHAN: Added time sample of 0s (total: 1)
+2023-07-11 15:17:57.003 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [DBG] PEER: Sending verack to 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [DBG] PEER: Received verack from 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [DBG] PEER: Connected to 10.151.0.71:40102
+2023-07-11 15:17:57.003 [DBG] SRVR: New peer 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.003 [INF] SYNC: New valid peer 10.151.0.71:40102 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:17:57.003 [INF] SYNC: Syncing to block height 149 from peer 10.151.0.71:40102
+2023-07-11 15:17:57.003 [DBG] PEER: Sending getblocks (locator 000000446715d0a180df957686e36ad2516e00a40cf46bf2f05b29954244fc99, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.004 [DBG] PEER: Received getblocks (locator 000000446715d0a180df957686e36ad2516e00a40cf46bf2f05b29954244fc99, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.004 [DBG] PEER: Received addrv2 from 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.004 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:17:57.004 [DBG] PEER: AddrV2 received: 10.151.0.71
+2023-07-11 15:17:57.004 [DBG] PEER: Received getaddr from 10.151.0.71:40102 (inbound)
+2023-07-11 15:17:57.004 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:17:57.416 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.417 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.417 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.417 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.417 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.417 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.417 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.417 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.417 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.417 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.417 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.417 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.418 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.418 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.418 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.418 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.418 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.418 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.418 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.418 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.419 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.419 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.419 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.419 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.419 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.419 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.419 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.419 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.419 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.419 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.419 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.419 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.419 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.419 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.419 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.420 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.420 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.420 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.420 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.420 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.420 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.420 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.420 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.420 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.421 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.421 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.421 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.421 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.421 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.421 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.421 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.421 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.421 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.422 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:17:57.422 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.422 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.424 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.424 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.424 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:17:57.424 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.424 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.424 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:17:57.424 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:17:57.434 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 33)
+2023-07-11 15:17:57.435 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 38)
+2023-07-11 15:17:57.437 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 35)
+2023-07-11 15:17:57.438 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 36)
+2023-07-11 15:17:57.439 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 34)
+2023-07-11 15:17:57.441 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 37)
+2023-07-11 15:17:57.442 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 39)
+2023-07-11 15:17:57.442 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 36)
+2023-07-11 15:17:57.442 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 38)
+2023-07-11 15:17:57.444 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 41)
+2023-07-11 15:17:57.445 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 42)
+2023-07-11 15:17:57.445 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 37)
+2023-07-11 15:17:57.446 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 40)
+2023-07-11 15:17:57.448 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 43)
+2023-07-11 15:17:57.448 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.448 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.448 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 34)
+2023-07-11 15:17:57.448 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.448 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.449 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 43)
+2023-07-11 15:17:57.450 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 40)
+2023-07-11 15:17:57.452 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 44)
+2023-07-11 15:17:57.453 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 45)
+2023-07-11 15:17:57.457 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] CHAN: Added time sample of 0s (total: 2)
+2023-07-11 15:17:57.457 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:17:57.457 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:17:57.457 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.457 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:17:57.458 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:17:57.458 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:17:57.458 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:17:57.458 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:17:57.458 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:17:57.458 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:17:57.458 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:17:57.458 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:17:57.458 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:17:57.458 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.458 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.459 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.460 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.460 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.467 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.460 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.467 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.466 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.467 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.466 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.468 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.468 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.468 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.468 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:17:57.469 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:17:57.469 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:17:57.469 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:17:57.469 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.469 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:17:57.469 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:17:57.470 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:17:57.470 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.217 [DBG] CHAN: Added time sample of 0s (total: 3)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.217 [DBG] CHAN: Added time sample of 0s (total: 4)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending verack to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending verack to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.217 [DBG] CHAN: Added time sample of 0s (total: 5)
+2023-07-11 15:18:01.217 [DBG] CHAN: New time offset: 0s
+2023-07-11 15:18:01.217 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending verack to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.217 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.217 [DBG] CHAN: Added time sample of 0s (total: 6)
+2023-07-11 15:18:01.217 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Sending verack to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.218 [DBG] CHAN: Added time sample of 0s (total: 7)
+2023-07-11 15:18:01.218 [DBG] CHAN: New time offset: 0s
+2023-07-11 15:18:01.218 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Sending verack to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.218 [DBG] CHAN: Added time sample of 0s (total: 8)
+2023-07-11 15:18:01.218 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.218 [DBG] PEER: Sending verack to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Received verack from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Connected to 10.152.0.71:56636
+2023-07-11 15:18:01.219 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Received verack from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Connected to 10.152.0.71:56626
+2023-07-11 15:18:01.219 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Received verack from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Connected to 10.152.0.71:56662
+2023-07-11 15:18:01.219 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Received verack from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Connected to 10.152.0.71:56674
+2023-07-11 15:18:01.219 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Received verack from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Connected to 10.152.0.71:56648
+2023-07-11 15:18:01.219 [DBG] SRVR: New peer 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.219 [DBG] SRVR: New peer 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.219 [DBG] SRVR: New peer 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.219 [DBG] SRVR: New peer 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.219 [DBG] SRVR: New peer 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.219 [INF] SYNC: New valid peer 10.152.0.71:56636 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:18:01.219 [INF] SYNC: New valid peer 10.152.0.71:56626 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:18:01.219 [INF] SYNC: New valid peer 10.152.0.71:56662 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:18:01.219 [INF] SYNC: New valid peer 10.152.0.71:56674 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:18:01.219 [INF] SYNC: New valid peer 10.152.0.71:56648 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:18:01.219 [DBG] PEER: Received addrv2 from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:18:01.219 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:18:01.219 [DBG] PEER: Received getaddr from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:18:01.219 [DBG] PEER: Received getblocks (locator 000000446715d0a180df957686e36ad2516e00a40cf46bf2f05b29954244fc99, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: Received addrv2 from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:18:01.219 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:18:01.219 [DBG] PEER: Received addrv2 from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:18:01.219 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:18:01.219 [DBG] PEER: Received getaddr from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:18:01.219 [DBG] PEER: Received addrv2 from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:18:01.219 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:18:01.219 [DBG] PEER: Received getaddr from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:18:01.219 [DBG] PEER: Received addrv2 from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.219 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:18:01.219 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:18:01.220 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.220 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.220 [DBG] CHAN: Added time sample of 0s (total: 9)
+2023-07-11 15:18:01.220 [DBG] CHAN: New time offset: 0s
+2023-07-11 15:18:01.220 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 149) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.220 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.220 [DBG] PEER: Sending verack to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.220 [DBG] PEER: Received getaddr from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:01.220 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:18:01.223 [DBG] PEER: Received getaddr from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:01.223 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:18:01.224 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: Received verack from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: Connected to 10.152.0.71:56634
+2023-07-11 15:18:01.224 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: Received verack from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: Connected to 10.152.0.71:56684
+2023-07-11 15:18:01.224 [DBG] SRVR: New peer 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.224 [DBG] SRVR: New peer 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.224 [INF] SYNC: New valid peer 10.152.0.71:56634 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:18:01.224 [INF] SYNC: New valid peer 10.152.0.71:56684 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:18:01.224 [DBG] PEER: Received addrv2 from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:18:01.224 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:18:01.224 [DBG] PEER: Received getaddr from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:18:01.224 [DBG] PEER: Received addrv2 from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:18:01.224 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:18:01.224 [DBG] PEER: Received getaddr from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:01.224 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:18:12.421 [DBG] MINR: Hash speed:   1953 kilohashes/s
+2023-07-11 15:18:20.331 [DBG] CHAN: Difficulty retarget at block height 150
+2023-07-11 15:18:20.331 [DBG] CHAN: Old target 1d56663b (00000056663b0000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:20.337 [DBG] CHAN: New target 1e010cfd (0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:20.337 [DBG] CHAN: Actual timespan 31m8s, adjusted timespan 31m8s, target timespan 10m0s
+2023-07-11 15:18:20.338 [DBG] CHAN: Accepted block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c
+2023-07-11 15:18:20.338 [INF] MINR: Block submitted via CPU miner accepted (hash 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, amount 50 BTC)
+2023-07-11 15:18:20.338 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:20.338 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:20.342 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.343 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.343 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.343 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.343 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.343 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.344 [DBG] PEER: Sending inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:20.352 [DBG] PEER: Received getdata (witness block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:20.353 [DBG] PEER: Sending block (hash 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, ver 536870912, 1 tx, 2023-07-11 15:18:07 +0000 UTC) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:20.353 [DBG] PEER: Received getdata (witness block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:20.353 [DBG] PEER: Sending block (hash 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, ver 536870912, 1 tx, 2023-07-11 15:18:07 +0000 UTC) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:20.369 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.369 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:20.369 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.369 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.369 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.369 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.370 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Received inv (block 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c) from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:20.371 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:20.372 [DBG] PEER: Sending getblocks (locator 000000672db71ff707b4b32de5d9104b5a8ef1396e72b863b9c1ec282b1c070c, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:22.415 [DBG] MINR: Hash speed:   1132 kilohashes/s
+2023-07-11 15:18:22.415 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:22.415 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:22.415 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:22.415 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:22.416 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:22.416 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:22.416 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:22.416 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:22.416 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:22.416 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:22.417 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:22.417 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:22.417 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:22.417 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:25.855 [DBG] CHAN: Accepted block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622
+2023-07-11 15:18:25.861 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:25.861 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.861 [INF] MINR: Block submitted via CPU miner accepted (hash 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, amount 50 BTC)
+2023-07-11 15:18:25.862 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:25.862 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:25.859 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:25.860 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:25.860 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:25.862 [DBG] PEER: Received getdata (witness block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:25.860 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:25.862 [DBG] PEER: Received getdata (witness block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.862 [DBG] PEER: Sending block (hash 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, ver 536870912, 1 tx, 2023-07-11 15:18:22 +0000 UTC) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:25.860 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.861 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.861 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:25.861 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.859 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.861 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:25.861 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.859 [DBG] PEER: Sending inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:25.863 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:25.864 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:25.864 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:25.864 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:25.864 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:25.864 [DBG] PEER: Received getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:25.864 [DBG] PEER: Received getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:25.869 [DBG] PEER: Sending block (hash 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, ver 536870912, 1 tx, 2023-07-11 15:18:22 +0000 UTC) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.869 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:25.869 [DBG] PEER: Received getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:25.870 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.871 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.871 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:25.871 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.871 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.871 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.872 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.871 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.871 [DBG] PEER: Received getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:25.872 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.872 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.872 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.872 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.880 [DBG] PEER: Received inv (block 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:25.880 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:25.880 [DBG] PEER: Sending getblocks (locator 00000083655f80a82722c5372f72a90d466ef1caeae00cfee2f08dbdc2569622, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:32.420 [DBG] MINR: Hash speed:   1902 kilohashes/s
+2023-07-11 15:18:37.420 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:37.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:37.421 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:37.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:37.421 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:37.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:37.421 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:37.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:37.422 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:37.422 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:37.422 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:37.423 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:37.423 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:37.423 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:40.057 [DBG] CHAN: Accepted block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989
+2023-07-11 15:18:40.058 [INF] MINR: Block submitted via CPU miner accepted (hash 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, amount 50 BTC)
+2023-07-11 15:18:40.058 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:40.058 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.062 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:40.064 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.078 [DBG] PEER: Received getdata (witness block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:40.078 [DBG] PEER: Sending block (hash 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, ver 536870912, 1 tx, 2023-07-11 15:18:37 +0000 UTC) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:40.078 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:40.078 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.079 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:40.078 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Received getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Received getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.078 [DBG] PEER: Received getdata (witness block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:40.078 [DBG] PEER: Sending inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.080 [DBG] PEER: Sending block (hash 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, ver 536870912, 1 tx, 2023-07-11 15:18:37 +0000 UTC) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:40.081 [DBG] PEER: Received getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.081 [DBG] PEER: Received getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Received inv (block 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989) from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:40.086 [DBG] PEER: Sending getblocks (locator 000000719d26b62871ddd9275efea346bb810d20680bc4dc808d0e71c2a9b989, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:42.420 [DBG] MINR: Hash speed:   2405 kilohashes/s
+2023-07-11 15:18:51.151 [DBG] CHAN: Accepted block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a
+2023-07-11 15:18:51.151 [INF] MINR: Block submitted via CPU miner accepted (hash 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, amount 50 BTC)
+2023-07-11 15:18:51.151 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:51.151 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:51.153 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:51.153 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:51.153 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:51.153 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:51.153 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:51.153 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.154 [DBG] PEER: Sending inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.168 [DBG] PEER: Received getdata (witness block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:51.168 [DBG] PEER: Sending block (hash 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, ver 536870912, 1 tx, 2023-07-11 15:18:40 +0000 UTC) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:51.168 [DBG] PEER: Received getdata (witness block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:51.168 [DBG] PEER: Sending block (hash 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, ver 536870912, 1 tx, 2023-07-11 15:18:40 +0000 UTC) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:51.171 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:51.172 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.172 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.172 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.172 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.172 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.172 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Received inv (block 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:51.173 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:51.174 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:51.174 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:51.174 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:51.174 [DBG] PEER: Sending getblocks (locator 00000037ec147cda3fe07246453c422a897d414bc6bc54a5758e469be7695d1a, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:52.419 [DBG] MINR: Hash speed:   1338 kilohashes/s
+2023-07-11 15:18:52.419 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:52.419 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:52.420 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:52.420 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:52.420 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:52.420 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:52.420 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:52.420 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:52.420 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:52.420 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:52.420 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:52.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:52.421 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:52.421 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:57.427 [DBG] CHAN: Accepted block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2
+2023-07-11 15:18:57.428 [INF] MINR: Block submitted via CPU miner accepted (hash 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, amount 50 BTC)
+2023-07-11 15:18:57.428 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:18:57.428 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:18:57.432 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:57.432 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Received getdata (witness block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:57.433 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.434 [DBG] PEER: Sending block (hash 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, ver 536870912, 1 tx, 2023-07-11 15:18:52 +0000 UTC) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:57.432 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:57.434 [DBG] PEER: Received getdata (witness block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.434 [DBG] PEER: Sending block (hash 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, ver 536870912, 1 tx, 2023-07-11 15:18:52 +0000 UTC) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Sending inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:57.435 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:40102 (inbound)
+2023-07-11 15:18:57.437 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:57.437 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:57.437 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:57.437 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Received inv (block 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2) from 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56684 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56636 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56648 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56662 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56674 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:56634 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Received getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.152.0.71:56626 (inbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.438 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.439 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.442 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:18:57.442 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:02.417 [DBG] MINR: Hash speed:   2024 kilohashes/s
+2023-07-11 15:19:07.422 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:19:07.422 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:19:07.422 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:19:07.422 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:19:07.423 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:19:07.423 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:19:07.423 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:19:07.423 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:19:07.423 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:19:07.423 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:19:07.423 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:19:07.424 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:19:07.424 [DBG] MINR: Considering 0 transactions for inclusion to new block
+2023-07-11 15:19:07.424 [DBG] MINR: Created new block template (1 transactions, 0 in fees, 4 signature operations cost, 755 weight, target difficulty 0000010cfd000000000000000000000000000000000000000000000000000000)
+2023-07-11 15:19:12.421 [DBG] MINR: Hash speed:   2413 kilohashes/s
+2023-07-11 15:19:22.416 [DBG] MINR: Hash speed:   1206 kilohashes/s
+2023-07-11 15:19:27.468 [DBG] PEER: Peer 10.151.0.71:6000 (outbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:27.468 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.468 [DBG] PEER: Peer 10.151.0.71:6000 (outbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:27.468 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.468 [DBG] SRVR: Removed peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.468 [DBG] PEER: Peer 10.151.0.71:6000 (outbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:27.468 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.468 [DBG] CMGR: Disconnected from 10.151.0.71:6000 (reqid 34)
+2023-07-11 15:19:27.468 [DBG] CMGR: Disconnected from 10.151.0.71:6000 (reqid 37)
+2023-07-11 15:19:27.468 [DBG] PEER: Peer 10.151.0.71:6000 (outbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:27.468 [DBG] SRVR: Removed peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.468 [DBG] SRVR: Removed peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.469 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.469 [DBG] CMGR: Disconnected from 10.151.0.71:6000 (reqid 38)
+2023-07-11 15:19:27.469 [DBG] SRVR: Removed peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.471 [DBG] PEER: Peer 10.151.0.71:6000 (outbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:27.471 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.471 [DBG] CMGR: Disconnected from 10.151.0.71:6000 (reqid 36)
+2023-07-11 15:19:27.471 [DBG] CMGR: Disconnected from 10.151.0.71:6000 (reqid 40)
+2023-07-11 15:19:27.471 [DBG] SRVR: Removed peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.473 [DBG] PEER: Peer 10.151.0.71:6000 (outbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:27.475 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.475 [DBG] SRVR: Removed peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.475 [DBG] CMGR: Disconnected from 10.151.0.71:6000 (reqid 43)
+2023-07-11 15:19:27.475 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 105)
+2023-07-11 15:19:27.476 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 106)
+2023-07-11 15:19:27.477 [DBG] CMGR: Attempting to connect to 10.151.0.71:6000 (reqid 107)
+2023-07-11 15:19:27.477 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 107)
+2023-07-11 15:19:27.477 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 106)
+2023-07-11 15:19:27.477 [DBG] CMGR: Connected to 10.151.0.71:6000 (reqid 105)
+2023-07-11 15:19:27.477 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.478 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.478 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Negotiated protocol version 70016 for peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:19:27.480 [DBG] PEER: Sending sendaddrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Sending verack to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.480 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:19:27.481 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:27.481 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:19:27.481 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:27.481 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:19:27.481 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Received sendaddrv2 from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Received verack from 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [DBG] PEER: Connected to 10.151.0.71:6000
+2023-07-11 15:19:27.481 [DBG] SRVR: New peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.481 [INF] SYNC: New valid peer 10.151.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:27.482 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.151.0.71:6000
+2023-07-11 15:19:27.497 [DBG] PEER: Sending addrv2 to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.497 [DBG] PEER: Sending getaddr to 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:27.619 [DBG] CMGR: Attempting to connect to 10.152.0.71:6000 (reqid 119)
+2023-07-11 15:19:27.632 [DBG] CMGR: Connected to 10.152.0.71:6000 (reqid 119)
+2023-07-11 15:19:27.633 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.640 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.641 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.643 [DBG] CHAN: Added time sample of 0s (total: 10)
+2023-07-11 15:19:27.643 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.643 [DBG] PEER: Sending verack to 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.643 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.643 [DBG] PEER: Received verack from 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.643 [DBG] PEER: Connected to 10.152.0.71:6000
+2023-07-11 15:19:27.643 [DBG] SRVR: New peer 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.643 [INF] SYNC: New valid peer 10.152.0.71:6000 (outbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:27.643 [DBG] AMGR: Suggesting address 10.150.0.71:6000 for 10.152.0.71:6000
+2023-07-11 15:19:27.643 [DBG] PEER: Sending addrv2 to 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:27.643 [DBG] PEER: Sending getaddr to 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:31.222 [DBG] PEER: Peer 10.152.0.71:56626 (inbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:31.222 [DBG] PEER: Received getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) from 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:31.222 [DBG] PEER: Peer 10.152.0.71:56662 (inbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:31.222 [INF] SYNC: Lost peer 10.152.0.71:56626 (inbound)
+2023-07-11 15:19:31.223 [INF] SYNC: Lost peer 10.152.0.71:56662 (inbound)
+2023-07-11 15:19:31.223 [DBG] PEER: Peer 10.152.0.71:56674 (inbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:31.223 [DBG] SRVR: Removed peer 10.152.0.71:56626 (inbound)
+2023-07-11 15:19:31.223 [DBG] SRVR: Removed peer 10.152.0.71:56662 (inbound)
+2023-07-11 15:19:31.222 [DBG] PEER: Peer 10.152.0.71:56636 (inbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:31.223 [INF] SYNC: Lost peer 10.152.0.71:56674 (inbound)
+2023-07-11 15:19:31.223 [DBG] SRVR: Removed peer 10.152.0.71:56674 (inbound)
+2023-07-11 15:19:31.223 [INF] SYNC: Lost peer 10.152.0.71:56636 (inbound)
+2023-07-11 15:19:31.223 [DBG] SRVR: Removed peer 10.152.0.71:56636 (inbound)
+2023-07-11 15:19:31.223 [DBG] PEER: Peer 10.152.0.71:56648 (inbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:31.223 [INF] SYNC: Lost peer 10.152.0.71:56648 (inbound)
+2023-07-11 15:19:31.223 [DBG] SRVR: Removed peer 10.152.0.71:56648 (inbound)
+2023-07-11 15:19:31.225 [DBG] PEER: Peer 10.152.0.71:56634 (inbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:31.225 [INF] SYNC: Lost peer 10.152.0.71:56634 (inbound)
+2023-07-11 15:19:31.225 [DBG] PEER: Peer 10.152.0.71:56684 (inbound) appears to be stalled or misbehaving, inv timeout -- disconnecting
+2023-07-11 15:19:31.225 [INF] SYNC: Lost peer 10.152.0.71:56684 (inbound)
+2023-07-11 15:19:31.225 [DBG] SRVR: Removed peer 10.152.0.71:56634 (inbound)
+2023-07-11 15:19:31.225 [DBG] SRVR: Removed peer 10.152.0.71:56684 (inbound)
+2023-07-11 15:19:31.235 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.235 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.235 [DBG] CHAN: Added time sample of 0s (total: 11)
+2023-07-11 15:19:31.235 [DBG] CHAN: New time offset: 0s
+2023-07-11 15:19:31.235 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.235 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.235 [DBG] PEER: Sending verack to 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.235 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.235 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.235 [DBG] CHAN: Added time sample of 0s (total: 12)
+2023-07-11 15:19:31.235 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Sending verack to 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.236 [DBG] CHAN: Added time sample of 0s (total: 13)
+2023-07-11 15:19:31.236 [DBG] CHAN: New time offset: 0s
+2023-07-11 15:19:31.236 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Sending verack to 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Received version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) from 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Negotiated protocol version 70016 for peer 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.236 [DBG] CHAN: Added time sample of 0s (total: 14)
+2023-07-11 15:19:31.236 [DBG] PEER: Sending version (agent /btcwire:0.5.0/btcd:0.23.3/, pver 70016, block 154) to 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Sending sendaddrv2 to 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.236 [DBG] PEER: Sending verack to 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Received verack from 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Connected to 10.152.0.71:59630
+2023-07-11 15:19:31.237 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Received verack from 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Connected to 10.152.0.71:59614
+2023-07-11 15:19:31.237 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Received verack from 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Connected to 10.152.0.71:59600
+2023-07-11 15:19:31.237 [DBG] PEER: Received sendaddrv2 from 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Received verack from 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.237 [DBG] PEER: Connected to 10.152.0.71:59598
+2023-07-11 15:19:31.238 [DBG] SRVR: New peer 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.238 [DBG] SRVR: New peer 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.238 [DBG] SRVR: New peer 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.238 [DBG] SRVR: New peer 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.238 [INF] SYNC: New valid peer 10.152.0.71:59630 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:31.238 [INF] SYNC: New valid peer 10.152.0.71:59614 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:31.238 [INF] SYNC: New valid peer 10.152.0.71:59600 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:31.238 [INF] SYNC: New valid peer 10.152.0.71:59598 (inbound) (/btcwire:0.5.0/btcd:0.23.3/)
+2023-07-11 15:19:31.238 [DBG] PEER: Received addrv2 from 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:19:31.238 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:19:31.238 [DBG] PEER: Received getaddr from 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:19:31.238 [DBG] PEER: Received addrv2 from 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:19:31.238 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:19:31.238 [DBG] PEER: Received getaddr from 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:19:31.238 [DBG] PEER: Received addrv2 from 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:19:31.238 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:19:31.238 [DBG] PEER: Received getaddr from 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:19:31.238 [DBG] PEER: Received addrv2 from 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: OnAddrV2 invokes
+2023-07-11 15:19:31.238 [DBG] PEER: AddrV2 received: 10.152.0.71
+2023-07-11 15:19:31.238 [DBG] PEER: Received getaddr from 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:31.238 [DBG] PEER: length of addressCache: %d 0
+2023-07-11 15:19:32.416 [DBG] MINR: Hash speed:   2072 kilohashes/s
+2023-07-11 15:19:33.995 [INF] BTCD: Received signal (interrupt).  Shutting down...
+2023-07-11 15:19:33.996 [INF] BTCD: Gracefully shutting down the server...
+2023-07-11 15:19:33.996 [WRN] SRVR: Server shutting down
+2023-07-11 15:19:33.996 [INF] MINR: CPU miner stopped
+2023-07-11 15:19:33.996 [INF] SYNC: Lost peer 10.152.0.71:59630 (inbound)
+2023-07-11 15:19:33.996 [INF] SYNC: Lost peer 10.152.0.71:59614 (inbound)
+2023-07-11 15:19:33.996 [INF] SYNC: Lost peer 10.152.0.71:59600 (inbound)
+2023-07-11 15:19:33.996 [INF] SYNC: Lost peer 10.152.0.71:59598 (inbound)
+2023-07-11 15:19:33.996 [INF] SYNC: Lost peer 10.151.0.71:40102 (inbound)
+2023-07-11 15:19:33.996 [DBG] SYNC: Updating sync peer, no progress for: 1m36.993017953s
+2023-07-11 15:19:33.996 [INF] SYNC: Syncing to block height 154 from peer 10.152.0.71:6000
+2023-07-11 15:19:33.996 [DBG] PEER: Sending getblocks (locator 000000df09212101307200abebfe44fa93776d257e1522535f4cc300c804a8c2, stop 0000000000000000000000000000000000000000000000000000000000000000) to 10.152.0.71:6000 (outbound)
+2023-07-11 15:19:33.997 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:33.997 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:33.997 [INF] SYNC: Lost peer 10.151.0.71:6000 (outbound)
+2023-07-11 15:19:33.997 [INF] SYNC: Sync manager shutting down
+2023-07-11 15:19:33.997 [INF] AMGR: Address manager shutting down
+2023-07-11 15:19:33.997 [INF] SRVR: Server shutdown complete
+2023-07-11 15:19:33.997 [INF] BTCD: Gracefully shutting down the database...
+2023-07-11 15:19:34.013 [INF] BTCD: Shutdown complete
