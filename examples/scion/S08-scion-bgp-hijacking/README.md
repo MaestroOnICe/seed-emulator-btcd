@@ -47,7 +47,7 @@ The hijack can be ended by removing the above configuration. After a reload of b
 ## SCION
 
 Using the SCION architecture to ping the victim `10.161.0.71` in `AS 2-161` should still be possible, since only BGP is affected. In practice (in the SEED emulator) it does not work. Why?
-We use SCMP messages and `scion ping` to reach the victim. The following filter can be used to visualize the flow of packets: `udp[12] == 202``
+We use SCMP messages and `scion ping` to reach the victim. The following filter can be used to visualize the flow of packets: `udp[12] == 202`
 
 ```bash
 scion ping 2-161,10.161.0.71
@@ -70,7 +70,7 @@ We see that contrary to the assumption SCION packets are diverted. Although we n
 10.162.0.0/24 via 10.101.0.160 dev ix101 proto bird metric 32 
 ```
 
-Both /25 entries are present. Because SCION and BGP run on the same container, the SCION packages are also forwarded to the advisory instead of being forwarded internally. Lets fix that, by adding to new routes:
+Both /25 entries are present. Because SCION and BGP run on the same container, the SCION packages are also forwarded to the advisory instead of being forwarded internally. Lets fix that, by adding two new routes:
 
 ```bash
 ip route add 10.161.0.0/25 dev net0 metric 10
@@ -78,3 +78,5 @@ ip route add 10.161.0.128/25 dev net0 metric 10
 ```
 
 Now SCION pings are forwarded to the end host, while the BGP hijacking attack is still present.
+
+## Measuring the impact
