@@ -38,21 +38,21 @@ as150_br0.joinNetwork('net0').joinNetwork('ix100')
 as150_br1.joinNetwork('net0').joinNetwork('ix102')
 
 ###############################################################################
-# Core AS 2-151
-as151 = base.createAutonomousSystem(151)
-scion_isd.addIsdAs(2, 151, is_core=True)
-as151.createNetwork('net0')
-as151.createControlService('cs1').joinNetwork('net0')
-as151_br0 = as151.createRouter('br0')
-as151_br1 = as151.createRouter('br1')
-as151_br0.joinNetwork('net0').joinNetwork('ix101')
-as151_br1.joinNetwork('net0').joinNetwork('ix102')
+# Core AS 2-160
+as160 = base.createAutonomousSystem(160)
+scion_isd.addIsdAs(2, 160, is_core=True)
+as160.createNetwork('net0')
+as160.createControlService('cs1').joinNetwork('net0')
+as160_br0 = as160.createRouter('br0')
+as160_br1 = as160.createRouter('br1')
+as160_br0.joinNetwork('net0').joinNetwork('ix101')
+as160_br1.joinNetwork('net0').joinNetwork('ix102')
 
 ###############################################################################
 # Non-core ASes in ISD 1
 isd1_asn_ix = {
+    151: 100,
     152: 100,
-    153: 100,
 }
 
 for asn, ix in isd1_asn_ix.items():
@@ -67,14 +67,14 @@ for asn, ix in isd1_asn_ix.items():
 ###############################################################################
 # Non-core ASes in ISD 2
 isd2_asn_ix = {
-    154: 101,
-    155: 101,
+    161: 101,
+    162: 101,
 }
 
 for asn, ix in isd2_asn_ix.items():
     as_ = base.createAutonomousSystem(asn)
     scion_isd.addIsdAs(2, asn, is_core=False)
-    scion_isd.setCertIssuer((2, asn), issuer=151)
+    scion_isd.setCertIssuer((2, asn), issuer=160)
     as_.createNetwork('net0')
     as_.createControlService('cs1').joinNetwork('net0')
     as_.createRouter('br0').joinNetwork('net0').joinNetwork(f'ix{ix}')
@@ -82,20 +82,20 @@ for asn, ix in isd2_asn_ix.items():
 
 ###############################################################################
 # SCION links
-scion.addIxLink(102, (1, 150), (2, 151), ScLinkType.Core)
+scion.addIxLink(102, (1, 150), (2, 160), ScLinkType.Core)
+scion.addIxLink(100, (1, 150), (1, 151), ScLinkType.Transit)
 scion.addIxLink(100, (1, 150), (1, 152), ScLinkType.Transit)
-scion.addIxLink(100, (1, 150), (1, 153), ScLinkType.Transit)
-scion.addIxLink(101, (2, 151), (2, 154), ScLinkType.Transit)
-scion.addIxLink(101, (2, 151), (2, 155), ScLinkType.Transit)
+scion.addIxLink(101, (2, 160), (2, 161), ScLinkType.Transit)
+scion.addIxLink(101, (2, 160), (2, 161), ScLinkType.Transit)
 
 
 ###############################################################################
 # BGP peering
-ebgp.addPrivatePeering(102, 150, 151, abRelationship=PeerRelationship.Peer)
+ebgp.addPrivatePeering(102, 150, 160, abRelationship=PeerRelationship.Peer)
+ebgp.addPrivatePeering(100, 150, 151, abRelationship=PeerRelationship.Provider)
 ebgp.addPrivatePeering(100, 150, 152, abRelationship=PeerRelationship.Provider)
-ebgp.addPrivatePeering(100, 150, 153, abRelationship=PeerRelationship.Provider)
-ebgp.addPrivatePeering(101, 151, 154, abRelationship=PeerRelationship.Provider)
-ebgp.addPrivatePeering(101, 151, 155, abRelationship=PeerRelationship.Provider)
+ebgp.addPrivatePeering(101, 160, 161, abRelationship=PeerRelationship.Provider)
+ebgp.addPrivatePeering(101, 160, 162, abRelationship=PeerRelationship.Provider)
 
 
 ###############################################################################
