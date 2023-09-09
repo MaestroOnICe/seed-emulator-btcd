@@ -263,7 +263,7 @@ for asn in range(165, 176):
 
 ###############################################################################
 # Cloud - North America ISD 8 (176 to 178)
-# Tier 2 ASes
+# Tier 1 ASes
 aws_cloud = create_tier1_as(8, 176)
 google_cloud = create_tier1_as(8, 177)
 digital_ocean_cloud = create_tier1_as(8, 178)
@@ -431,6 +431,55 @@ br = verizon.getRouter('br0')
 br.crossConnect(163, 'br0', xc_nets.next_addr('162-163'))
 scion.addXcLink((7, 162), (7, 163), ScLinkType.Transit)
 ebgp.addCrossConnectPeering(162, 163, PeerRelationship.Provider)
+
+
+###############################################################################
+# Links originating in Tier 2 ASes
+
+# Swisscom 1-105 to
+# Tier2: 1-104, 1-106
+br = swisscom.getRouter('br0')
+br.crossConnect(104, 'br0', xc_nets.next_addr('105-104'))
+br.crossConnect(106, 'br0', xc_nets.next_addr('105-106'))
+scion.addXcLink((1, 105), (1, 104), ScLinkType.Peer)
+scion.addXcLink((1, 105), (1, 106), ScLinkType.Peer)
+ebgp.addCrossConnectPeering(105, 104, PeerRelationship.Peer)
+ebgp.addCrossConnectPeering(105, 106, PeerRelationship.Peer)
+
+# core-Backbone 1-104 to
+# Tier2: 5-141
+br = core_backbone.getRouter('br0')
+br.crossConnect(141, 'br0', xc_nets.next_addr('104-141'))
+scion.addXcLink((1, 104), (5,141), ScLinkType.Peer)
+ebgp.addCrossConnectPeering(104, 141, PeerRelationship.Peer)
+
+# Microscan 3-128 to
+# Tier2: 3-130
+br = microscan.getRouter('br0')
+br.crossConnect(130, 'br0', xc_nets.next_addr('128-130'))
+scion.addXcLink((3, 128), (3, 130), ScLinkType.Peer)
+ebgp.addCrossConnectPeering(128, 130, PeerRelationship.Peer)
+
+# Kinx 3-130 to
+# Tier2: 3-129
+br = kinx.getRouter('br0')
+br.crossConnect(129, 'br0', xc_nets.next_addr('130-129'))
+scion.addXcLink((3, 130), (3, 129), ScLinkType.Peer)
+ebgp.addCrossConnectPeering(130, 129, PeerRelationship.Peer)
+
+# Ecoband 5-141 to
+# Tier2: 5-142
+br = ecoband.getRouter('br0')
+br.crossConnect(142, 'br0', xc_nets.next_addr('141-142'))
+scion.addXcLink((5, 141), (5, 142), ScLinkType.Peer)
+ebgp.addCrossConnectPeering(141, 142, PeerRelationship.Peer)
+
+# liquidweb 7-163 to
+# Tier2: 7-164
+br = liquidweb.getRouter('br0')
+br.crossConnect(164, 'br0', xc_nets.next_addr('163-164'))
+scion.addXcLink((7, 163), (7, 164), ScLinkType.Peer)
+ebgp.addCrossConnectPeering(163, 164, PeerRelationship.Peer)
 
 ###############################################################################
 # Rendering
