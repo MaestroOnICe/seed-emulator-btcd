@@ -5,8 +5,12 @@ from seedemu.compiler import Docker, Graphviz
 from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ibgp, Ebgp, PeerRelationship 
 from seedemu.layers.Scion import LinkType as ScLinkType
-from enum import Enum
+import csv
 
+
+txt_file = 'paths.txt'
+with open(txt_file, mode='w', newline=''):
+    pass  # Do nothing, just open and close to clear the file
 # ###############################################################################
 # AS factory
 
@@ -52,7 +56,7 @@ def create_tier2_as(isd, asn, issuer=None):
     return as_
 
 # Tier 3 ASes have 1 border router
-def create_tier3_as(isd, asn, issuer=None):
+def create_tier3_as(isd: int, asn: int, issuer=None):
     as_ = base.createAutonomousSystem(asn)
     scion_isd.addIsdAs(isd, asn, False)
     scion_isd.setCertIssuer((isd, asn), issuer)
@@ -106,6 +110,15 @@ def XConnect(asn_a: int, asn_b: int, type: str):
     as_a_isd = scion_isd.getAsIsds(asn_a)[0]
     as_b_isd = scion_isd.getAsIsds(asn_b)[0]
 
+
+    bgp_source = f'10.{asn_a}.0.71'
+    bgp_destination = f'10.{asn_b}.0.71'
+    scion_source = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
+    scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
+
+    with open(txt_file, mode='a', newline='') as file:
+        file.write(f'bgp |{bgp_source} |{bgp_destination}\nscion |{scion_source} |{scion_destination}\n')
+
     # will throw error if link type does not match
     scion.addXcLink((as_a_isd[0],asn_a), (as_b_isd[0],asn_b), sclink_type.get(type, "null"))
     
@@ -119,6 +132,9 @@ def XConnect(asn_a: int, asn_b: int, type: str):
 # scion.addIxLink(IXn, (ISD, ASn), (ISD, ASn), Linktype)
 
 def IXPConnect(ixn: int, asn: int):
+    # AS has to join the network of IXP 
+    br = base.getAutonomousSystem(asn).getRouter('br0')
+    br.joinNetwork(f'ix{ixn}')
     ebgp.addRsPeer(ixn, asn)
     ixs[ixn].append(asn)
 
@@ -128,19 +144,13 @@ def AddScionIXPConnections():
         for asn_a in ixn_list:
             for asn_b in ixn_list:
                 if asn_a != asn_b:
-                    if([asn_a, asn_b ] in addedIXConnections or [asn_b, asn_a ]in addedIXConnections):
+                    if([ixn, asn_a, asn_b ] in addedIXConnections or [ixn, asn_b, asn_a ]in addedIXConnections):
                          continue
-                    # both ases have to join the network 
-                    br_a = base.getAutonomousSystem(asn_a).getRouter('br0')
-                    br_b = base.getAutonomousSystem(asn_b).getRouter('br0')
-
-                    br_a.joinNetwork(f'ix{ixn}')
-                    br_b.joinNetwork(f'ix{ixn}')
 
                     # lookup ISD AS a and ISD b are in, at this time, one AS is only in one ISD
                     as_a_isd = scion_isd.getAsIsds(asn_a)[0]
                     as_b_isd = scion_isd.getAsIsds(asn_b)[0]
-                    addedIXConnections.append([asn_a, asn_b]) 
+                    addedIXConnections.append([ixn, asn_a, asn_b]) 
                     #print(ixn, "connect ",as_a_isd[0], asn_a," to ",as_b_isd[0], asn_b, "as peer")            
                     scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), ScLinkType.Peer)
 
@@ -198,29 +208,26 @@ microscan = create_tier2_as(2, 151, issuer=150) # Issuer: Telstra
 
 ###############################################################################
 # Links
-
-# arelion 1-100 to telstra 2-150 as core
+XConnect(100, 101, "provider")
 XConnect(100, 150, "core")
+#XConnect(101, 151, "peer")
+#XConnect(150, 151, "provider")
 
-# arelion 1-100 to swisscom 1-101 as provider
-#XConnect(100, 101, "provider")
+telstra.getRouter('br0').joinNetwork('ix20')
+swisscom.getRouter('br0').joinNetwork('ix20')
 
-# telstra 2-150 to microscan 2-151 as provider
-XConnect(150, 151, "provider")
+scion.addIxLink(20, (2, 150), (1, 101), ScLinkType.Transit)
+ebgp.addRsPeer(20, 150)
+ebgp.addRsPeer(20, 101)
 
-# swisscom.getRouter('br0').joinNetwork('ix20')
-# microscan.getRouter('br0').joinNetwork('ix20')
-# scion.addIxLink(20, (1, 101), (2, 151), ScLinkType.Peer)
-# ebgp.addRsPeer(20, 101)
-# ebgp.addRsPeer(20, 151)
-
-IXPConnect(20, 101)
-IXPConnect(20, 151)
-IXPConnect(20, 100)
+#IXPConnect(20, 150)
+#IXPConnect(21, 150)
+#IXPConnect(20, 101)
+#IXPConnect(21, 101)
 
 ###############################################################################
 #Rendering
-AddScionIXPConnections()
+#AddScionIXPConnections()
 emu.addLayer(base)
 emu.addLayer(routing)
 emu.addLayer(ospf)

@@ -386,7 +386,7 @@ XConnect(126, 160, "core")
 XConnect(126, 129, "provider")
 
 # Alibab 3-139 to 
-# ix103 and 104
+# ix103 and ix104
 
 # Angola Cable 5-140 to 
 # Tier1: 6-150
