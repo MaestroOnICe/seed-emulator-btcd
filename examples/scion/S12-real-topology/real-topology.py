@@ -105,6 +105,72 @@ xc_nets = CrossConnectNetAssigner()
 
 
 ###############################################################################
+# setting crossconnect and ixconnect
+ebgp_types = {
+    "peer": PeerRelationship.Peer,
+    "provider": PeerRelationship.Provider,
+    "core": PeerRelationship.Peer
+}
+
+sclink_type = {
+    "peer": ScLinkType.Peer,
+    "provider": ScLinkType.Transit,
+    "core": ScLinkType.Core   
+}
+
+# SCION and BGP cross connect two ASes
+def XConnect(asn_a: int, asn_b: int, type: str, as_a_router="br0", as_b_router="br0"):
+    # cross connecting AS a <-> AS b
+    as_a = base.getAutonomousSystem(asn_a)
+    as_b = base.getAutonomousSystem(asn_b)
+    br_a = as_a.getRouter(as_a_router)
+    br_b = as_b.getRouter(as_b_router)
+    br_a.crossConnect(asn_b, as_b_router, xc_nets.next_addr(f'{asn_a}-{asn_b}'))
+    br_b.crossConnect(asn_a, as_a_router, xc_nets.next_addr(f'{asn_a}-{asn_b}'))
+
+    # lookup ISD AS a and ISD b are in, at this time, one AS is only in one ISD
+    as_a_isd = scion_isd.getAsIsds(asn_a)[0]
+    as_b_isd = scion_isd.getAsIsds(asn_b)[0]
+
+    # will throw error if link type does not match
+    scion.addXcLink((as_a_isd[0],asn_a), (as_b_isd[0],asn_b), sclink_type.get(type, "null"))
+    
+    # will throw error if link type does not match
+    ebgp.addCrossConnectPeering(asn_a, asn_b, ebgp_types.get(type, "null"))
+
+# Connect an AS to an IXP, with SCION and BGP
+# SCION connections are saved, because they will be added in the end
+# due to the need to specify each connectin like 
+# scion.addIxLink(IXn, (ISD, ASn), (ISD, ASn), Linktype)
+
+def IXPConnect(ixn: int, asn: int):
+    ebgp.addRsPeer(ixn, asn)
+    ixs[ixn].append(asn)
+
+def AddScionIXPConnections():
+    addedIXConnections = []
+    for ixn, ixn_list in ixs.items():
+        for asn_a in ixn_list:
+            for asn_b in ixn_list:
+                if asn_a != asn_b:
+                    if([asn_a, asn_b ] in addedIXConnections or [asn_b, asn_a ]in addedIXConnections):
+                         continue
+                    # both ases have to join the network 
+                    br_a = base.getAutonomousSystem(asn_a).getRouter('br0')
+                    br_b = base.getAutonomousSystem(asn_b).getRouter('br0')
+
+                    br_a.joinNetwork(f'ix{ixn}')
+                    br_b.joinNetwork(f'ix{ixn}')
+
+                    # lookup ISD AS a and ISD b are in, at this time, one AS is only in one ISD
+                    as_a_isd = scion_isd.getAsIsds(asn_a)[0]
+                    as_b_isd = scion_isd.getAsIsds(asn_b)[0]
+                    addedIXConnections.append([asn_a, asn_b]) 
+                    #print(ixn, "connect ",as_a_isd[0], asn_a," to ",as_b_isd[0], asn_b, "as peer")            
+                    scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), ScLinkType.Peer)
+
+
+###############################################################################
 # Initialize
 emu = Emulator()
 base = ScionBase()
@@ -112,7 +178,7 @@ routing = ScionRouting()
 ospf = Ospf()
 scion_isd = ScionIsd()
 scion = Scion()
-ibgp = Ibgp()
+#ibgp = Ibgp()
 ebgp = Ebgp()
 
 
@@ -162,6 +228,11 @@ ix26.getPeeringLan().setDisplayName('Sao Paulo-106')
 ix27.getPeeringLan().setDisplayName('Los Angeles-107')
 ix28.getPeeringLan().setDisplayName('Miami-108')
 
+# dict for registering IX scion paths
+ixs = {}
+ixn_list = base.getInternetExchangeIds()
+for ixn in ixn_list:
+    ixs[ixn] = []
 
 ###############################################################################
 # Europe ISD 1 (100 to 122)
@@ -275,162 +346,88 @@ digital_ocean_cloud = create_tier1_as(8, 178)
 # Arelion 1-100 to 
 # Tier1: 1-101, 1-102, 7-161, 
 # Tier2: 1-104
-br = arelion.getRouter('br0')
-br.crossConnect(101, 'br0', xc_nets.next_addr('100-101'))
-br.crossConnect(102, 'br0', xc_nets.next_addr('100-102'))
-br.crossConnect(161, 'br0', xc_nets.next_addr('100-161'))
-br.crossConnect(104, 'br0', xc_nets.next_addr('100-104'))
-scion.addXcLink((1, 100), (1, 101), ScLinkType.Core)
-scion.addXcLink((1, 100), (1, 102), ScLinkType.Core)
-scion.addXcLink((1, 100), (7, 161), ScLinkType.Core)
-scion.addXcLink((1, 100), (1, 104), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(100, 101, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(100, 102, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(100, 161, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(100, 104, PeerRelationship.Provider)
+
+XConnect(100, 101, "core")
+XConnect(100, 102, "core")
+XConnect(100, 161, "core")
+XConnect(100, 104, "provider")
 
 # Telecom Italia 1-101 to 
 # Tier1: 1-102, 1-103, 7-162
 # Tier2: 1-105
-br = telecom_italia.getRouter('br0')
-br.crossConnect(102, 'br0', xc_nets.next_addr('101-102'))
-br.crossConnect(105, 'br0', xc_nets.next_addr('101-105'))
-br.crossConnect(103, 'br0', xc_nets.next_addr('101-103'))
-br.crossConnect(162, 'br0', xc_nets.next_addr('101-162'))
-scion.addXcLink((1, 101), (1, 102), ScLinkType.Core)
-scion.addXcLink((1, 101), (1, 105), ScLinkType.Core)
-scion.addXcLink((1, 101), (1, 103), ScLinkType.Peer)
-scion.addXcLink((1, 101), (7, 162), ScLinkType.Core)
-ebgp.addCrossConnectPeering(101, 102, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(101, 105, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(101, 103, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(101, 162, PeerRelationship.Peer)
+XConnect(101, 102, "core")
+XConnect(101, 103, "core")
+XConnect(101, 162, "core")
+XConnect(101, 105, "peer")
 
 # Deutsche Telekom 1-102 to 
 # Tier1: 5-140
 # Tier2: 1-106, 1-104
-br = deutsche_telekom.getRouter('br0')
-br.crossConnect(140, 'br0', xc_nets.next_addr('102-140'))
-br.crossConnect(106, 'br0', xc_nets.next_addr('102-106'))
-br.crossConnect(104, 'br0', xc_nets.next_addr('102-104'))
-scion.addXcLink((1, 102), (5, 140), ScLinkType.Core)
-scion.addXcLink((1, 102), (1, 106), ScLinkType.Transit)
-scion.addXcLink((1, 102), (1, 104), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(102, 140, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(102, 106, PeerRelationship.Provider)
-ebgp.addCrossConnectPeering(102, 104, PeerRelationship.Provider)
+XConnect(102, 140, "core")
+XConnect(102, 106, "provider")
+XConnect(102, 164, "provider")
 
 # RETN Limited 1-103 to 
 # Tier1: 3-127
-br = retn_limited.getRouter('br0')
-br.crossConnect(127, 'br0', xc_nets.next_addr('103-127'))
-scion.addXcLink((1, 103), (3, 127), ScLinkType.Core)
-ebgp.addCrossConnectPeering(103, 127, PeerRelationship.Peer)
+XConnect(103, 127, "core")
 
 # Singapore Telecommunication 3-127 to 
 # Tier1: 3-126, 5-140
 # Tier2: 3-128, 3-129
-br = singapore_telecommunication.getRouter('br0')
-br.crossConnect(127, 'br0', xc_nets.next_addr('127-126'))
-br.crossConnect(127, 'br0', xc_nets.next_addr('127-140'))
-br.crossConnect(127, 'br0', xc_nets.next_addr('127-128'))
-br.crossConnect(127, 'br0', xc_nets.next_addr('127-129'))
-scion.addXcLink((3, 127), (3, 126), ScLinkType.Core)
-scion.addXcLink((3, 127), (5, 140), ScLinkType.Core)
-scion.addXcLink((3, 127), (3, 128), ScLinkType.Transit)
-scion.addXcLink((3, 127), (3, 129), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(127, 126, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(127, 140, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(127, 128, PeerRelationship.Provider)
-ebgp.addCrossConnectPeering(127, 129, PeerRelationship.Provider)
+XConnect(127, 126, "core")
+XConnect(127, 140, "core")
+XConnect(127, 128, "provider")
+XConnect(127, 129, "provider")
 
-# Telstra 3-139 to 
+# Telstra 3-126 to 
 # Tier1: 7-160
 # Tier2: 3-129
-br = telstra.getRouter('br0')
-br.crossConnect(160, 'br0', xc_nets.next_addr('126-160'))
-br.crossConnect(129, 'br0', xc_nets.next_addr('126-129'))
-scion.addXcLink((3, 126), (7, 160), ScLinkType.Core)
-scion.addXcLink((3, 126), (3, 129), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(126, 160, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(126, 129, PeerRelationship.Provider)
+XConnect(126, 160, "core")
+XConnect(126, 129, "provider")
 
-# Alibab 3-126 to 
+# Alibab 3-139 to 
 # ix103 and 104
-br = alibab_cloud.getRouter('br0')
 
 # Angola Cable 5-140 to 
 # Tier1: 6-150
 # Tier2: 1-104, 5-141, 5-142
-br = telstra.getRouter('br0')
-br.crossConnect(150, 'br0', xc_nets.next_addr('140-150'))
-br.crossConnect(104, 'br0', xc_nets.next_addr('140-104'))
-br.crossConnect(141, 'br0', xc_nets.next_addr('140-141'))
-br.crossConnect(142, 'br0', xc_nets.next_addr('140-142'))
-scion.addXcLink((5, 140), (6, 150), ScLinkType.Core)
-scion.addXcLink((5, 140), (1, 104), ScLinkType.Peer)
-scion.addXcLink((5, 140), (5, 141), ScLinkType.Transit)
-scion.addXcLink((5, 140), (5, 142), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(140, 150, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(140, 104, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(140, 141, PeerRelationship.Provider)
-ebgp.addCrossConnectPeering(140, 142, PeerRelationship.Provider)
+XConnect(140, 150, "core")
+XConnect(140, 104, "peer")
+XConnect(140, 141, "provider")
+XConnect(140, 142, "provider")
 
 # Algar Telecom 6-150 to 
 # Tier1: 6-151, 7-162
-br = algar_telecomm.getRouter('br0')
-br.crossConnect(151, 'br0', xc_nets.next_addr('150-151'))
-br.crossConnect(162, 'br0', xc_nets.next_addr('150-162'))
-scion.addXcLink((6, 150), (6, 151), ScLinkType.Core)
-scion.addXcLink((6, 150), (7, 162), ScLinkType.Core)
-ebgp.addCrossConnectPeering(150, 151, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(150, 162, PeerRelationship.Peer)
+XConnect(150, 151, "core")
+XConnect(150, 162, "core")
 
 # GlobeNet 6-151 to 
 # Tier1: 7-162
 # Tier2: 6-152
-br = globe_net.getRouter('br0')
-br.crossConnect(162, 'br0', xc_nets.next_addr('151-162'))
-br.crossConnect(152, 'br0', xc_nets.next_addr('151-152'))
-scion.addXcLink((6, 151), (7, 162), ScLinkType.Core)
-scion.addXcLink((6, 151), (5, 152), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(151, 162, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(151, 152, PeerRelationship.Provider)
+XConnect(151, 162, "core")
+XConnect(151, 152, "provider")
 
 # Level3 7-160 to 
 # Tier1: 7-161, 7-162
 # Tier2: 1-104, 7-164
-br = level_3.getRouter('br0')
-br.crossConnect(161, 'br0', xc_nets.next_addr('160-161'))
-br.crossConnect(162, 'br0', xc_nets.next_addr('160-162'))
-br.crossConnect(104, 'br0', xc_nets.next_addr('160-104'))
-br.crossConnect(164, 'br0', xc_nets.next_addr('160-164'))
-scion.addXcLink((7, 160), (7, 161), ScLinkType.Core)
-scion.addXcLink((7, 160), (7, 162), ScLinkType.Core)
-scion.addXcLink((7, 160), (1, 104), ScLinkType.Transit)
-scion.addXcLink((7, 160), (7, 164), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(160, 161, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(160, 162, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(160, 104, PeerRelationship.Provider)
-ebgp.addCrossConnectPeering(160, 164, PeerRelationship.Provider)
+XConnect(160, 161, "core")
+XConnect(160, 162, "core")
+XConnect(160, 104, "provider")
+XConnect(160, 164, "provider")
 
 # Cogent 7-161 to 
 # Tier1: 7-162
 # Tier2: 1-104
-br = cogent.getRouter('br0')
-br.crossConnect(162, 'br0', xc_nets.next_addr('161-162'))
-br.crossConnect(104, 'br0', xc_nets.next_addr('161-104'))
-scion.addXcLink((7, 161), (7, 162), ScLinkType.Core)
-scion.addXcLink((7, 161), (1, 104), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(160, 162, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(160, 104, PeerRelationship.Provider)
+XConnect(161, 162, "core")
+XConnect(161, 104, "provider")
 
 # Verizon 7-162 to 
 # Tier2: 7-163
-br = verizon.getRouter('br0')
-br.crossConnect(163, 'br0', xc_nets.next_addr('162-163'))
-scion.addXcLink((7, 162), (7, 163), ScLinkType.Transit)
-ebgp.addCrossConnectPeering(162, 163, PeerRelationship.Provider)
+XConnect(162, 163, "provider")
+
+# Digital Ocean 8-178 to 
+# Tier2:  Liquidweb 7-163
+XConnect(178, 163, "peer")
 
 
 ###############################################################################
@@ -438,57 +435,38 @@ ebgp.addCrossConnectPeering(162, 163, PeerRelationship.Provider)
 
 # Swisscom 1-105 to
 # Tier2: 1-104, 1-106
-br = swisscom.getRouter('br0')
-br.crossConnect(104, 'br0', xc_nets.next_addr('105-104'))
-br.crossConnect(106, 'br0', xc_nets.next_addr('105-106'))
-scion.addXcLink((1, 105), (1, 104), ScLinkType.Peer)
-scion.addXcLink((1, 105), (1, 106), ScLinkType.Peer)
-ebgp.addCrossConnectPeering(105, 104, PeerRelationship.Peer)
-ebgp.addCrossConnectPeering(105, 106, PeerRelationship.Peer)
+XConnect(105, 104, "peer")
+XConnect(105, 106, "peer")
 
 # core-Backbone 1-104 to
 # Tier2: 5-141
-br = core_backbone.getRouter('br0')
-br.crossConnect(141, 'br0', xc_nets.next_addr('104-141'))
-scion.addXcLink((1, 104), (5,141), ScLinkType.Peer)
-ebgp.addCrossConnectPeering(104, 141, PeerRelationship.Peer)
+XConnect(104, 141, "peer")
 
 # Microscan 3-128 to
 # Tier2: 3-130
-br = microscan.getRouter('br0')
-br.crossConnect(130, 'br0', xc_nets.next_addr('128-130'))
-scion.addXcLink((3, 128), (3, 130), ScLinkType.Peer)
-ebgp.addCrossConnectPeering(128, 130, PeerRelationship.Peer)
+XConnect(128, 130, "peer")
 
 # Kinx 3-130 to
 # Tier2: 3-129
-br = kinx.getRouter('br0')
-br.crossConnect(129, 'br0', xc_nets.next_addr('130-129'))
-scion.addXcLink((3, 130), (3, 129), ScLinkType.Peer)
-ebgp.addCrossConnectPeering(130, 129, PeerRelationship.Peer)
+XConnect(130, 129, "peer")
 
 # Ecoband 5-141 to
 # Tier2: 5-142
-br = ecoband.getRouter('br0')
-br.crossConnect(142, 'br0', xc_nets.next_addr('141-142'))
-scion.addXcLink((5, 141), (5, 142), ScLinkType.Peer)
-ebgp.addCrossConnectPeering(141, 142, PeerRelationship.Peer)
+XConnect(141, 142, "peer")
 
 # liquidweb 7-163 to
 # Tier2: 7-164
-br = liquidweb.getRouter('br0')
-br.crossConnect(164, 'br0', xc_nets.next_addr('163-164'))
-scion.addXcLink((7, 163), (7, 164), ScLinkType.Peer)
-ebgp.addCrossConnectPeering(163, 164, PeerRelationship.Peer)
+XConnect(163, 164, "peer")
 
 ###############################################################################
 # Rendering
+AddScionIXPConnections()
 emu.addLayer(base)
 emu.addLayer(routing)
 emu.addLayer(ospf)
 emu.addLayer(scion_isd)
 emu.addLayer(scion)
-emu.addLayer(ibgp)
+#emu.addLayer(ibgp)
 emu.addLayer(ebgp)
 
 emu.render()

@@ -475,6 +475,8 @@ class Node(Printable, Registrable, Configurable, Vertex):
         assert not self.__asn == 0, 'This API is only available on a real physical node.'
         assert not self.__configured, 'Node already configured.'
 
+        if (netname, address) in self.__pending_nets:
+            return self
         self.__pending_nets.append((netname, address))
 
         return self
