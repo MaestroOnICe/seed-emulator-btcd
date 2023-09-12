@@ -144,6 +144,9 @@ def XConnect(asn_a: int, asn_b: int, type: str, as_a_router="br0", as_b_router="
 # scion.addIxLink(IXn, (ISD, ASn), (ISD, ASn), Linktype)
 
 def IXPConnect(ixn: int, asn: int):
+    # AS has to join the network of IXP 
+    br = base.getAutonomousSystem(asn).getRouter('br0')
+    br.joinNetwork(f'ix{ixn}')
     ebgp.addRsPeer(ixn, asn)
     ixs[ixn].append(asn)
 
@@ -155,12 +158,6 @@ def AddScionIXPConnections():
                 if asn_a != asn_b:
                     if([asn_a, asn_b ] in addedIXConnections or [asn_b, asn_a ]in addedIXConnections):
                          continue
-                    # both ases have to join the network 
-                    br_a = base.getAutonomousSystem(asn_a).getRouter('br0')
-                    br_b = base.getAutonomousSystem(asn_b).getRouter('br0')
-
-                    br_a.joinNetwork(f'ix{ixn}')
-                    br_b.joinNetwork(f'ix{ixn}')
 
                     # lookup ISD AS a and ISD b are in, at this time, one AS is only in one ISD
                     as_a_isd = scion_isd.getAsIsds(asn_a)[0]
@@ -248,10 +245,15 @@ swisscom = create_tier2_as(1, 105, issuer=102) # Issuer: Deutsche Telekom
 tele_2 = create_tier2_as(1, 106, issuer=102) # Issuer: Deutsche Telekom
 
 # Tier 3 ASes
-stub_as_isd1 = {}
-for asn in range(107, 123):
+stub_groupA_isd1 = {}
+for asn in range(107, 119):
     as_ = create_tier3_as(1, asn, issuer=102) # Issuer: Deutsche Telekom
-    stub_as_isd1[asn] = as_
+    stub_groupA_isd1[asn] = as_
+
+stub_groupB_isd1 = {}
+for asn in range(119, 123):
+    as_ = create_tier3_as(1, asn, issuer=102) # Issuer: Deutsche Telekom
+    stub_groupB_isd1[asn] = as_
 
 
 ###############################################################################
@@ -273,10 +275,15 @@ tm_technology = create_tier2_as(3, 129, issuer=126) # Issuer: Telstra
 kinx = create_tier2_as(3, 130, issuer=126) # Issuer: Telstra
 
 # Tier 3 ASes
-stub_as_isd3 = {}
-for asn in range(131, 139):
+stub_groupA_isd3 = {}
+for asn in range(131, 136):
     as_ = create_tier3_as(3, asn, issuer=126) # Issuer: Telstra
-    stub_as_isd3[asn] = as_
+    stub_groupA_isd3[asn] = as_
+
+stub_groupB_isd3 = {}
+for asn in range(136, 139):
+    as_ = create_tier3_as(3, asn, issuer=126) # Issuer: Telstra
+    stub_groupB_isd3[asn] = as_
 
 
 ###############################################################################
@@ -294,10 +301,10 @@ ecoband = create_tier2_as(5, 141, issuer=140) # Issuer: Angola Cables
 africom = create_tier2_as(5, 142, issuer=140) # Issuer: Angola Cables
 
 # Tier 3 ASes
-stub_as_isd5 = {}
+stub_groupA_isd5 = {}
 for asn in range(143, 150):
     as_ = create_tier3_as(5, asn, issuer=140) # Issuer: Angola Cables
-    stub_as_isd5[asn] = as_
+    stub_groupA_isd5[asn] = as_
 
 
 ###############################################################################
@@ -310,10 +317,15 @@ globe_net = create_tier1_as(6, 151)
 locaweb = create_tier2_as(6, 152, issuer=150)
 
 # Tier 3 ASes
-stub_as_isd6 = {}
-for asn in range(153, 160):
+stub_groupA_isd6 = {}
+for asn in range(153, 156):
     as_ = create_tier3_as(6, asn, issuer=150) # Issuer: Algar Telecomm
-    stub_as_isd6[asn] = as_
+    stub_groupA_isd6[asn] = as_
+
+stub_groupB_isd6 = {}
+for asn in range(156, 160):
+    as_ = create_tier3_as(6, asn, issuer=150) # Issuer: Algar Telecomm
+    stub_groupB_isd6[asn] = as_
 
 ###############################################################################
 # North America ISD 7 (160 to 175 )
@@ -327,10 +339,15 @@ liquidweb = create_tier2_as(7, 163, issuer=160)
 lunavi = create_tier2_as(7, 164, issuer=160)
 
 # Tier 3 ASes
-stub_as_isd7 = {}
-for asn in range(165, 176):
+stub_groupA_isd7 = {}
+for asn in range(165, 170):
     as_ = create_tier3_as(7, asn, issuer=160) # Issuer: level3
-    stub_as_isd7[asn] = as_
+    stub_groupA_isd7[asn] = as_
+
+stub_groupB_isd7 = {}
+for asn in range(170, 176):
+    as_ = create_tier3_as(7, asn, issuer=160) # Issuer: level3
+    stub_groupB_isd7[asn] = as_
 
 ###############################################################################
 # Cloud - North America ISD 8 (176 to 178)
@@ -346,7 +363,6 @@ digital_ocean_cloud = create_tier1_as(8, 178)
 # Arelion 1-100 to 
 # Tier1: 1-101, 1-102, 7-161, 
 # Tier2: 1-104
-
 XConnect(100, 101, "core")
 XConnect(100, 102, "core")
 XConnect(100, 161, "core")
@@ -371,6 +387,24 @@ XConnect(102, 164, "provider")
 # Tier1: 3-127
 XConnect(103, 127, "core")
 
+# Cloud ovh 2-123 to
+# IX100, IX101, IX102
+IXPConnect(100, 123)
+IXPConnect(101, 123)
+IXPConnect(102, 123)
+
+# Cloud Contabo 2-124 to
+# IX100, IX101, IX102
+IXPConnect(100, 124)
+IXPConnect(101, 124)
+IXPConnect(102, 124)
+
+# Cloud Hetzner 2-125 to
+# IX100, IX101, IX102
+IXPConnect(100, 125)
+IXPConnect(101, 125)
+IXPConnect(102, 125)
+
 # Singapore Telecommunication 3-127 to 
 # Tier1: 3-126, 5-140
 # Tier2: 3-128, 3-129
@@ -385,8 +419,10 @@ XConnect(127, 129, "provider")
 XConnect(126, 160, "core")
 XConnect(126, 129, "provider")
 
-# Alibab 3-139 to 
+# Cloud Alibaba 3-139 to 
 # ix103 and ix104
+IXPConnect(103, 139)
+IXPConnect(104, 139)
 
 # Angola Cable 5-140 to 
 # Tier1: 6-150
@@ -425,26 +461,51 @@ XConnect(161, 104, "provider")
 # Tier2: 7-163
 XConnect(162, 163, "provider")
 
+# AWS Cloud 8-176 to
+# IX107, IX108
+IXPConnect(107, 176)
+IXPConnect(108, 176)
+
+# Google Cloud 8-177 to
+# IX107, IX108
+IXPConnect(107, 177)
+IXPConnect(108, 177)
+
 # Digital Ocean 8-178 to 
 # Tier2:  Liquidweb 7-163
+# IX108
 XConnect(178, 163, "peer")
-
+IXPConnect(108, 178)
 
 ###############################################################################
 # Links originating in Tier 2 ASes
 
-# Swisscom 1-105 to
-# Tier2: 1-104, 1-106
-XConnect(105, 104, "peer")
-XConnect(105, 106, "peer")
-
 # core-Backbone 1-104 to
 # Tier2: 5-141
+# IX100, IX101, IX101
 XConnect(104, 141, "peer")
+IXPConnect(100, 104)
+IXPConnect(101, 104)
+IXPConnect(102, 104)
+IXPConnect(107, 104)
+
+# Swisscom 1-105 to
+# Tier2: 1-104, 1-106
+# IX100, IX101, IX101
+XConnect(105, 104, "peer")
+XConnect(105, 106, "peer")
+IXPConnect(100, 105)
+IXPConnect(101, 105)
+IXPConnect(102, 105)
 
 # Microscan 3-128 to
 # Tier2: 3-130
 XConnect(128, 130, "peer")
+
+# TM Techbology 3-129 to
+# IX103, IX104
+IXPConnect(103, 129)
+IXPConnect(104, 129)
 
 # Kinx 3-130 to
 # Tier2: 3-129
@@ -452,11 +513,29 @@ XConnect(130, 129, "peer")
 
 # Ecoband 5-141 to
 # Tier2: 5-142
+# IX 105
 XConnect(141, 142, "peer")
+IXPConnect(105, 141)
+
+# Africom 5-142 to
+# IX 105
+IXPConnect(105, 142)
+
+# locaweb 6-152 to
+# IX106
+IXPConnect(106, 152)
 
 # liquidweb 7-163 to
 # Tier2: 7-164
+# IX108
 XConnect(163, 164, "peer")
+IXPConnect(108, 163)
+
+# lunavi 7-164 to
+# IX107, IX108
+IXPConnect(107, 164)
+IXPConnect(108, 164)
+
 
 ###############################################################################
 # Rendering

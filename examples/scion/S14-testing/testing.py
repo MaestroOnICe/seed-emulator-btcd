@@ -5,8 +5,6 @@ from seedemu.compiler import Docker, Graphviz
 from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ibgp, Ebgp, PeerRelationship 
 from seedemu.layers.Scion import LinkType as ScLinkType
-import csv
-
 
 txt_file = 'paths.txt'
 with open(txt_file, mode='w', newline=''):
@@ -110,12 +108,11 @@ def XConnect(asn_a: int, asn_b: int, type: str):
     as_a_isd = scion_isd.getAsIsds(asn_a)[0]
     as_b_isd = scion_isd.getAsIsds(asn_b)[0]
 
-
+    # loggng each connection (BGP and SCION) to a file, of later use
     bgp_source = f'10.{asn_a}.0.71'
     bgp_destination = f'10.{asn_b}.0.71'
     scion_source = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
     scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
-
     with open(txt_file, mode='a', newline='') as file:
         file.write(f'bgp |{bgp_source} |{bgp_destination}\nscion |{scion_source} |{scion_destination}\n')
 
@@ -144,12 +141,23 @@ def AddScionIXPConnections():
         for asn_a in ixn_list:
             for asn_b in ixn_list:
                 if asn_a != asn_b:
+                    # skip this pair, when both endpoints have already an IX link between them
                     if([ixn, asn_a, asn_b ] in addedIXConnections or [ixn, asn_b, asn_a ]in addedIXConnections):
                          continue
 
                     # lookup ISD AS a and ISD b are in, at this time, one AS is only in one ISD
                     as_a_isd = scion_isd.getAsIsds(asn_a)[0]
                     as_b_isd = scion_isd.getAsIsds(asn_b)[0]
+
+                    # loggng each connection (BGP and SCION) to a file, of later use
+                    bgp_source = f'10.{asn_a}.0.71'
+                    bgp_destination = f'10.{asn_b}.0.71'
+                    scion_source = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
+                    scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
+                    with open(txt_file, mode='a', newline='') as file:
+                        file.write(f'bgp |{bgp_source} |{bgp_destination}\nscion |{scion_source} |{scion_destination}\n')
+
+                    # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
                     addedIXConnections.append([ixn, asn_a, asn_b]) 
                     #print(ixn, "connect ",as_a_isd[0], asn_a," to ",as_b_isd[0], asn_b, "as peer")            
                     scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), ScLinkType.Peer)
@@ -228,17 +236,17 @@ ebgp.addRsPeer(20, 101)
 ###############################################################################
 #Rendering
 #AddScionIXPConnections()
-emu.addLayer(base)
-emu.addLayer(routing)
-emu.addLayer(ospf)
-emu.addLayer(scion_isd)
-emu.addLayer(scion)
-#emu.addLayer(ibgp)
-emu.addLayer(ebgp)
+# emu.addLayer(base)
+# emu.addLayer(routing)
+# emu.addLayer(ospf)
+# emu.addLayer(scion_isd)
+# emu.addLayer(scion)
+# #emu.addLayer(ibgp)
+# emu.addLayer(ebgp)
 
-emu.render()
+# emu.render()
 
-# ##############################################################################
-# Compilation
-emu.compile(Docker(), "./output", override=True)
-emu.compile(Graphviz(), "./output/graphs", override=True)
+# # ##############################################################################
+# # Compilation
+# emu.compile(Docker(), "./output", override=True)
+# emu.compile(Graphviz(), "./output/graphs", override=True)

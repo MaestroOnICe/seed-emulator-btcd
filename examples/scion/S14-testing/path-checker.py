@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import docker
 import python_on_whales
-
+import time
 
 def ping(type: str, source: str, destination: str):
     if(type == "bgp"):
@@ -11,8 +11,26 @@ def ping(type: str, source: str, destination: str):
         cmd = f'scion ping {destination}'
     else:
         print("Error, not bgp or scion")
-     
+    
+    for name, ctr in ctrs.items():
+        if "cs" not in name:
+            continue
+        print("Run path check in", name, end="")
+        ec, output = ctr.exec_run(cmd)
+        for line in output.decode('utf8').splitlines():
+            print("  " + line)
 
+# Build Docker containers and run the network
+whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
+whales.compose.build()
+whales.compose.up(detach=True)    
+     
+# Use Docker SDK to interact with the containers
+client: docker.DockerClient = docker.from_env()
+ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
+
+#sleep for 15 seconds to up paths
+time.sleep(15)
 
 txt_file = 'paths.txt'
 with open(txt_file, mode='r') as file:
@@ -26,29 +44,5 @@ with open(txt_file, mode='r') as file:
             # Assign each part to separate variables
             column1, column2, column3 = parts
             ping(column1, column2, column3)
-
-            # Append the values to their respective lists
-            print(column1, column2, column3)
         else:
             print(f"Skipping line: {line.strip()}")
-
-
-# # Build the Docker exec command
-# docker_exec_cmd = f'docker exec {container_name_or_id} {command}'
-
-# # Execute the Docker exec command
-# try:
-#     result = subprocess.run(
-#         docker_exec_cmd,
-#         shell=True,
-#         stdout=subprocess.PIPE,
-#         stderr=subprocess.PIPE,
-#         text=True,
-#     )
-    
-#     if result.returncode == 0:
-#         print(f"Command Output:\n{result.stdout}")
-#     else:
-#         print(f"Command Error:\n{result.stderr}")
-# except Exception as e:
-#     print(f"An error occurred: {str(e)}")
