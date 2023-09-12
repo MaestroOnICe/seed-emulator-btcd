@@ -5,7 +5,7 @@ from seedemu.compiler import Docker, Graphviz
 from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ibgp, Ebgp, PeerRelationship 
 from seedemu.layers.Scion import LinkType as ScLinkType
-import utils
+import examples.scion.utility.utils as utils
 ###############################################################################
 # Initialize
 emu = Emulator()
@@ -41,9 +41,9 @@ ix20.getPeeringLan().setDisplayName('Frankfurt-20')
 ###############################################################################
 # Helper
 path_checker = utils.PathChecker()
-xConnector = utils.xConnector(base, scion_isd, ebgp, scion, path_checker)
-ixpConnector = utils.ixpConnector(base, scion_isd, ebgp, scion, path_checker)
-maker = utils.asMaker(base, scion_isd)
+cross_connector = utils.CrossConnector(base, scion_isd, ebgp, scion, path_checker)
+ixp_connector = utils.IXPConnector(base, scion_isd, ebgp, scion, path_checker)
+maker = utils.AutonomousSystemMaker(base, scion_isd)
 
 
 ###############################################################################
@@ -63,12 +63,12 @@ telstra = maker.createTier1AS(2, 150)
 
 ###############################################################################
 # Links
-xConnector.XConnect(100, 101, "provider")
-xConnector.XConnect(100, 150, "core")
+cross_connector.XConnect(100, 101, "provider")
+cross_connector.XConnect(100, 150, "core")
 
 ###############################################################################
 #Rendering
-ixpConnector.AddScionIXPConnections()
+ixp_connector.addScionIXPConnections()
 emu.addLayer(base)
 emu.addLayer(routing)
 emu.addLayer(ospf)

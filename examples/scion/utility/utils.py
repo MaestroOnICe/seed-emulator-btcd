@@ -98,7 +98,7 @@ class PathChecker:
 ###############################################################################
 # AS factory
 
-class asMaker:
+class AutonomousSystemMaker:
     def __init__(self, base: ScionBase, scion_isd: ScionIsd):
         self.base = base
         self.scion_isd = scion_isd
@@ -223,7 +223,7 @@ sclink_type = {
     "core": ScLinkType.Core   
 }
 
-class xConnector:
+class CrossConnector:
     def __init__(self, base: ScionBase, scion_isd: ScionIsd, ebgp: Ebgp, scion: Scion, path_checker: PathChecker = None):
         self.base = base
         self.scion_isd = scion_isd
@@ -262,7 +262,7 @@ class xConnector:
 # SCION connections are saved, because they will be added in the end
 # due to the need to specify each connection like 
 # scion.addIxLink(IXn, (ISD, ASn), (ISD, ASn), Linktype)
-class ixpConnector:
+class IXPConnector:
     def __init__(self, base: ScionBase, scion_isd: ScionIsd, ebgp: Ebgp, scion: Scion, path_checker: PathChecker = None):
         self.base = base
         self.scion_isd = scion_isd
@@ -283,7 +283,7 @@ class ixpConnector:
         self.ebgp.addRsPeer(ixn, asn)
         self.ixs[ixn].append(asn)
 
-    def AddScionIXPConnections(self):
+    def addScionIXPConnections(self):
         addedIXConnections = []
         for ixn, ixn_list in self.ixs.items():
             for asn_a in ixn_list:
