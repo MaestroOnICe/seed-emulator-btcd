@@ -14,10 +14,10 @@ class PathChecker:
         @brief Path checker, for scion and bgp mixed topology.
         """
         self.paths = []
-        self.txt_file_path = 'paths.txt'
-        with open(self.txt_file_path, mode='w', newline='') as file:
-            pass  # Do nothing, just open and close to clear the file
-        self.results_file = file
+        # self.txt_file_path = 'paths.txt'
+        # with open(self.txt_file_path, mode='w', newline='') as file:
+        #     pass  # Do nothing, just open and close to clear the file
+        # self.results_file = file
     
     def getName(self) -> str:
         return "Path Checker"
@@ -305,8 +305,7 @@ class IXPConnector:
                             self.checker._savePath(2, asn_a, scion_destination)
 
                         # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
-                        addedIXConnections.append([ixn, asn_a, asn_b]) 
-                        #print(ixn, "connect ",as_a_isd[0], asn_a," to ",as_b_isd[0], asn_b, "as peer")            
+                        addedIXConnections.append([ixn, asn_a, asn_b])     
                         self.scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), ScLinkType.Peer)
 
 

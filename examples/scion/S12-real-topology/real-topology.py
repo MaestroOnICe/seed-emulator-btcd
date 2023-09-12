@@ -79,15 +79,15 @@ ix28 = base.createInternetExchange(28) # Miami (North America)
 
 
 # Customize names (for visualization purpose)
-ix20.getPeeringLan().setDisplayName('Frankfurt-100')
-ix21.getPeeringLan().setDisplayName('London-101')
-ix22.getPeeringLan().setDisplayName('Amsterdam-102')
-ix23.getPeeringLan().setDisplayName('Hong Kong-103')
-ix24.getPeeringLan().setDisplayName('Singapore-104')
-ix25.getPeeringLan().setDisplayName('Accra-105')
-ix26.getPeeringLan().setDisplayName('Sao Paulo-106')
-ix27.getPeeringLan().setDisplayName('Los Angeles-107')
-ix28.getPeeringLan().setDisplayName('Miami-108')
+ix20.getPeeringLan().setDisplayName('Frankfurt-20')
+ix21.getPeeringLan().setDisplayName('London-21')
+ix22.getPeeringLan().setDisplayName('Amsterdam-22')
+ix23.getPeeringLan().setDisplayName('Hong Kong-23')
+ix24.getPeeringLan().setDisplayName('Singapore-24')
+ix25.getPeeringLan().setDisplayName('Accra-25')
+ix26.getPeeringLan().setDisplayName('Sao Paulo-26')
+ix27.getPeeringLan().setDisplayName('Los Angeles-27')
+ix28.getPeeringLan().setDisplayName('Miami-28')
 
 
 ###############################################################################
@@ -255,22 +255,22 @@ cross_connector.XConnect(102, 164, "provider")
 cross_connector.XConnect(103, 127, "core")
 
 # Cloud ovh 2-123 to
-# IX100, IX101, IX102
-ixp_connector.IXPConnect(100, 123)
-ixp_connector.IXPConnect(101, 123)
-ixp_connector.IXPConnect(102, 123)
+# IX20, IX21, IX22
+ixp_connector.IXPConnect(20, 123)
+ixp_connector.IXPConnect(21, 123)
+ixp_connector.IXPConnect(22, 123)
 
 # Cloud Contabo 2-124 to
-# IX100, IX101, IX102
-ixp_connector.IXPConnect(100, 124)
-ixp_connector.IXPConnect(101, 124)
-ixp_connector.IXPConnect(102, 124)
+# IX20, IX21, IX22
+ixp_connector.IXPConnect(20, 124)
+ixp_connector.IXPConnect(21, 124)
+ixp_connector.IXPConnect(22, 124)
 
 # Cloud Hetzner 2-125 to
-# IX100, IX101, IX102
-ixp_connector.IXPConnect(100, 125)
-ixp_connector.IXPConnect(101, 125)
-ixp_connector.IXPConnect(102, 125)
+# IX20, IX21, IX22
+ixp_connector.IXPConnect(20, 125)
+ixp_connector.IXPConnect(21, 125)
+ixp_connector.IXPConnect(22, 125)
 
 # Singapore Telecommunication 3-127 to 
 # Tier1: 3-126, 5-140
@@ -287,9 +287,9 @@ cross_connector.XConnect(126, 160, "core")
 cross_connector.XConnect(126, 129, "provider")
 
 # Cloud Alibaba 3-139 to 
-# ix103 and ix104
-ixp_connector.IXPConnect(103, 139)
-ixp_connector.IXPConnect(104, 139)
+# IX23 and IX24
+ixp_connector.IXPConnect(23, 139)
+ixp_connector.IXPConnect(24, 139)
 
 # Angola Cable 5-140 to 
 # Tier1: 6-150
@@ -329,50 +329,50 @@ cross_connector.XConnect(161, 104, "provider")
 cross_connector.XConnect(162, 163, "provider")
 
 # AWS Cloud 8-176 to
-# IX107, IX108
-ixp_connector.IXPConnect(107, 176)
-ixp_connector.IXPConnect(108, 176)
+# IX27, IX28
+ixp_connector.IXPConnect(27, 176)
+ixp_connector.IXPConnect(28, 176)
 
 # Google Cloud 8-177 to
-# IX107, IX108
-ixp_connector.IXPConnect(107, 177)
-ixp_connector.IXPConnect(108, 177)
+# IX27, IX28
+ixp_connector.IXPConnect(27, 177)
+ixp_connector.IXPConnect(28, 177)
 
 # Digital Ocean 8-178 to 
 # Tier2:  Liquidweb 7-163
-# IX108
+# IX28
 cross_connector.XConnect(178, 163, "peer")
-ixp_connector.IXPConnect(108, 178)
+ixp_connector.IXPConnect(28, 178)
 
 ###############################################################################
 # Links originating in Tier 2 ASes
 
 # core-Backbone 1-104 to
 # Tier2: 5-141
-# IX100, IX101, IX101
+# IX20, IX21, IX22, IX27
 cross_connector.XConnect(104, 141, "peer")
-ixp_connector.IXPConnect(100, 104)
-ixp_connector.IXPConnect(101, 104)
-ixp_connector.IXPConnect(102, 104)
-ixp_connector.IXPConnect(107, 104)
+ixp_connector.IXPConnect(20, 104)
+ixp_connector.IXPConnect(21, 104)
+ixp_connector.IXPConnect(22, 104)
+ixp_connector.IXPConnect(27, 104)
 
 # Swisscom 1-105 to
 # Tier2: 1-104, 1-106
-# IX100, IX101, IX101
+# IX20, IX21, IX22
 cross_connector.XConnect(105, 104, "peer")
 cross_connector.XConnect(105, 106, "peer")
-ixp_connector.IXPConnect(100, 105)
-ixp_connector.IXPConnect(101, 105)
-ixp_connector.IXPConnect(102, 105)
+ixp_connector.IXPConnect(20, 105)
+ixp_connector.IXPConnect(21, 105)
+ixp_connector.IXPConnect(22, 105)
 
 # Microscan 3-128 to
 # Tier2: 3-130
 cross_connector.XConnect(128, 130, "peer")
 
 # TM Techbology 3-129 to
-# IX103, IX104
-ixp_connector.IXPConnect(103, 129)
-ixp_connector.IXPConnect(104, 129)
+# IX23, IX24
+ixp_connector.IXPConnect(23, 129)
+ixp_connector.IXPConnect(24, 129)
 
 # Kinx 3-130 to
 # Tier2: 3-129
@@ -380,28 +380,28 @@ cross_connector.XConnect(130, 129, "peer")
 
 # Ecoband 5-141 to
 # Tier2: 5-142
-# IX 105
+# IX 25
 cross_connector.XConnect(141, 142, "peer")
-ixp_connector.IXPConnect(105, 141)
+ixp_connector.IXPConnect(25, 141)
 
 # Africom 5-142 to
-# IX 105
-ixp_connector.IXPConnect(105, 142)
+# IX25
+ixp_connector.IXPConnect(25, 142)
 
 # locaweb 6-152 to
-# IX106
-ixp_connector.IXPConnect(106, 152)
+# IX26
+ixp_connector.IXPConnect(26, 152)
 
 # liquidweb 7-163 to
 # Tier2: 7-164
-# IX108
+# IX28
 cross_connector.XConnect(163, 164, "peer")
-ixp_connector.IXPConnect(108, 163)
+ixp_connector.IXPConnect(28, 163)
 
 # lunavi 7-164 to
-# IX107, IX108
-ixp_connector.IXPConnect(107, 164)
-ixp_connector.IXPConnect(108, 164)
+# IX27, IX28
+ixp_connector.IXPConnect(27, 164)
+ixp_connector.IXPConnect(28, 164)
 
 
 ###############################################################################

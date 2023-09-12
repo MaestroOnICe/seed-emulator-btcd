@@ -51,7 +51,7 @@ maker = utils.AutonomousSystemMaker(base, scion_isd)
 # Tier 1 ASes
 arelion = maker.createTier1AS(1, 100)
 # Tier 2 ASes
-swisscom = maker.createTier2AS(1, 101, issuer=100) # Issuer: Arelion
+#swisscom = maker.createTier2AS(1, 101, issuer=100) # Issuer: Arelion
 
 
 # Asia ISD 2
@@ -63,8 +63,10 @@ telstra = maker.createTier1AS(2, 150)
 
 ###############################################################################
 # Links
-cross_connector.XConnect(100, 101, "provider")
-cross_connector.XConnect(100, 150, "core")
+#cross_connector.XConnect(100, 150, "core")
+
+ixp_connector.IXPConnect(20, 100)
+ixp_connector.IXPConnect(20, 150)
 
 ###############################################################################
 #Rendering
