@@ -1,5 +1,5 @@
-from enum import Enum
 from ipaddress import IPv4Network
+from sys import stderr
 import python_on_whales
 import docker
 import time
@@ -8,18 +8,6 @@ from seedemu.layers.Scion import LinkType as ScLinkType
 
 ###############################################################################
 # Path Checker
-class PathType(Enum):
-    """!
-    @brief Type of a path between two ASes, BGP or SCION.
-    """
-
-    ## BGP path between two ASes.
-    BGP = "BGP"
-
-    ## SCION path between two ASes.
-    SCION = "SCION"
-
-
 class PathChecker:
     def __init__(self):
         """!
@@ -30,8 +18,17 @@ class PathChecker:
         with open(self.txt_file_path, mode='w', newline='') as file:
             pass  # Do nothing, just open and close to clear the file
         self.results_file = file
+    
+    def getName(self) -> str:
+        return "Path Checker"
 
-    def log(self, connection_type: PathType, source_asn: int, destination: str):
+    def _log(self, message: str) -> None:
+        """!
+        @brief Log to stderr.
+        """
+        print("==== {}: {}".format(self.getName(), message), file=stderr)
+
+    def _savePath(self, connection_type: int, source_asn: int, destination: str):
         """!
         @brief log a path to the internal list, to be checked later.
 
@@ -43,130 +40,158 @@ class PathChecker:
         self.paths.append(path)
 
     def deployAndCheck(self):
-        print(self.paths)
-        whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
-        whales.compose.build()
-        whales.compose.up(detach=True)    
-
-        # Use Docker SDK to interact with the containers
-        client: docker.DockerClient = docker.from_env()
-        ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
-
-        # Sleep for 15 seconds to up the paths
-        time.sleep(15)
-
-        # all containers
-        containers = ctrs.items()
-
-        # check each path for connectivity
-        for connection_type, source_asn, destination in self.paths:
-            if(connection_type == PathType.BGP):
-                cmd = f'ping {destination}'
-            if(connection_type == PathType.SCION):
-                cmd = f'scion ping {destination}'
-            else:
-                print("Error, not BGP or SCION for path from: ",source_asn, "to: ", destination)
-                return
+        index = 1
+        for path in self.paths:
+            self._log(f"Path {index} from AS: {path[1]} to destination address: {path[2]}")
+            index = index +1
             
-            host = f"csnode_{source_asn}_cs1"
-            container = containers[host]
-            print("Run path check in", host, end="")
-            ec, output = container.exec_run(cmd)
-            for line in output.decode('utf8').splitlines():
-                self.results_file.write(line)
+        try:
+            whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
+            whales.compose.build()
+            whales.compose.up(build=True, detach=True)    
 
+            # Use Docker SDK to interact with the containers
+            client: docker.DockerClient = docker.from_env()
+            ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
+
+            # Sleep for 15 seconds to up the paths
+            self._log("Sleeping 15 seconds, waiting for the topology and links to come up")
+            time.sleep(15)
+            
+            # check each path for connectivity
+            for connection_type, source_asn, destination in self.paths:
+                if connection_type == 1:
+                    cmd = f'ping {destination} -c 1'
+                if connection_type == 2:
+                    cmd = f'scion ping {destination} -c 1'
+                if connection_type != 1 and connection_type != 2:
+                    self._log(f'Error, not BGP or SCION for path from: {source_asn}to: {destination}\n')
+                    whales.compose.down()
+                    return
+                
+                host = f'as{source_asn}h-cs1-10.{source_asn}.0.71'
+                container = ctrs[host]
+                
+                _, output = container.exec_run(cmd)
+                if "Error" in output.decode('utf8'):
+                    self._log(f'\u2718 Error, the path from AS {source_asn} to {destination} did not work')
+                else:
+                    self._log(f'\u2714 Yay, the path from AS {source_asn} to {destination} works')
+            
+            user_input = input("Do you want to want to bring all containers and networks down? (yes/no): ")
+            # Check the user's input
+            if user_input.lower() == "yes":
+                print("Okay, brining all containers and networks down...")
+                whales.compose.down()
+            elif user_input.lower() == "no":
+                print("Okay goodbye...")
+                return
+            else:
+                print("Invalid input. Please enter 'yes' or 'no'.")
+
+        except KeyboardInterrupt:
+            print("Keyboard interrupt received. Cleaning up...")
+            whales.compose.down()
+        except Exception:
+            print("Keyboard interrupt received. Cleaning up...")
+            whales.compose.down()
 ###############################################################################
 # AS factory
 
-# Tier 1 ASes have 4 border routers
-def createTier1AS(base: ScionBase, scion_isd: ScionIsd, isdn: int, asn: int):
-    """!
-    @brief create a Tier 1 AS with 4 border routers.
+class asMaker:
+    def __init__(self, base: ScionBase, scion_isd: ScionIsd):
+        self.base = base
+        self.scion_isd = scion_isd
 
-    @param base reference to the scion base layer.
-    @param scion_isd reference to teh scion isd layer
-    @param isdn number of the isd in which the AS is in
-    @param asn ASN of the newly created AS.
+    # Tier 1 ASes have 4 border routers
+    def createTier1AS(self, isdn: int, asn: int):
+        """!
+        @brief create a Tier 1 AS with 4 border routers.
 
-    @returns Tier 1 AS object.
-    """
+        @param base reference to the scion base layer.
+        @param scion_isd reference to teh scion isd layer
+        @param isdn number of the isd in which the AS is in
+        @param asn ASN of the newly created AS.
 
-    as_ = base.createAutonomousSystem(asn)
-    scion_isd.addIsdAs(isdn, asn, is_core=True)
-    as_.setBeaconingIntervals('30s', '30s', '30s')
+        @returns Tier 1 AS object.
+        """
 
-    as_.createNetwork('net0')
-    as_.createNetwork('net1')
-    as_.createNetwork('net2')    
-    as_.createNetwork('net3')
-    as_.createControlService('cs1').joinNetwork('net0')
+        as_ = self.base.createAutonomousSystem(asn)
+        self.scion_isd.addIsdAs(isdn, asn, is_core=True)
+        as_.setBeaconingIntervals('30s', '30s', '30s')
 
-    br0 = as_.createRouter('br0')
-    br1 = as_.createRouter('br1')
-    br2 = as_.createRouter('br2')
-    br3 = as_.createRouter('br3')
+        as_.createNetwork('net0')
+        as_.createNetwork('net1')
+        as_.createNetwork('net2')    
+        as_.createNetwork('net3')
+        as_.createControlService('cs1').joinNetwork('net0')
 
-    br0.joinNetwork('net0').joinNetwork('net1')
-    br1.joinNetwork('net1').joinNetwork('net2')
-    br2.joinNetwork('net2').joinNetwork('net3')
-    br3.joinNetwork('net3').joinNetwork('net0')
-    return as_
+        br0 = as_.createRouter('br0')
+        br1 = as_.createRouter('br1')
+        br2 = as_.createRouter('br2')
+        br3 = as_.createRouter('br3')
 
-# Tier 2 ASes have 2 border routers
-def createTier2AS(base: ScionBase, scion_isd: ScionIsd, isdn: int, asn: int, issuer=None):
-    """!
-    @brief create a Tier 2 AS with 4 border routers.
+        br0.joinNetwork('net0').joinNetwork('net1')
+        br1.joinNetwork('net1').joinNetwork('net2')
+        br2.joinNetwork('net2').joinNetwork('net3')
+        br3.joinNetwork('net3').joinNetwork('net0')
+        return as_
 
-    @param base reference to the scion base layer.
-    @param scion_isd reference to teh scion isd layer
-    @param isdn number of the isd in which the AS is in
-    @param asn ASN of the newly created AS.
-    @param issuer ASN of the certificte issuer
+    # Tier 2 ASes have 2 border routers
+    def createTier2AS(self, isdn: int, asn: int, issuer=None):
+        """!
+        @brief create a Tier 2 AS with 4 border routers.
 
-    @returns Tier 2 AS object.
-    """
+        @param base reference to the scion base layer.
+        @param scion_isd reference to teh scion isd layer
+        @param isdn number of the isd in which the AS is in
+        @param asn ASN of the newly created AS.
+        @param issuer ASN of the certificte issuer
 
-    as_ = base.createAutonomousSystem(asn)
-    scion_isd.addIsdAs(isdn, asn, False)
-    scion_isd.setCertIssuer((isdn, asn), issuer)
-    as_.setBeaconingIntervals('30s', '30s', '30s')
+        @returns Tier 2 AS object.
+        """
 
-    as_.createNetwork('net0')
-    as_.createNetwork('net1')
-    as_.createControlService('cs1').joinNetwork('net0')
+        as_ = self.base.createAutonomousSystem(asn)
+        self.scion_isd.addIsdAs(isdn, asn, False)
+        self.scion_isd.setCertIssuer((isdn, asn), issuer)
+        as_.setBeaconingIntervals('30s', '30s', '30s')
 
-    br0 = as_.createRouter('br0')
-    br1 = as_.createRouter('br1')
-    
-    br0.joinNetwork('net0').joinNetwork('net1')
-    br1.joinNetwork('net0').joinNetwork('net1')
-    return as_
+        as_.createNetwork('net0')
+        as_.createNetwork('net1')
+        as_.createControlService('cs1').joinNetwork('net0')
 
-# Tier 3 ASes have 1 border router
-def createTier3AS(base: ScionBase, scion_isd: ScionIsd, isdn: int, asn: int, issuer=None):
-    """!
-    @brief create a Tier 3 AS with 4 border routers.
+        br0 = as_.createRouter('br0')
+        br1 = as_.createRouter('br1')
+        
+        br0.joinNetwork('net0').joinNetwork('net1')
+        br1.joinNetwork('net0').joinNetwork('net1')
+        return as_
 
-    @param base reference to the scion base layer.
-    @param scion_isd reference to teh scion isd layer
-    @param isdn number of the isd in which the AS is in
-    @param asn ASN of the newly created AS.
-    @param issuer ASN of the certificte issuer
+    # Tier 3 ASes have 1 border router
+    def createTier3AS(self, isdn: int, asn: int, issuer=None):
+        """!
+        @brief create a Tier 3 AS with 4 border routers.
 
-    @returns Tier 3 AS object.
-    """
+        @param base reference to the scion base layer.
+        @param scion_isd reference to teh scion isd layer
+        @param isdn number of the isd in which the AS is in
+        @param asn ASN of the newly created AS.
+        @param issuer ASN of the certificte issuer
 
-    as_ = base.createAutonomousSystem(asn)
-    scion_isd.addIsdAs(isdn, asn, False)
-    scion_isd.setCertIssuer((isdn, asn), issuer)
-    as_.setBeaconingIntervals('30s', '30s', '30s')
+        @returns Tier 3 AS object.
+        """
 
-    as_.createNetwork('net0')
-    as_.createControlService('cs1').joinNetwork('net0')
+        as_ = self.base.createAutonomousSystem(asn)
+        self.scion_isd.addIsdAs(isdn, asn, False)
+        self.scion_isd.setCertIssuer((isdn, asn), issuer)
+        as_.setBeaconingIntervals('30s', '30s', '30s')
 
-    br0 = as_.createRouter('br0')
-    br0.joinNetwork('net0')
-    return as_
+        as_.createNetwork('net0')
+        as_.createControlService('cs1').joinNetwork('net0')
+
+        br0 = as_.createRouter('br0')
+        br0.joinNetwork('net0')
+        return as_
 
 ###############################################################################
 # Link factory
@@ -176,7 +201,7 @@ class CrossConnectNetAssigner:
         self.subnet_iter = IPv4Network("10.3.0.0/16").subnets(new_prefix=29)
         self.xc_nets = {}
 
-    def next_addr(self, net):
+    def _next_addr(self, net):
         if net not in self.xc_nets:
             hosts = next(self.subnet_iter).hosts()
             next(hosts) # Skip first IP (reserved for Docker)
@@ -207,14 +232,14 @@ class xConnector:
         self.checker = path_checker
 
     # SCION and BGP cross connect two ASes
-    def XConnect(self, asn_a: int, asn_b: int, type: str):
+    def XConnect(self, asn_a: int, asn_b: int, type: str, as_a_router: str="br0", as_b_router: str="br0"):
         # cross connecting AS a <-> AS b
         as_a = self.base.getAutonomousSystem(asn_a)
         as_b = self.base.getAutonomousSystem(asn_b)
-        br_a = as_a.getRouter('br0')
-        br_b = as_b.getRouter('br0')
-        br_a.crossConnect(asn_b, 'br0', xc_nets.next_addr(f'{asn_a}-{asn_b}'))
-        br_b.crossConnect(asn_a, 'br0', xc_nets.next_addr(f'{asn_a}-{asn_b}'))
+        br_a = as_a.getRouter(as_a_router)
+        br_b = as_b.getRouter(as_b_router)
+        br_a.crossConnect(asn_b, as_b_router, xc_nets._next_addr(f'{asn_a}-{asn_b}'))
+        br_b.crossConnect(asn_a, as_a_router, xc_nets._next_addr(f'{asn_a}-{asn_b}'))
 
         # lookup ISD AS a and ISD b are in, at this time, one AS is only in one ISD
         as_a_isd = self.scion_isd.getAsIsds(asn_a)[0]
@@ -224,8 +249,8 @@ class xConnector:
         if hasattr(self, "checker"):
             bgp_destination = f'10.{asn_b}.0.71'
             scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
-            self.checker.log(PathType.BGP, asn_a, bgp_destination)
-            self.checker.log(PathType.SCION, asn_a, scion_destination)
+            self.checker._savePath(1, asn_a, bgp_destination)
+            self.checker._savePath(2, asn_a, scion_destination)
 
         # will throw error if link type does not match
         self.scion.addXcLink((as_a_isd[0],asn_a), (as_b_isd[0],asn_b), sclink_type.get(type, "null"))
@@ -237,7 +262,6 @@ class xConnector:
 # SCION connections are saved, because they will be added in the end
 # due to the need to specify each connection like 
 # scion.addIxLink(IXn, (ISD, ASn), (ISD, ASn), Linktype)
-
 class ixpConnector:
     def __init__(self, base: ScionBase, scion_isd: ScionIsd, ebgp: Ebgp, scion: Scion, path_checker: PathChecker = None):
         self.base = base
@@ -252,9 +276,9 @@ class ixpConnector:
             self.ixs[ixn] = []
 
 
-    def IXPConnect(self, ixn: int, asn: int):
+    def IXPConnect(self, ixn: int, asn: int, router: str="br0"):
         # AS has to join the network of IXP 
-        br = self.base.getAutonomousSystem(asn).getRouter('br0')
+        br = self.base.getAutonomousSystem(asn).getRouter(router)
         br.joinNetwork(f'ix{ixn}')
         self.ebgp.addRsPeer(ixn, asn)
         self.ixs[ixn].append(asn)
@@ -277,8 +301,8 @@ class ixpConnector:
                         if hasattr(self, "checker"):
                             bgp_destination = f'10.{asn_b}.0.71'
                             scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
-                            self.checker.log(PathType.BGP, asn_a, bgp_destination)
-                            self.checker.log(PathType.SCION, asn_a, scion_destination)
+                            self.checker._savePath(1, asn_a, bgp_destination)
+                            self.checker._savePath(2, asn_a, scion_destination)
 
                         # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
                         addedIXConnections.append([ixn, asn_a, asn_b]) 
