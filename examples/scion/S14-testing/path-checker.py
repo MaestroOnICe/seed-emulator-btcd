@@ -3,17 +3,17 @@ import docker
 import python_on_whales
 import time
 
-def ping(type: str, source: str, destination: str):
-    if(type == "bgp"):
+def ping(connection_type: int, source: str, destination: str):
+    if(connection_type == 1):
         cmd = f'ping {destination}'
-    
-    if(type == "scion"):
+    if(connection_type == 2):
         cmd = f'scion ping {destination}'
     else:
-        print("Error, not bgp or scion")
+        print("Error, not bgp or scion", connection_type)
+        return
     
     for name, ctr in ctrs.items():
-        if "cs" not in name:
+        if f"csnode_{source}_cs1" not in name:
             continue
         print("Run path check in", name, end="")
         ec, output = ctr.exec_run(cmd)
@@ -22,15 +22,15 @@ def ping(type: str, source: str, destination: str):
 
 # Build Docker containers and run the network
 whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
-whales.compose.build()
-whales.compose.up(detach=True)    
+# whales.compose.build()
+# whales.compose.up(detach=True)    
      
 # Use Docker SDK to interact with the containers
 client: docker.DockerClient = docker.from_env()
 ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
 
 #sleep for 15 seconds to up paths
-time.sleep(15)
+#time.sleep(15)
 
 txt_file = 'paths.txt'
 with open(txt_file, mode='r') as file:
@@ -43,6 +43,6 @@ with open(txt_file, mode='r') as file:
         if len(parts) == 3:
             # Assign each part to separate variables
             column1, column2, column3 = parts
-            ping(column1, column2, column3)
+            ping(int(column1), column2, column3)
         else:
             print(f"Skipping line: {line.strip()}")

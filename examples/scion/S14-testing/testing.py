@@ -6,9 +6,7 @@ from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ibgp, Ebgp, PeerRelationship 
 from seedemu.layers.Scion import LinkType as ScLinkType
 
-txt_file = 'paths.txt'
-with open(txt_file, mode='w', newline=''):
-    pass  # Do nothing, just open and close to clear the file
+
 # ###############################################################################
 # AS factory
 
@@ -109,12 +107,11 @@ def XConnect(asn_a: int, asn_b: int, type: str):
     as_b_isd = scion_isd.getAsIsds(asn_b)[0]
 
     # loggng each connection (BGP and SCION) to a file, of later use
-    bgp_source = f'10.{asn_a}.0.71'
+    source_as = asn_a
     bgp_destination = f'10.{asn_b}.0.71'
-    scion_source = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
     scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
     with open(txt_file, mode='a', newline='') as file:
-        file.write(f'bgp |{bgp_source} |{bgp_destination}\nscion |{scion_source} |{scion_destination}\n')
+        file.write(f'1 |{source_as} |{bgp_destination}\n2 |{source_as} |{scion_destination}\n')
 
     # will throw error if link type does not match
     scion.addXcLink((as_a_isd[0],asn_a), (as_b_isd[0],asn_b), sclink_type.get(type, "null"))
@@ -150,12 +147,11 @@ def AddScionIXPConnections():
                     as_b_isd = scion_isd.getAsIsds(asn_b)[0]
 
                     # loggng each connection (BGP and SCION) to a file, of later use
-                    bgp_source = f'10.{asn_a}.0.71'
+                    source_as = asn_a
                     bgp_destination = f'10.{asn_b}.0.71'
-                    scion_source = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
                     scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
                     with open(txt_file, mode='a', newline='') as file:
-                        file.write(f'bgp |{bgp_source} |{bgp_destination}\nscion |{scion_source} |{scion_destination}\n')
+                        file.write(f'1 |{source_as} |{bgp_destination}\n2 |{source_as} |{scion_destination}\n')
 
                     # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
                     addedIXConnections.append([ixn, asn_a, asn_b]) 
@@ -171,7 +167,6 @@ routing = ScionRouting()
 ospf = Ospf()
 scion_isd = ScionIsd()
 scion = Scion()
-#ibgp = Ibgp()
 ebgp = Ebgp()
 
 
@@ -218,35 +213,26 @@ microscan = create_tier2_as(2, 151, issuer=150) # Issuer: Telstra
 # Links
 XConnect(100, 101, "provider")
 XConnect(100, 150, "core")
-#XConnect(101, 151, "peer")
-#XConnect(150, 151, "provider")
 
 telstra.getRouter('br0').joinNetwork('ix20')
 swisscom.getRouter('br0').joinNetwork('ix20')
 
-scion.addIxLink(20, (2, 150), (1, 101), ScLinkType.Transit)
-ebgp.addRsPeer(20, 150)
-ebgp.addRsPeer(20, 101)
-
-#IXPConnect(20, 150)
-#IXPConnect(21, 150)
-#IXPConnect(20, 101)
-#IXPConnect(21, 101)
+IXPConnect(20, 150)
+IXPConnect(20, 101)
 
 ###############################################################################
 #Rendering
-#AddScionIXPConnections()
-# emu.addLayer(base)
-# emu.addLayer(routing)
-# emu.addLayer(ospf)
-# emu.addLayer(scion_isd)
-# emu.addLayer(scion)
-# #emu.addLayer(ibgp)
-# emu.addLayer(ebgp)
+AddScionIXPConnections()
+emu.addLayer(base)
+emu.addLayer(routing)
+emu.addLayer(ospf)
+emu.addLayer(scion_isd)
+emu.addLayer(scion)
+emu.addLayer(ebgp)
 
-# emu.render()
+emu.render()
 
-# # ##############################################################################
-# # Compilation
-# emu.compile(Docker(), "./output", override=True)
-# emu.compile(Graphviz(), "./output/graphs", override=True)
+# ##############################################################################
+# Compilation
+emu.compile(Docker(), "./output", override=True)
+emu.compile(Graphviz(), "./output/graphs", override=True)
