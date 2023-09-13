@@ -258,10 +258,7 @@ class CrossConnector:
         # will throw error if link type does not match
         self.ebgp.addCrossConnectPeering(asn_a, asn_b, ebgp_types.get(type, "null"))
 
-# Connect an AS to an IXP, with SCION and BGP
-# SCION connections are saved, because they will be added in the end
-# due to the need to specify each connection like 
-# scion.addIxLink(IXn, (ISD, ASn), (ISD, ASn), Linktype)
+
 class IXPConnector:
     def __init__(self, base: ScionBase, scion_isd: ScionIsd, ebgp: Ebgp, scion: Scion, path_checker: PathChecker = None):
         self.base = base
@@ -304,9 +301,14 @@ class IXPConnector:
                             self.checker._savePath(1, asn_a, bgp_destination)
                             self.checker._savePath(2, asn_a, scion_destination)
 
+                        # if two core ASes are connected through an IXP, they should have the core type
+                        link_type = ScLinkType.Peer
+                        if self.scion_isd.isCoreAs(as_a_isd, asn_a) and self.scion_isd.isCoreAs(as_a_isd, asn_a):
+                            link_type = ScLinkType.Core
+
                         # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
                         addedIXConnections.append([ixn, asn_a, asn_b])     
-                        self.scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), ScLinkType.Peer)
+                        self.scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), link_type)
 
 
 

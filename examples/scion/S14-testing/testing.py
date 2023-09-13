@@ -63,7 +63,7 @@ telstra = maker.createTier1AS(2, 150)
 
 ###############################################################################
 # Links
-#cross_connector.XConnect(100, 150, "core")
+cross_connector.XConnect(100, 150, "core")
 
 ixp_connector.IXPConnect(20, 100)
 ixp_connector.IXPConnect(20, 150)
