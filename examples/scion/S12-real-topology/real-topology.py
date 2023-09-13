@@ -235,6 +235,68 @@ aws_cloud = maker.createTier1AS(8, 176)
 google_cloud = maker.createTier1AS(8, 177)
 digital_ocean_cloud = maker.createTier1AS(8, 178)
 
+# Arelion 1-100 to 
+# Tier1: 1-101, 1-102
+# Tier2: 1-104
+cross_connector.XConnect(100, 101, "core")
+cross_connector.XConnect(100, 102, "core")
+cross_connector.XConnect(100, 104, "provider")
+
+# Telecom Italia 1-101 to
+# Tier1: 1-102, 1-103
+# Tier2: 1-105
+cross_connector.XConnect(101, 102, "core")
+cross_connector.XConnect(101, 103, "core")
+cross_connector.XConnect(101, 105, "provider")
+
+# Deutsche Telekom 1-102 to
+# Tier2: 1-106, 1-104
+cross_connector.XConnect(102, 106, "provider")
+cross_connector.XConnect(102, 104, "provider")
+
+#CLOUD IX
+ixp_connector.IXPConnect(29, 123)
+ixp_connector.IXPConnect(29, 124)
+ixp_connector.IXPConnect(29, 125)
+cross_connector.XConnect(123, 100, "core")
+
+# Cloud ovh 2-123 to
+# IX20, IX21, IX22
+ixp_connector.IXPConnect(20, 123)
+ixp_connector.IXPConnect(21, 123)
+ixp_connector.IXPConnect(22, 123)
+
+# Cloud Contabo 2-124 to
+# IX20, IX21, IX22
+ixp_connector.IXPConnect(20, 124)
+ixp_connector.IXPConnect(21, 124)
+ixp_connector.IXPConnect(22, 124)
+
+# Cloud Hetzner 2-125 to
+# IX20, IX21, IX22
+ixp_connector.IXPConnect(20, 125)
+ixp_connector.IXPConnect(21, 125)
+ixp_connector.IXPConnect(22, 125)
+
+# core-Backbone 1-104 to
+# IX20, IX21, IX22
+ixp_connector.IXPConnect(20, 104)
+ixp_connector.IXPConnect(21, 104)
+ixp_connector.IXPConnect(22, 104)
+
+# Swisscom 1-105 to
+# Tier2: 1-104, 1-106
+# IX20, IX21, IX22
+cross_connector.XConnect(105, 104, "peer")
+cross_connector.XConnect(105, 106, "peer")
+ixp_connector.IXPConnect(20, 105)
+ixp_connector.IXPConnect(21, 105)
+ixp_connector.IXPConnect(22, 105)
+
+# Tele2 1-106 to
+# 1-119 until 1-122 (Group B)
+for asn in stub_groupB_isd1:
+    cross_connector.XConnect(106, asn, "provider")
 
 ###############################################################################
 # Intra-ISD Links
