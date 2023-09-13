@@ -112,11 +112,13 @@ swisscom = maker.createTier2AS(1, 105, issuer=102) # Issuer: Deutsche Telekom
 tele_2 = maker.createTier2AS(1, 106, issuer=102) # Issuer: Deutsche Telekom
 
 # Tier 3 ASes
+# 107 - 118
 stub_groupA_isd1 = {}
 for asn in range(107, 119):
     as_ = maker.createTier3AS(1, asn, issuer=102) # Issuer: Deutsche Telekom
     stub_groupA_isd1[asn] = as_
 
+# 119 - 122
 stub_groupB_isd1 = {}
 for asn in range(119, 123):
     as_ = maker.createTier3AS(1, asn, issuer=102) # Issuer: Deutsche Telekom
@@ -142,11 +144,13 @@ tm_technology = maker.createTier2AS(3, 129, issuer=126) # Issuer: Telstra
 kinx = maker.createTier2AS(3, 130, issuer=126) # Issuer: Telstra
 
 # Tier 3 ASes
+# 131 - 135
 stub_groupA_isd3 = {}
 for asn in range(131, 136):
     as_ = maker.createTier3AS(3, asn, issuer=126) # Issuer: Telstra
     stub_groupA_isd3[asn] = as_
 
+# 136 -138
 stub_groupB_isd3 = {}
 for asn in range(136, 139):
     as_ = maker.createTier3AS(3, asn, issuer=126) # Issuer: Telstra
@@ -168,6 +172,7 @@ ecoband = maker.createTier2AS(5, 141, issuer=140) # Issuer: Angola Cables
 africom = maker.createTier2AS(5, 142, issuer=140) # Issuer: Angola Cables
 
 # Tier 3 ASes
+# 143 - 149
 stub_groupA_isd5 = {}
 for asn in range(143, 150):
     as_ = maker.createTier3AS(5, asn, issuer=140) # Issuer: Angola Cables
@@ -184,11 +189,13 @@ globe_net = maker.createTier1AS(6, 151)
 locaweb = maker.createTier2AS(6, 152, issuer=150)
 
 # Tier 3 ASes
+# 153 - 155
 stub_groupA_isd6 = {}
 for asn in range(153, 156):
     as_ = maker.createTier3AS(6, asn, issuer=150) # Issuer: Algar Telecomm
     stub_groupA_isd6[asn] = as_
 
+# 156 - 159
 stub_groupB_isd6 = {}
 for asn in range(156, 160):
     as_ = maker.createTier3AS(6, asn, issuer=150) # Issuer: Algar Telecomm
@@ -206,11 +213,13 @@ liquidweb = maker.createTier2AS(7, 163, issuer=160)
 lunavi = maker.createTier2AS(7, 164, issuer=160)
 
 # Tier 3 ASes
+# 165 - 169
 stub_groupA_isd7 = {}
 for asn in range(165, 170):
     as_ = maker.createTier3AS(7, asn, issuer=160) # Issuer: level3
     stub_groupA_isd7[asn] = as_
 
+# 170 - 175
 stub_groupB_isd7 = {}
 for asn in range(170, 176):
     as_ = maker.createTier3AS(7, asn, issuer=160) # Issuer: level3
@@ -358,19 +367,30 @@ ixp_connector.IXPConnect(27, 104)
 
 # Swisscom 1-105 to
 # Tier2: 1-104, 1-106
+# Tier3: 1-119 until 1-122
 # IX20, IX21, IX22
 cross_connector.XConnect(105, 104, "peer")
 cross_connector.XConnect(105, 106, "peer")
+for asn, _ in stub_groupB_isd1:
+    cross_connector.XConnect(106, asn, "provider")
 ixp_connector.IXPConnect(20, 105)
 ixp_connector.IXPConnect(21, 105)
 ixp_connector.IXPConnect(22, 105)
+
+# Tele2 1-106 to
+# 1-119 until 1-122 (Group B)
+for asn, _ in stub_groupB_isd1:
+    cross_connector.XConnect(106, asn, "provider")
 
 # Microscan 3-128 to
 # Tier2: 3-130
 cross_connector.XConnect(128, 130, "peer")
 
 # TM Techbology 3-129 to
+# Tier3: 3-136 until 3-138
 # IX23, IX24
+for asn, _ in stub_groupB_isd3:
+    cross_connector.XConnect(129, asn, "provider")
 ixp_connector.IXPConnect(23, 129)
 ixp_connector.IXPConnect(24, 129)
 
@@ -389,20 +409,62 @@ ixp_connector.IXPConnect(25, 141)
 ixp_connector.IXPConnect(25, 142)
 
 # locaweb 6-152 to
+# Tier3: 6-156 until 6-159
 # IX26
+for asn, _ in stub_groupB_isd6:
+    cross_connector.XConnect(152, asn, "provider")
 ixp_connector.IXPConnect(26, 152)
 
 # liquidweb 7-163 to
 # Tier2: 7-164
+# Tier3: 7-165 until 7-169
 # IX28
 cross_connector.XConnect(163, 164, "peer")
+for asn, _ in stub_groupA_isd7:
+    cross_connector.XConnect(163, asn, "provider")
 ixp_connector.IXPConnect(28, 163)
 
 # lunavi 7-164 to
+# Tier3: 7-165 until 7-169
 # IX27, IX28
+for asn, _ in stub_groupA_isd7:
+    cross_connector.XConnect(164, asn, "provider")
 ixp_connector.IXPConnect(27, 164)
 ixp_connector.IXPConnect(28, 164)
 
+
+###############################################################################
+# Links originating in Tier 3 ASes
+# ISD 1 Stub Group A
+# IX20, IX21, IX22
+for asn, _ in stub_groupA_isd1:
+    ixp_connector.IXPConnect(20, asn)
+    ixp_connector.IXPConnect(21, asn)
+    ixp_connector.IXPConnect(21, asn)
+
+
+# ISD 3 Stub Group A
+# IX24
+for asn, _ in stub_groupA_isd3:
+    ixp_connector.IXPConnect(24, asn)
+
+
+# ISD 5 Stub Group A
+# IX25
+for asn, _ in stub_groupA_isd5:
+    ixp_connector.IXPConnect(25, asn)
+
+
+# ISD 6 Stub Group A
+# IX26
+for asn, _ in stub_groupA_isd6:
+    ixp_connector.IXPConnect(26, asn)
+
+# ISD 7 Stub Group B
+# IX26
+for asn, _ in stub_groupB_isd7:
+    ixp_connector.IXPConnect(27, asn)
+    ixp_connector.IXPConnect(28, asn)
 
 ###############################################################################
 # Rendering
