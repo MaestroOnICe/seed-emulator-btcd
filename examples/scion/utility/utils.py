@@ -277,10 +277,40 @@ class IXPConnector:
             self.ixs[ixn] = []
 
 
+    # adds a specific AS to AS SCION connection over an IXP with a specific LinkType
+    def addIXLink(self, ixn: int, asn_a: int, asn_b: int, linkType: ScLinkType):
+        # lookup ISD AS a and ISD b are in, we assume, that an AS is only in one ISD
+        as_a_isd = self.scion_isd.getAsIsds(asn_a)[0]
+        as_b_isd = self.scion_isd.getAsIsds(asn_b)[0]
+        
+        self.base.getAutonomousSystem(asn_a).getRouter('br0').joinNetwork(f'ix{ixn}')
+        self.base.getAutonomousSystem(asn_b).getRouter('br0').joinNetwork(f'ix{ixn}')
+
+        # Correct Strink for logging later
+        if linkType == ScLinkType.Peer:
+            log_policy = "Peering"
+        elif linkType == ScLinkType.Transit:
+            log_policy = "Transit"
+        elif linkType == ScLinkType.Core:
+            log_policy = "Core"
+
+        # log each connection to be checked later after deployment
+        # from A -> B
+        scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
+        self.checker._savePath(2, asn_a, scion_destination, log_policy)
+
+        # from B -> A
+        scion_destination = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
+        self.checker._savePath(2, asn_b, scion_destination, log_policy)
+
+        self.scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), linkType)
+
+
     def IXPConnect(self, ixn: int, asn: int, router: str="br0"):
         # AS has to join the network of IXP 
         br = self.base.getAutonomousSystem(asn).getRouter(router)
         br.joinNetwork(f'ix{ixn}')
+
         self.ebgp.addRsPeer(ixn, asn)
         self.ixs[ixn].append(asn)
 
@@ -294,7 +324,7 @@ class IXPConnector:
                         if([ixn, asn_a, asn_b ] in addedIXConnections or [ixn, asn_b, asn_a ]in addedIXConnections):
                             continue
 
-                        # lookup ISD AS a and ISD b are in, at this time, one AS is only in one ISD
+                        # lookup ISD AS a and ISD b are in, we assume, that an AS is only in one ISD
                         as_a_isd = self.scion_isd.getAsIsds(asn_a)[0]
                         as_b_isd = self.scion_isd.getAsIsds(asn_b)[0]
 
@@ -330,7 +360,7 @@ class IXPConnector:
                             bgp_destination = f'      10.{asn_a}.0.71'
                             scion_destination = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
                             self.checker._savePath(1, asn_b, bgp_destination, "Peering")
-                            self.checker._savePath(2, asn_b, scion_destination,log_policy)     
+                            self.checker._savePath(2, asn_b, scion_destination, log_policy)     
 
                         # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
                         addedIXConnections.append([ixn, asn_a, asn_b])     

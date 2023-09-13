@@ -68,27 +68,28 @@ isd8.setLabel('Cloud - North America')
 ix20 = base.createInternetExchange(20) # Frankfurt (Europe)
 ix21 = base.createInternetExchange(21) # London (Europe)
 ix22 = base.createInternetExchange(22) # Amsterdam (Europe)
-ix23 = base.createInternetExchange(23) # Hong Kong (Asia)
+#ix23 = base.createInternetExchange(23) # Hong Kong (Asia)
 ix24 = base.createInternetExchange(24) # Singapore (Asia)
 ix25 = base.createInternetExchange(25) # Accra (Africa)
 ix26 = base.createInternetExchange(26) # Sao Paulo (South America)
-ix27 = base.createInternetExchange(27) # Los Angeles (North America)
+#ix27 = base.createInternetExchange(27) # Los Angeles (North America)
 ix28 = base.createInternetExchange(28) # Miami (North America)
-ix29 = base.createInternetExchange(29) # 
-ix30 = base.createInternetExchange(30) # 
-ix31 = base.createInternetExchange(31) # 
+ix29 = base.createInternetExchange(29) # EU Cloud
+ix30 = base.createInternetExchange(30) # NA Cloud
 
 
 # Customize names (for visualization purpose)
 ix20.getPeeringLan().setDisplayName('Frankfurt-20')
 ix21.getPeeringLan().setDisplayName('London-21')
 ix22.getPeeringLan().setDisplayName('Amsterdam-22')
-ix23.getPeeringLan().setDisplayName('Hong Kong-23')
+#ix23.getPeeringLan().setDisplayName('Hong Kong-23')
 ix24.getPeeringLan().setDisplayName('Singapore-24')
 ix25.getPeeringLan().setDisplayName('Accra-25')
 ix26.getPeeringLan().setDisplayName('Sao Paulo-26')
-ix27.getPeeringLan().setDisplayName('Los Angeles-27')
+#ix27.getPeeringLan().setDisplayName('Los Angeles-27')
 ix28.getPeeringLan().setDisplayName('Miami-28')
+ix29.getPeeringLan().setDisplayName('EU Cloud-29')
+ix30.getPeeringLan().setDisplayName('NA Cloud-30')
 
 
 ###############################################################################
@@ -212,11 +213,12 @@ verizon = maker.createTier1AS(7, 162)
 # Tier 2 ASes
 liquidweb = maker.createTier2AS(7, 163, issuer=160)
 lunavi = maker.createTier2AS(7, 164, issuer=160)
+t_mobile = maker.createTier2AS(7, 165, issuer=160)
 
 # Tier 3 ASes
-# 165 - 169
+# 166 - 169
 stub_groupA_isd7 = []
-for asn in range(165, 170):
+for asn in range(166, 170):
     as_ = maker.createTier3AS(7, asn, issuer=160) # Issuer: level3
     stub_groupA_isd7.append(asn)
 
@@ -235,119 +237,131 @@ digital_ocean_cloud = maker.createTier1AS(8, 178)
 
 
 ###############################################################################
-# Links originating in Tier 1 ASes
-
-# Arelion 1-100 to 
-# Tier1: 1-101, 1-102, 7-161, 
-# Tier2: 1-104
-cross_connector.XConnect(100, 101, "core")
-cross_connector.XConnect(100, 102, "core")
-cross_connector.XConnect(100, 161, "core")
-cross_connector.XConnect(100, 104, "provider")
-
-# Telecom Italia 1-101 to 
-# Tier1: 1-102, 1-103, 7-162
-# Tier2: 1-105
-cross_connector.XConnect(101, 102, "core")
-cross_connector.XConnect(101, 103, "core")
-cross_connector.XConnect(101, 162, "core")
-cross_connector.XConnect(101, 105, "peer")
-
-# Deutsche Telekom 1-102 to 
-# Tier1: 5-140
-# Tier2: 1-106, 1-104
-cross_connector.XConnect(102, 140, "core")
-cross_connector.XConnect(102, 106, "provider")
-cross_connector.XConnect(102, 164, "provider")
-
-# RETN Limited 1-103 to 
-# Tier1: 3-127
-cross_connector.XConnect(103, 127, "core")
+# Intra-ISD Links
 
 
-#CLOUD IX
-ixp_connector.IXPConnect(29, 123)
-ixp_connector.IXPConnect(29, 124)
-ixp_connector.IXPConnect(29, 125)
-cross_connector.XConnect(123, 100, "core")
+# EUROPE ISD 1 and EU CLOUD ISD 2
+#############
 
-# Cloud ovh 2-123 to
-# IX20, IX21, IX22
-ixp_connector.IXPConnect(20, 123)
-ixp_connector.IXPConnect(21, 123)
-ixp_connector.IXPConnect(22, 123)
-
-# Cloud Contabo 2-124 to
-# IX20, IX21, IX22
-ixp_connector.IXPConnect(20, 124)
-ixp_connector.IXPConnect(21, 124)
-ixp_connector.IXPConnect(22, 124)
-
-# Cloud Hetzner 2-125 to
-# IX20, IX21, IX22
-ixp_connector.IXPConnect(20, 125)
-ixp_connector.IXPConnect(21, 125)
-ixp_connector.IXPConnect(22, 125)
+# ASIA, ISD 3 and ASIA CLOUD ISD 4
+#############
 
 # Singapore Telecommunication 3-127 to 
-# Tier1: 3-126, 5-140
+# Tier1: 3-126
 # Tier2: 3-128, 3-129
 cross_connector.XConnect(127, 126, "core")
-cross_connector.XConnect(127, 140, "core")
 cross_connector.XConnect(127, 128, "provider")
 cross_connector.XConnect(127, 129, "provider")
 
 # Telstra 3-126 to 
-# Tier1: 7-160
+# Tier1: 4-139
 # Tier2: 3-129
-cross_connector.XConnect(126, 160, "core")
+cross_connector.XConnect(126, 139, "core")
 cross_connector.XConnect(126, 129, "provider")
 
-# Cloud Alibaba 3-139 to 
-# IX23 and IX24
-ixp_connector.IXPConnect(23, 139)
-ixp_connector.IXPConnect(24, 139)
+# Microscan 3-128 to
+# Tier2: 3-130
+# Tier3: 3-131 to 3-135
+cross_connector.XConnect(128, 130, "provider")
+for asn in stub_groupA_isd3:
+    ixp_connector.addIXLink(24, 128, asn, ScLinkType.Transit)
 
-cross_connector.XConnect(139, 126, "core")
+# Kinx 3-130 to
+# Tier2: 3-129
+# IX: IX24
+cross_connector.XConnect(130, 129, "peer")
+ixp_connector.IXPConnect(24, 130)
 
-# Angola Cable 5-140 to 
-# Tier1: 6-150
-# Tier2: 1-104, 5-141, 5-142
-cross_connector.XConnect(140, 150, "core")
-cross_connector.XConnect(140, 104, "peer")
+# TM Technology 3-129 to
+# Tier3: 3-136 to 3-138
+# IX: IX24
+ixp_connector.IXPConnect(24, 129)
+for asn in stub_groupB_isd3:
+    cross_connector.XConnect(129, asn, "provider")
+
+# Alibaba 4-139 to
+# Tier2: 3-129
+cross_connector.XConnect(139, 129, "provider")
+
+# Stub Group A
+# IX: IX24
+for asn in stub_groupA_isd3:
+    ixp_connector.IXPConnect(24, asn)
+
+
+# AFRICA ISD 5
+#############
+
+# Angola Cables 5-140
+# Tier2: 5-142, 5-141
 cross_connector.XConnect(140, 141, "provider")
 cross_connector.XConnect(140, 142, "provider")
 
-# Algar Telecom 6-150 to 
-# Tier1: 6-151, 7-162
-cross_connector.XConnect(150, 151, "core")
-cross_connector.XConnect(150, 162, "core")
+# Ecoband 5-141
+# Tier2: 5-142
+# IX: IX25
+cross_connector.XConnect(141, 142, "peer")
+ixp_connector.IXPConnect(25, 141)
 
-# GlobeNet 6-151 to 
-# Tier1: 7-162
+# Africom 5-142
+# IX: IX25
+ixp_connector.IXPConnect(25, 142)
+for asn in stub_groupA_isd5:
+    ixp_connector.addIXLink(25, 142, asn, ScLinkType.Transit)
+
+# Tier3 ASes in ISD 5
+# IX: IX2025
+for asn in stub_groupA_isd5:
+    ixp_connector.IXPConnect(25, asn)
+
+
+# SOUTH AMERICA ISD 6
+#############
+
+# Algar Telecom 6-150
+# Tier1: 6-151
+cross_connector.XConnect(150, 151, "core")
+
+# GlobeNet 6-151
 # Tier2: 6-152
-cross_connector.XConnect(151, 162, "core")
 cross_connector.XConnect(151, 152, "provider")
+
+# Locaweb 6-152
+# Tier3: 6-156 until 6-159 and 6-153 until 6-155
+# IX: IX26
+ixp_connector.IXPConnect(26, 152)
+for asn in stub_groupB_isd6:
+    cross_connector.XConnect(152, asn, "provider")
+
+for asn in stub_groupA_isd6:
+    cross_connector.XConnect(152, asn, "provider")
+
+# Tier 3 ASes Group A
+#IX: IX26
+for asn in stub_groupA_isd6:
+    ixp_connector.IXPConnect(26, asn)
+
+
+# NORTH AMERICA ISD 7 and NA CLOUD ISD 8
+#############
 
 # Level3 7-160 to 
 # Tier1: 7-161, 7-162
-# Tier2: 1-104, 7-164
+# Tier2: 7-164, 7-165
 cross_connector.XConnect(160, 161, "core")
 cross_connector.XConnect(160, 162, "core")
-cross_connector.XConnect(160, 104, "provider")
 cross_connector.XConnect(160, 164, "provider")
+cross_connector.XConnect(160, 165, "provider")
 
 # Cogent 7-161 to 
 # Tier1: 7-162
-# Tier2: 1-104
 cross_connector.XConnect(161, 162, "core")
-cross_connector.XConnect(161, 104, "provider")
 
 # Verizon 7-162 to 
 # Tier2: 7-163
 cross_connector.XConnect(162, 163, "provider")
 
-#CLOUD IX
+#NA CLOUD IX30
 ixp_connector.IXPConnect(30, 176)
 ixp_connector.IXPConnect(30, 177)
 ixp_connector.IXPConnect(30, 178)
@@ -355,81 +369,15 @@ cross_connector.XConnect(176, 160, "core")
 
 # AWS Cloud 8-176 to
 # IX27, IX28
-ixp_connector.IXPConnect(27, 176)
 ixp_connector.IXPConnect(28, 176)
 
 # Google Cloud 8-177 to
 # IX27, IX28
-ixp_connector.IXPConnect(27, 177)
 ixp_connector.IXPConnect(28, 177)
 
 # Digital Ocean 8-178 to 
-# Tier2:  Liquidweb 7-163
 # IX28
-cross_connector.XConnect(178, 163, "peer")
 ixp_connector.IXPConnect(28, 178)
-
-###############################################################################
-# Links originating in Tier 2 ASes
-
-# core-Backbone 1-104 to
-# Tier2: 5-141
-# IX20, IX21, IX22, IX27
-cross_connector.XConnect(104, 141, "peer")
-ixp_connector.IXPConnect(20, 104)
-ixp_connector.IXPConnect(21, 104)
-ixp_connector.IXPConnect(22, 104)
-ixp_connector.IXPConnect(27, 104)
-
-# Swisscom 1-105 to
-# Tier2: 1-104, 1-106
-# Tier3: 1-119 until 1-122
-# IX20, IX21, IX22
-cross_connector.XConnect(105, 104, "peer")
-cross_connector.XConnect(105, 106, "peer")
-for asn in stub_groupB_isd1:
-    cross_connector.XConnect(105, asn, "provider")
-ixp_connector.IXPConnect(20, 105)
-ixp_connector.IXPConnect(21, 105)
-ixp_connector.IXPConnect(22, 105)
-
-# Tele2 1-106 to
-# 1-119 until 1-122 (Group B)
-for asn in stub_groupB_isd1:
-    cross_connector.XConnect(106, asn, "provider")
-
-# Microscan 3-128 to
-# Tier2: 3-130
-cross_connector.XConnect(128, 130, "peer")
-
-# TM Techbology 3-129 to
-# Tier3: 3-136 until 3-138
-# IX23, IX24
-for asn in stub_groupB_isd3:
-    cross_connector.XConnect(129, asn, "provider")
-ixp_connector.IXPConnect(23, 129)
-ixp_connector.IXPConnect(24, 129)
-
-# Kinx 3-130 to
-# Tier2: 3-129
-cross_connector.XConnect(130, 129, "peer")
-
-# Ecoband 5-141 to
-# Tier2: 5-142
-# IX 25
-cross_connector.XConnect(141, 142, "peer")
-ixp_connector.IXPConnect(25, 141)
-
-# Africom 5-142 to
-# IX25
-ixp_connector.IXPConnect(25, 142)
-
-# locaweb 6-152 to
-# Tier3: 6-156 until 6-159
-# IX26
-for asn in stub_groupB_isd6:
-    cross_connector.XConnect(152, asn, "provider")
-ixp_connector.IXPConnect(26, 152)
 
 # liquidweb 7-163 to
 # Tier2: 7-164
@@ -441,46 +389,22 @@ for asn in stub_groupA_isd7:
 ixp_connector.IXPConnect(28, 163)
 
 # lunavi 7-164 to
-# Tier3: 7-165 until 7-169
-# IX27, IX28
+# Tier3: 7-166 until 7-169
+# IX28
 for asn in stub_groupA_isd7:
     cross_connector.XConnect(164, asn, "provider")
-ixp_connector.IXPConnect(27, 164)
 ixp_connector.IXPConnect(28, 164)
+
+# T-Mobile 7-165 to
+# Tier3: 7-170 until 7-175
+# IX: IX28
+for asn in stub_groupB_isd7:
+    cross_connector.XConnect(165, asn, "provider")
+ixp_connector.IXPConnect(28, 165)
 
 
 ###############################################################################
-# Links originating in Tier 3 ASes
-# ISD 1 Stub Group A
-# IX20, IX21, IX22
-for asn in stub_groupA_isd1:
-    ixp_connector.IXPConnect(20, asn)
-    ixp_connector.IXPConnect(21, asn)
-    ixp_connector.IXPConnect(22, asn)
-
-
-# ISD 3 Stub Group A
-# IX24
-for asn in stub_groupA_isd3:
-    ixp_connector.IXPConnect(24, asn)
-
-
-# ISD 5 Stub Group A
-# IX25
-for asn in stub_groupA_isd5:
-    ixp_connector.IXPConnect(25, asn)
-
-
-# ISD 6 Stub Group A
-# IX26
-for asn in stub_groupA_isd6:
-    ixp_connector.IXPConnect(26, asn)
-
-# ISD 7 Stub Group B
-# IX26
-for asn in stub_groupB_isd7:
-    ixp_connector.IXPConnect(27, asn)
-    ixp_connector.IXPConnect(28, asn)
+# Inter ISD Links
 
 ###############################################################################
 # Rendering
