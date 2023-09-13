@@ -48,7 +48,7 @@ class PathChecker:
         try:
             whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
             whales.compose.build()
-            whales.compose.up(build=True, detach=True)    
+            whales.compose.up(detach=True)    
 
             # Use Docker SDK to interact with the containers
             client: docker.DockerClient = docker.from_env()
@@ -64,10 +64,10 @@ class PathChecker:
                 if connection_type == 1:
                     cmd = f'ping {destination} -c 1'
                     connection_type_str = "BGP  "
-                if connection_type == 2:
+                elif connection_type == 2:
                     cmd = f'scion ping {destination} -c 1'
                     connection_type_str = "SCION"
-                if connection_type != 1 and connection_type != 2:
+                else:
                     self._log(f'Error, not BGP or SCION for path from: {source_asn}to: {destination}\n')
                     whales.compose.down()
                     return
@@ -95,8 +95,9 @@ class PathChecker:
         except KeyboardInterrupt:
             print("Keyboard interrupt received. Cleaning up...")
             whales.compose.down()
-        except Exception:
-            print("Keyboard interrupt received. Cleaning up...")
+        except Exception as e:
+            print(e)
+            print("ExKeyboard interrupt received. Cleaning up...")
             whales.compose.down()
 ###############################################################################
 # AS factory
@@ -124,20 +125,20 @@ class AutonomousSystemMaker:
         as_.setBeaconingIntervals('30s', '30s', '30s')
 
         as_.createNetwork('net0')
-        as_.createNetwork('net1')
-        as_.createNetwork('net2')    
-        as_.createNetwork('net3')
+        #as_.createNetwork('net1')
+        #as_.createNetwork('net2')    
+        #as_.createNetwork('net3')
         as_.createControlService('cs1').joinNetwork('net0')
 
         br0 = as_.createRouter('br0')
-        br1 = as_.createRouter('br1')
-        br2 = as_.createRouter('br2')
-        br3 = as_.createRouter('br3')
+        #br1 = as_.createRouter('br1')
+        #br2 = as_.createRouter('br2')
+        #br3 = as_.createRouter('br3')
 
-        br0.joinNetwork('net0').joinNetwork('net1')
-        br1.joinNetwork('net1').joinNetwork('net2')
-        br2.joinNetwork('net2').joinNetwork('net3')
-        br3.joinNetwork('net3').joinNetwork('net0')
+        br0.joinNetwork('net0')#.joinNetwork('net1')
+        #br1.joinNetwork('net1').joinNetwork('net2')
+        #br2.joinNetwork('net2').joinNetwork('net3')
+        #br3.joinNetwork('net3').joinNetwork('net0')
         return as_
 
     # Tier 2 ASes have 2 border routers
@@ -160,14 +161,14 @@ class AutonomousSystemMaker:
         as_.setBeaconingIntervals('30s', '30s', '30s')
 
         as_.createNetwork('net0')
-        as_.createNetwork('net1')
+        #as_.createNetwork('net1')
         as_.createControlService('cs1').joinNetwork('net0')
 
         br0 = as_.createRouter('br0')
-        br1 = as_.createRouter('br1')
+        #br1 = as_.createRouter('br1')
         
-        br0.joinNetwork('net0').joinNetwork('net1')
-        br1.joinNetwork('net0').joinNetwork('net1')
+        br0.joinNetwork('net0')#.joinNetwork('net1')
+        #br1.joinNetwork('net0').joinNetwork('net1')
         return as_
 
     # Tier 3 ASes have 1 border router
@@ -298,26 +299,38 @@ class IXPConnector:
                         as_b_isd = self.scion_isd.getAsIsds(asn_b)[0]
 
                         # if two core ASes are connected through an IXP, they should have the core type
-                        link_policy = ScLinkType.Peer
-                        if self.scion_isd.isCoreAs(as_a_isd[0], asn_a) and self.scion_isd.isCoreAs(as_b_isd[0], asn_b):
-                             link_policy = ScLinkType.Core
+                        # if a core and and non-core AS are connected through an IXP, they should have the transit type
+                        # if two non-core ASes are connected through an IXP, they should hae the peer type
+                        number_of_core_AS = 0
+                        if self.scion_isd.isCoreAs(as_a_isd[0], asn_a):
+                            number_of_core_AS = number_of_core_AS+1
+                        
+                        if self.scion_isd.isCoreAs(as_b_isd[0], asn_b):
+                            number_of_core_AS = number_of_core_AS+1
 
+                        if number_of_core_AS == 0:
+                            link_policy = ScLinkType.Peer
+                            log_policy = "Peering"
+                        elif number_of_core_AS == 1:
+                            link_policy = ScLinkType.Transit
+                            log_policy = "Transit"
+                        elif number_of_core_AS == 2:
+                            link_policy = ScLinkType.Core
+                            log_policy = "Core"
+                        
                         # log each connection (BGP and SCION) to be checked later after deployment
                         if hasattr(self, "checker"):
                             # from A -> B
                             bgp_destination = f'      10.{asn_b}.0.71'
                             scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
                             self.checker._savePath(1, asn_a, bgp_destination, "Peering")
-                            self.checker._savePath(2, asn_a, scion_destination, "Peering" if link_policy == ScLinkType.Peer else "Core")
+                            self.checker._savePath(2, asn_a, scion_destination, log_policy)
 
                             # from B -> A
                             bgp_destination = f'      10.{asn_a}.0.71'
                             scion_destination = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
                             self.checker._savePath(1, asn_b, bgp_destination, "Peering")
-                            self.checker._savePath(2, asn_b, scion_destination, "Peering" if link_policy == ScLinkType.Peer else "Core")     
-
-                        print(f'checcking if AS {asn_a} is a Core in {as_a_isd[0]}: {self.scion_isd.isCoreAs(as_a_isd[0], asn_a)}')
-                        print(f'checcking if AS {asn_b} is a Core in {as_b_isd[0]}: {self.scion_isd.isCoreAs(as_b_isd[0], asn_b)}')
+                            self.checker._savePath(2, asn_b, scion_destination,log_policy)     
 
                         # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
                         addedIXConnections.append([ixn, asn_a, asn_b])     

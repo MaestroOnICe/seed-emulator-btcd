@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-from ipaddress import IPv4Network
 from seedemu.compiler import Docker, Graphviz
 from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ebgp, PeerRelationship 
@@ -37,7 +36,6 @@ import examples.scion.utility.utils as utils
 emu = Emulator()
 base = ScionBase()
 routing = ScionRouting()
-ospf = Ospf()
 scion_isd = ScionIsd()
 scion = Scion()
 ebgp = Ebgp()
@@ -76,6 +74,9 @@ ix25 = base.createInternetExchange(25) # Accra (Africa)
 ix26 = base.createInternetExchange(26) # Sao Paulo (South America)
 ix27 = base.createInternetExchange(27) # Los Angeles (North America)
 ix28 = base.createInternetExchange(28) # Miami (North America)
+ix29 = base.createInternetExchange(29) # 
+ix30 = base.createInternetExchange(30) # 
+ix31 = base.createInternetExchange(31) # 
 
 
 # Customize names (for visualization purpose)
@@ -113,16 +114,16 @@ tele_2 = maker.createTier2AS(1, 106, issuer=102) # Issuer: Deutsche Telekom
 
 # Tier 3 ASes
 # 107 - 118
-stub_groupA_isd1 = {}
+stub_groupA_isd1 = []
 for asn in range(107, 119):
     as_ = maker.createTier3AS(1, asn, issuer=102) # Issuer: Deutsche Telekom
-    stub_groupA_isd1[asn] = as_
+    stub_groupA_isd1.append(asn)
 
 # 119 - 122
-stub_groupB_isd1 = {}
+stub_groupB_isd1 = []
 for asn in range(119, 123):
     as_ = maker.createTier3AS(1, asn, issuer=102) # Issuer: Deutsche Telekom
-    stub_groupB_isd1[asn] = as_
+    stub_groupB_isd1.append(asn)
 
 
 ###############################################################################
@@ -145,16 +146,16 @@ kinx = maker.createTier2AS(3, 130, issuer=126) # Issuer: Telstra
 
 # Tier 3 ASes
 # 131 - 135
-stub_groupA_isd3 = {}
+stub_groupA_isd3 = []
 for asn in range(131, 136):
     as_ = maker.createTier3AS(3, asn, issuer=126) # Issuer: Telstra
-    stub_groupA_isd3[asn] = as_
-
+    stub_groupA_isd3.append(asn)
+                     
 # 136 -138
-stub_groupB_isd3 = {}
+stub_groupB_isd3 = []
 for asn in range(136, 139):
     as_ = maker.createTier3AS(3, asn, issuer=126) # Issuer: Telstra
-    stub_groupB_isd3[asn] = as_
+    stub_groupB_isd3.append(asn)
 
 
 ###############################################################################
@@ -173,10 +174,10 @@ africom = maker.createTier2AS(5, 142, issuer=140) # Issuer: Angola Cables
 
 # Tier 3 ASes
 # 143 - 149
-stub_groupA_isd5 = {}
+stub_groupA_isd5 = []
 for asn in range(143, 150):
     as_ = maker.createTier3AS(5, asn, issuer=140) # Issuer: Angola Cables
-    stub_groupA_isd5[asn] = as_
+    stub_groupA_isd5.append(asn)
 
 
 ###############################################################################
@@ -190,16 +191,16 @@ locaweb = maker.createTier2AS(6, 152, issuer=150)
 
 # Tier 3 ASes
 # 153 - 155
-stub_groupA_isd6 = {}
+stub_groupA_isd6 = []
 for asn in range(153, 156):
     as_ = maker.createTier3AS(6, asn, issuer=150) # Issuer: Algar Telecomm
-    stub_groupA_isd6[asn] = as_
+    stub_groupA_isd6.append(asn)
 
 # 156 - 159
-stub_groupB_isd6 = {}
+stub_groupB_isd6 = []
 for asn in range(156, 160):
     as_ = maker.createTier3AS(6, asn, issuer=150) # Issuer: Algar Telecomm
-    stub_groupB_isd6[asn] = as_
+    stub_groupB_isd6.append(asn)
 
 ###############################################################################
 # North America ISD 7 (160 to 175 )
@@ -214,16 +215,16 @@ lunavi = maker.createTier2AS(7, 164, issuer=160)
 
 # Tier 3 ASes
 # 165 - 169
-stub_groupA_isd7 = {}
+stub_groupA_isd7 = []
 for asn in range(165, 170):
     as_ = maker.createTier3AS(7, asn, issuer=160) # Issuer: level3
-    stub_groupA_isd7[asn] = as_
+    stub_groupA_isd7.append(asn)
 
 # 170 - 175
-stub_groupB_isd7 = {}
+stub_groupB_isd7 = []
 for asn in range(170, 176):
     as_ = maker.createTier3AS(7, asn, issuer=160) # Issuer: level3
-    stub_groupB_isd7[asn] = as_
+    stub_groupB_isd7.append(asn)
 
 ###############################################################################
 # Cloud - North America ISD 8 (176 to 178)
@@ -263,6 +264,13 @@ cross_connector.XConnect(102, 164, "provider")
 # Tier1: 3-127
 cross_connector.XConnect(103, 127, "core")
 
+
+#CLOUD IX
+ixp_connector.IXPConnect(29, 123)
+ixp_connector.IXPConnect(29, 124)
+ixp_connector.IXPConnect(29, 125)
+cross_connector.XConnect(123, 100, "core")
+
 # Cloud ovh 2-123 to
 # IX20, IX21, IX22
 ixp_connector.IXPConnect(20, 123)
@@ -299,6 +307,8 @@ cross_connector.XConnect(126, 129, "provider")
 # IX23 and IX24
 ixp_connector.IXPConnect(23, 139)
 ixp_connector.IXPConnect(24, 139)
+
+cross_connector.XConnect(139, 126, "core")
 
 # Angola Cable 5-140 to 
 # Tier1: 6-150
@@ -337,6 +347,12 @@ cross_connector.XConnect(161, 104, "provider")
 # Tier2: 7-163
 cross_connector.XConnect(162, 163, "provider")
 
+#CLOUD IX
+ixp_connector.IXPConnect(30, 176)
+ixp_connector.IXPConnect(30, 177)
+ixp_connector.IXPConnect(30, 178)
+cross_connector.XConnect(176, 160, "core")
+
 # AWS Cloud 8-176 to
 # IX27, IX28
 ixp_connector.IXPConnect(27, 176)
@@ -371,15 +387,15 @@ ixp_connector.IXPConnect(27, 104)
 # IX20, IX21, IX22
 cross_connector.XConnect(105, 104, "peer")
 cross_connector.XConnect(105, 106, "peer")
-for asn, _ in stub_groupB_isd1:
-    cross_connector.XConnect(106, asn, "provider")
+for asn in stub_groupB_isd1:
+    cross_connector.XConnect(105, asn, "provider")
 ixp_connector.IXPConnect(20, 105)
 ixp_connector.IXPConnect(21, 105)
 ixp_connector.IXPConnect(22, 105)
 
 # Tele2 1-106 to
 # 1-119 until 1-122 (Group B)
-for asn, _ in stub_groupB_isd1:
+for asn in stub_groupB_isd1:
     cross_connector.XConnect(106, asn, "provider")
 
 # Microscan 3-128 to
@@ -389,7 +405,7 @@ cross_connector.XConnect(128, 130, "peer")
 # TM Techbology 3-129 to
 # Tier3: 3-136 until 3-138
 # IX23, IX24
-for asn, _ in stub_groupB_isd3:
+for asn in stub_groupB_isd3:
     cross_connector.XConnect(129, asn, "provider")
 ixp_connector.IXPConnect(23, 129)
 ixp_connector.IXPConnect(24, 129)
@@ -411,7 +427,7 @@ ixp_connector.IXPConnect(25, 142)
 # locaweb 6-152 to
 # Tier3: 6-156 until 6-159
 # IX26
-for asn, _ in stub_groupB_isd6:
+for asn in stub_groupB_isd6:
     cross_connector.XConnect(152, asn, "provider")
 ixp_connector.IXPConnect(26, 152)
 
@@ -420,14 +436,14 @@ ixp_connector.IXPConnect(26, 152)
 # Tier3: 7-165 until 7-169
 # IX28
 cross_connector.XConnect(163, 164, "peer")
-for asn, _ in stub_groupA_isd7:
+for asn in stub_groupA_isd7:
     cross_connector.XConnect(163, asn, "provider")
 ixp_connector.IXPConnect(28, 163)
 
 # lunavi 7-164 to
 # Tier3: 7-165 until 7-169
 # IX27, IX28
-for asn, _ in stub_groupA_isd7:
+for asn in stub_groupA_isd7:
     cross_connector.XConnect(164, asn, "provider")
 ixp_connector.IXPConnect(27, 164)
 ixp_connector.IXPConnect(28, 164)
@@ -437,32 +453,32 @@ ixp_connector.IXPConnect(28, 164)
 # Links originating in Tier 3 ASes
 # ISD 1 Stub Group A
 # IX20, IX21, IX22
-for asn, _ in stub_groupA_isd1:
+for asn in stub_groupA_isd1:
     ixp_connector.IXPConnect(20, asn)
     ixp_connector.IXPConnect(21, asn)
-    ixp_connector.IXPConnect(21, asn)
+    ixp_connector.IXPConnect(22, asn)
 
 
 # ISD 3 Stub Group A
 # IX24
-for asn, _ in stub_groupA_isd3:
+for asn in stub_groupA_isd3:
     ixp_connector.IXPConnect(24, asn)
 
 
 # ISD 5 Stub Group A
 # IX25
-for asn, _ in stub_groupA_isd5:
+for asn in stub_groupA_isd5:
     ixp_connector.IXPConnect(25, asn)
 
 
 # ISD 6 Stub Group A
 # IX26
-for asn, _ in stub_groupA_isd6:
+for asn in stub_groupA_isd6:
     ixp_connector.IXPConnect(26, asn)
 
 # ISD 7 Stub Group B
 # IX26
-for asn, _ in stub_groupB_isd7:
+for asn in stub_groupB_isd7:
     ixp_connector.IXPConnect(27, asn)
     ixp_connector.IXPConnect(28, asn)
 
@@ -471,7 +487,6 @@ for asn, _ in stub_groupB_isd7:
 ixp_connector.addScionIXPConnections()
 emu.addLayer(base)
 emu.addLayer(routing)
-emu.addLayer(ospf)
 emu.addLayer(scion_isd)
 emu.addLayer(scion)
 emu.addLayer(ebgp)

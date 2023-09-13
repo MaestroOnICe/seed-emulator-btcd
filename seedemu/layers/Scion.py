@@ -111,7 +111,7 @@ class Scion(Layer, Graphable):
         """
         a, b = IA(*a), IA(*b)
         assert a.asn != b.asn, "Cannot link as{} to itself.".format(a)
-        assert (a, b, linkType) not in self.__links, (
+        assert (a, b, linkType) not in self.__ix_links, (
             "Link between as{} and as{} of type {} at ix{} exists already.".format(a, b, linkType, ix))
 
         self.__ix_links[(ix, a, b, linkType)] = count
