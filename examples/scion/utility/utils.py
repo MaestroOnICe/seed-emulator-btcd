@@ -28,7 +28,7 @@ class PathChecker:
         """
         print("==== {}: {}".format(self.getName(), message), file=stderr)
 
-    def _savePath(self, connection_type: int, source_asn: int, destination: str):
+    def _savePath(self, connection_type: int, source_asn: int, destination: str, policy: str):
         """!
         @brief log a path to the internal list, to be checked later.
 
@@ -36,7 +36,7 @@ class PathChecker:
         @param source_asn ASN of the source for the path to be checked
         @param destination address of the host in the destination of the path in form of IP or full SCION address
         """
-        path = [connection_type, source_asn, destination]
+        path = [connection_type, source_asn, destination, policy]
         self.paths.append(path)
 
     def deployAndCheck(self):
@@ -59,11 +59,14 @@ class PathChecker:
             time.sleep(15)
             
             # check each path for connectivity
-            for connection_type, source_asn, destination in self.paths:
+            connection_type_str = ""
+            for connection_type, source_asn, destination, policy in self.paths:
                 if connection_type == 1:
                     cmd = f'ping {destination} -c 1'
+                    connection_type_str = "BGP  "
                 if connection_type == 2:
                     cmd = f'scion ping {destination} -c 1'
+                    connection_type_str = "SCION"
                 if connection_type != 1 and connection_type != 2:
                     self._log(f'Error, not BGP or SCION for path from: {source_asn}to: {destination}\n')
                     whales.compose.down()
@@ -74,9 +77,9 @@ class PathChecker:
                 
                 _, output = container.exec_run(cmd)
                 if "Error" in output.decode('utf8'):
-                    self._log(f'\u2718 Error, the path from AS {source_asn} to {destination} did not work')
+                    self._log(f'\u2718 Error, in path from AS {source_asn} to {destination} {connection_type_str}, {policy}')
                 else:
-                    self._log(f'\u2714 Yay, the path from AS {source_asn} to {destination} works')
+                    self._log(f'\u2714 No Er, in path from AS {source_asn} to {destination} {connection_type_str}, {policy}')
             
             user_input = input("Do you want to want to bring all containers and networks down? (yes/no): ")
             # Check the user's input
@@ -232,7 +235,7 @@ class CrossConnector:
         self.checker = path_checker
 
     # SCION and BGP cross connect two ASes
-    def XConnect(self, asn_a: int, asn_b: int, type: str, as_a_router: str="br0", as_b_router: str="br0"):
+    def XConnect(self, asn_a: int, asn_b: int, policy: str, as_a_router: str="br0", as_b_router: str="br0"):
         # cross connecting AS a <-> AS b
         as_a = self.base.getAutonomousSystem(asn_a)
         as_b = self.base.getAutonomousSystem(asn_b)
@@ -247,16 +250,16 @@ class CrossConnector:
 
         # log each connection (BGP and SCION) to be checked later after deployment
         if hasattr(self, "checker"):
-            bgp_destination = f'10.{asn_b}.0.71'
+            bgp_destination = f'      10.{asn_b}.0.71'
             scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
-            self.checker._savePath(1, asn_a, bgp_destination)
-            self.checker._savePath(2, asn_a, scion_destination)
+            self.checker._savePath(1, asn_a, bgp_destination, policy)
+            self.checker._savePath(2, asn_a, scion_destination, policy)
 
         # will throw error if link type does not match
-        self.scion.addXcLink((as_a_isd[0],asn_a), (as_b_isd[0],asn_b), sclink_type.get(type, "null"))
+        self.scion.addXcLink((as_a_isd[0],asn_a), (as_b_isd[0],asn_b), sclink_type.get(policy, "null"))
         
         # will throw error if link type does not match
-        self.ebgp.addCrossConnectPeering(asn_a, asn_b, ebgp_types.get(type, "null"))
+        self.ebgp.addCrossConnectPeering(asn_a, asn_b, ebgp_types.get(policy, "null"))
 
 
 class IXPConnector:
@@ -294,21 +297,31 @@ class IXPConnector:
                         as_a_isd = self.scion_isd.getAsIsds(asn_a)[0]
                         as_b_isd = self.scion_isd.getAsIsds(asn_b)[0]
 
+                        # if two core ASes are connected through an IXP, they should have the core type
+                        link_policy = ScLinkType.Peer
+                        if self.scion_isd.isCoreAs(as_a_isd[0], asn_a) and self.scion_isd.isCoreAs(as_b_isd[0], asn_b):
+                             link_policy = ScLinkType.Core
+
                         # log each connection (BGP and SCION) to be checked later after deployment
                         if hasattr(self, "checker"):
-                            bgp_destination = f'10.{asn_b}.0.71'
+                            # from A -> B
+                            bgp_destination = f'      10.{asn_b}.0.71'
                             scion_destination = f'{as_b_isd[0]}-{asn_b},10.{asn_b}.0.71'
-                            self.checker._savePath(1, asn_a, bgp_destination)
-                            self.checker._savePath(2, asn_a, scion_destination)
+                            self.checker._savePath(1, asn_a, bgp_destination, "Peering")
+                            self.checker._savePath(2, asn_a, scion_destination, "Peering" if link_policy == ScLinkType.Peer else "Core")
 
-                        # if two core ASes are connected through an IXP, they should have the core type
-                        link_type = ScLinkType.Peer
-                        if self.scion_isd.isCoreAs(as_a_isd, asn_a) and self.scion_isd.isCoreAs(as_a_isd, asn_a):
-                            link_type = ScLinkType.Core
+                            # from B -> A
+                            bgp_destination = f'      10.{asn_a}.0.71'
+                            scion_destination = f'{as_a_isd[0]}-{asn_a},10.{asn_a}.0.71'
+                            self.checker._savePath(1, asn_b, bgp_destination, "Peering")
+                            self.checker._savePath(2, asn_b, scion_destination, "Peering" if link_policy == ScLinkType.Peer else "Core")     
+
+                        print(f'checcking if AS {asn_a} is a Core in {as_a_isd[0]}: {self.scion_isd.isCoreAs(as_a_isd[0], asn_a)}')
+                        print(f'checcking if AS {asn_b} is a Core in {as_b_isd[0]}: {self.scion_isd.isCoreAs(as_b_isd[0], asn_b)}')
 
                         # A link of an IX should only be scripted once, otherwise the link would be created twice in both directions
                         addedIXConnections.append([ixn, asn_a, asn_b])     
-                        self.scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), link_type)
+                        self.scion.addIxLink(ixn, (as_a_isd[0], asn_a), (as_b_isd[0], asn_b), link_policy)
 
 
 
