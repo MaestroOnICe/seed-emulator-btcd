@@ -68,7 +68,7 @@ isd8.setLabel('Cloud - North America')
 ix20 = base.createInternetExchange(20) # Frankfurt (Europe)
 ix21 = base.createInternetExchange(21) # London (Europe)
 ix22 = base.createInternetExchange(22) # Amsterdam (Europe)
-#ix23 = base.createInternetExchange(23) # Hong Kong (Asia)
+ix23 = base.createInternetExchange(23) # Frankfurt2 (Europe)
 ix24 = base.createInternetExchange(24) # Singapore (Asia)
 ix25 = base.createInternetExchange(25) # Accra (Africa)
 ix26 = base.createInternetExchange(26) # Sao Paulo (South America)
@@ -82,7 +82,7 @@ ix30 = base.createInternetExchange(30) # NA Cloud
 ix20.getPeeringLan().setDisplayName('Frankfurt-20')
 ix21.getPeeringLan().setDisplayName('London-21')
 ix22.getPeeringLan().setDisplayName('Amsterdam-22')
-#ix23.getPeeringLan().setDisplayName('Hong Kong-23')
+ix23.getPeeringLan().setDisplayName('Frankfurt2-23')
 ix24.getPeeringLan().setDisplayName('Singapore-24')
 ix25.getPeeringLan().setDisplayName('Accra-25')
 ix26.getPeeringLan().setDisplayName('Sao Paulo-26')
@@ -235,6 +235,8 @@ aws_cloud = maker.createTier1AS(8, 176)
 google_cloud = maker.createTier1AS(8, 177)
 digital_ocean_cloud = maker.createTier1AS(8, 178)
 
+
+###############################################################################
 # Arelion 1-100 to 
 # Tier1: 1-101, 1-102
 # Tier2: 1-104
@@ -285,9 +287,9 @@ ixp_connector.IXPConnect(21, 104)
 ixp_connector.IXPConnect(22, 104)
 
 # Swisscom 1-105 to
-# Tier2: 1-104, 1-106
+# Tier2: 1-106
 # IX20, IX21, IX22
-cross_connector.XConnect(105, 104, "peer")
+#cross_connector.XConnect(105, 104, "peer")
 cross_connector.XConnect(105, 106, "peer")
 ixp_connector.IXPConnect(20, 105)
 ixp_connector.IXPConnect(21, 105)
@@ -296,7 +298,14 @@ ixp_connector.IXPConnect(22, 105)
 # Tele2 1-106 to
 # 1-119 until 1-122 (Group B)
 for asn in stub_groupB_isd1:
-    cross_connector.XConnect(106, asn, "provider")
+    ixp_connector.addIXLink(23, 106, asn, ScLinkType.Transit)
+    ixp_connector.IXPConnect(23, asn)
+
+# Tele2 1-106 to
+# 1-107 until 1-118 (Group A)
+for asn in stub_groupA_isd1:
+    ixp_connector.addIXLink(23, 106, asn, ScLinkType.Transit)
+    ixp_connector.IXPConnect(23, asn)
 
 ###############################################################################
 # Intra-ISD Links
@@ -360,14 +369,12 @@ cross_connector.XConnect(140, 141, "provider")
 cross_connector.XConnect(140, 142, "provider")
 
 # Ecoband 5-141
-# Tier2: 5-142
 # IX: IX25
-cross_connector.XConnect(141, 142, "peer")
 ixp_connector.IXPConnect(25, 141)
 
 # Africom 5-142
 # IX: IX25
-ixp_connector.IXPConnect(25, 142)
+#ixp_connector.IXPConnect(25, 142)
 for asn in stub_groupA_isd5:
     ixp_connector.addIXLink(25, 142, asn, ScLinkType.Transit)
 
@@ -467,6 +474,47 @@ ixp_connector.IXPConnect(28, 165)
 
 ###############################################################################
 # Inter ISD Links
+
+
+# Arelion 1-100 to
+# Tier1: 7-161
+cross_connector.XConnect(100, 161, "core")
+
+# Telecom Italia 1-101 to
+# Tier1: 7-162
+cross_connector.XConnect(101, 162, "core")
+
+# RETN 1-103 to
+# Tier1: 3-127
+cross_connector.XConnect(103, 127, "core")
+
+# Telstra 3-126 to
+# Tier1: 7-160
+cross_connector.XConnect(126, 160, "core")
+
+# Singapore Communication 3-127 to
+# Tier1: 5-140
+cross_connector.XConnect(127, 140, "core")
+
+# Angola Cables 5-140 to
+# Tier1: 1-102, 6-150
+# IX: IX26
+cross_connector.XConnect(140, 102, "core")
+cross_connector.XConnect(140, 150, "core")
+#ixp_connector.IXPConnect(26, 140)
+
+# GlobeNet 6-151 to
+# Tier1: 7-162
+cross_connector.XConnect(151, 162, "core")
+
+# GlobeNet 6-150 to
+# Tier1: 7-162
+cross_connector.XConnect(150, 162, "core")
+
+
+
+
+
 
 ###############################################################################
 # Rendering
