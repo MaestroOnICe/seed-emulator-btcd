@@ -12,7 +12,6 @@ import examples.scion.utility.bitcoin as bitcoin
 emu = Emulator()
 base = ScionBase()
 routing = ScionRouting()
-ospf = Ospf()
 scion_isd = ScionIsd()
 scion = Scion()
 ebgp = Ebgp()
@@ -51,7 +50,8 @@ path_checker = utils.PathChecker()
 cross_connector = utils.CrossConnector(base, scion_isd, ebgp, scion, path_checker)
 ixp_connector = utils.IXPConnector(base, scion_isd, ebgp, scion, path_checker)
 maker = utils.AutonomousSystemMaker(base, scion_isd)
-btc = bitcoin.btcd()
+btcd = bitcoin.btcd()
+
 
 
 ###############################################################################
@@ -73,13 +73,21 @@ stub_groupA_isd1 = []
 for asn in range(107, 119):
     as_ = maker.createTier3AS(1, asn, issuer=102) # Issuer: Deutsche Telekom
     stub_groupA_isd1.append(asn)
+    btcd.createNode(as_)
 
 # 119 - 122
 stub_groupB_isd1 = []
 for asn in range(119, 123):
     as_ = maker.createTier3AS(1, asn, issuer=102) # Issuer: Deutsche Telekom
     stub_groupB_isd1.append(asn)
+    btcd.createNode(as_)
 
+
+# create Bootstrap node in AS 107 and AS 119
+as107 = base.getAutonomousSystem(107)
+as119 = base.getAutonomousSystem(119)
+btcd.createBootstrap(as107)
+btcd.createBootstrap(as119)
 
 ###############################################################################
 # Cloud - Europe ISD 2 (123 to 125)
@@ -166,7 +174,6 @@ for asn in stub_groupA_isd1:
 ixp_connector.addScionIXPConnections()
 emu.addLayer(base)
 emu.addLayer(routing)
-emu.addLayer(ospf)
 emu.addLayer(scion_isd)
 emu.addLayer(scion)
 emu.addLayer(ebgp)
@@ -180,5 +187,5 @@ emu.compile(Graphviz(), "./output/graphs", override=True)
 
 ###############################################################################
 # Deploy and check all paths
-#path_checker.deployAndCheck()
-path_checker.deploy()
+path_checker.deployAndCheck()
+#path_checker.deploy()

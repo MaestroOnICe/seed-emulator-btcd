@@ -13,11 +13,7 @@ class PathChecker:
         """!
         @brief Path checker, for scion and bgp mixed topology.
         """
-        self.paths = []
-        # self.txt_file_path = 'paths.txt'
-        # with open(self.txt_file_path, mode='w', newline='') as file:
-        #     pass  # Do nothing, just open and close to clear the file
-        # self.results_file = file
+        self.__paths = []
     
     def getName(self) -> str:
         return "Path Checker"
@@ -37,11 +33,11 @@ class PathChecker:
         @param destination address of the host in the destination of the path in form of IP or full SCION address
         """
         path = [connection_type, source_asn, destination, policy]
-        self.paths.append(path)
+        self.__paths.append(path)
 
     def deployAndCheck(self):
         index = 1
-        for path in self.paths:
+        for path in self.__paths:
             self._log(f"Path {index} from AS: {path[1]} to destination address: {path[2]}")
             index = index +1
             
@@ -60,7 +56,7 @@ class PathChecker:
             
             # check each path for connectivity
             connection_type_str = ""
-            for connection_type, source_asn, destination, policy in self.paths:
+            for connection_type, source_asn, destination, policy in self.__paths:
                 if connection_type == 1:
                     cmd = f'ping {destination} -c 1'
                     connection_type_str = "BGP  "
@@ -308,7 +304,7 @@ class IXPConnector:
         self.base.getAutonomousSystem(asn_a).getRouter('br0').joinNetwork(f'ix{ixn}')
         self.base.getAutonomousSystem(asn_b).getRouter('br0').joinNetwork(f'ix{ixn}')
 
-        # Correct Strink for logging later
+        # Correct string for logging later
         if linkType == ScLinkType.Peer:
             log_policy = "Peering"
         elif linkType == ScLinkType.Transit:
