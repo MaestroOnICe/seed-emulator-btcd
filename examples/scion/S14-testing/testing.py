@@ -6,7 +6,7 @@ from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ibgp, Ebgp, PeerRelationship 
 from seedemu.layers.Scion import LinkType as ScLinkType
 import examples.scion.utility.utils as utils
-import examples.scion.utility.btcd as btcd
+import examples.scion.utility.bitcoin as bitcoin
 ###############################################################################
 # Initialize
 emu = Emulator()
@@ -51,6 +51,7 @@ path_checker = utils.PathChecker()
 cross_connector = utils.CrossConnector(base, scion_isd, ebgp, scion, path_checker)
 ixp_connector = utils.IXPConnector(base, scion_isd, ebgp, scion, path_checker)
 maker = utils.AutonomousSystemMaker(base, scion_isd)
+btc = bitcoin.btcd()
 
 
 ###############################################################################
