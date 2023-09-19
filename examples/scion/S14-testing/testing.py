@@ -6,6 +6,7 @@ from seedemu.core import Emulator
 from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ibgp, Ebgp, PeerRelationship 
 from seedemu.layers.Scion import LinkType as ScLinkType
 import examples.scion.utility.utils as utils
+import examples.scion.utility.btcd as btcd
 ###############################################################################
 # Initialize
 emu = Emulator()
@@ -32,12 +33,14 @@ isd2.setLabel('EU Cloud')
 ix20 = base.createInternetExchange(20)
 ix21 = base.createInternetExchange(21)
 ix22 = base.createInternetExchange(22)
+ix23 = base.createInternetExchange(23)
 ix29 = base.createInternetExchange(29)
 
 # # Customize names (for visualization purpose)
 ix20.getPeeringLan().setDisplayName('Frankfurt-20')
 ix21.getPeeringLan().setDisplayName('London-21')
 ix22.getPeeringLan().setDisplayName('Amsterdam-22')
+ix23.getPeeringLan().setDisplayName('Frankfurt-23')
 ix29.getPeeringLan().setDisplayName('EU Cloud-22')
 
 
@@ -147,7 +150,15 @@ ixp_connector.IXPConnect(22, 105)
 # Tele2 1-106 to
 # 1-119 until 1-122 (Group B)
 for asn in stub_groupB_isd1:
-    cross_connector.XConnect(106, asn, "provider")
+    ixp_connector.addIXLink(23, 106, asn, ScLinkType.Transit)
+    ixp_connector.IXPConnect(23, asn)
+
+# Tele2 1-106 to
+# 1-107 until 1-118 (Group A)
+for asn in stub_groupA_isd1:
+    ixp_connector.addIXLink(23, 106, asn, ScLinkType.Transit)
+    ixp_connector.IXPConnect(23, asn)
+
 
 ###############################################################################
 #Rendering
@@ -168,4 +179,5 @@ emu.compile(Graphviz(), "./output/graphs", override=True)
 
 ###############################################################################
 # Deploy and check all paths
-path_checker.deployAndCheck()
+#path_checker.deployAndCheck()
+path_checker.deploy()

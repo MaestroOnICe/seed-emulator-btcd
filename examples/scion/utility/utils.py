@@ -99,6 +99,28 @@ class PathChecker:
             print(e)
             print("ExKeyboard interrupt received. Cleaning up...")
             whales.compose.down()
+
+    def deploy(self):
+        try:
+            whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
+            whales.compose.build()
+            whales.compose.up(detach=True)    
+
+            # Use Docker SDK to interact with the containers
+            # client: docker.DockerClient = docker.from_env()
+            # ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
+
+            # Sleep for 15 seconds to up the paths
+            self._log("Sleeping 15 seconds, waiting for the topology and links to come up")
+            time.sleep(10)
+
+        except KeyboardInterrupt:
+            print("Keyboard interrupt received. Cleaning up...")
+            whales.compose.down()
+        except Exception as e:
+            print(e)
+            whales.compose.down()
+
 ###############################################################################
 # AS factory
 
