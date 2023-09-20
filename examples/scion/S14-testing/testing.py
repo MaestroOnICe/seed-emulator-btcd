@@ -187,5 +187,5 @@ emu.compile(Graphviz(), "./output/graphs", override=True)
 
 ###############################################################################
 # Deploy and check all paths
-path_checker.deployAndCheck()
-#path_checker.deploy()
+#path_checker.deployAndCheck()
+path_checker.deploy()

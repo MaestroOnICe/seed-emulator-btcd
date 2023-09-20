@@ -51,7 +51,7 @@ class btcd:
         host.addSharedFolder('/root/.btcd/logs/mainnet', log_path)
 
         # add peers.json folder
-        #host.addSharedFolder('/root/.btcd/data/mainnet', log_path)  
+        #host.addSharedFolder('/root/.btcd/data/mainnet/', log_path)  
 
         # add binary and config from the shared folder, make it executable
         host.addSharedFolder('/shared/',self.__wd+'/bin/')
@@ -75,7 +75,7 @@ class btcd:
         host.addSharedFolder('/root/.btcd/logs/mainnet', log_path)
 
         # add peers.json folder
-        #host.addSharedFolder('/root/.btcd/data/mainnet', log_path)  
+        #host.addSharedFolder('/root/.btcd/data/mainnet/', log_path)  
 
         # add binary and config from the shared folder, make it executable
         host.addSharedFolder('/shared/',self.__wd+'/bin/')
