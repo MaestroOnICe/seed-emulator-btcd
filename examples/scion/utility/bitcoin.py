@@ -17,7 +17,7 @@ class btcd:
         host_number = len(self.__nodeNames[asn]) + 1
 
         # creates the host in the seed emulator
-        host = as_.createHost(f'node_{asn}_{host_number}').joinNetwork("net0")
+        host = as_.createHost(f'node_{asn}_{host_number}').joinNetwork("net0", address=f"10.{asn}.0.100")
         self.__addNode(host)
     
 
@@ -29,7 +29,7 @@ class btcd:
         host_number = len(self.__nodeNames[asn]) + 1
     
         # creates the host in the seed emulator
-        host = as_.createHost(f'bootstrap_{asn}_{host_number}').joinNetwork("net0")
+        host = as_.createHost(f'node_{asn}_{host_number}').joinNetwork("net0", address=f"10.{asn}.0.100")
         self.__addBootstrapNode(host)
 
 
