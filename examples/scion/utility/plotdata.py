@@ -59,6 +59,31 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     plt.clf()
 
 
+def plotCDF(file_path: str, log_number: int):
+    # Read and parse the JSON data from the file
+    with open(file_path, 'r') as json_file:
+        data_1 = json.load(json_file)["data"]
+    # Create a DataFrame
+    df = pd.DataFrame(data_1)
+
+    connection_count = []
+
+    for value in df["connectionCount"]:
+        connection_count.append(value)
+
+
+    # Create CDF plot
+    sns.ecdfplot(connection_count)
+
+    # Customize the plot
+    plt.xlabel("Connection Count")
+    plt.ylabel("Cumulative Probability")
+    plt.title("CDF Plot of Data")
+    plt.show()
+    # fig_path = saveFigurePath(log_number)
+    # plt.savefig(fig_path)
+    # plt.clf()
+
 def saveFigurePath(log_number: int)->str:
     base_path = '/home/justus/seed-emulator/examples/scion/plots'
     plot_path = f'{base_path}/plot_{log_number}'
