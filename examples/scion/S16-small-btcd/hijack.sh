@@ -12,4 +12,4 @@ protocol static hijacks {
 }
 EOM"
 
-echo docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "$command"
+docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "$command"

@@ -14,15 +14,16 @@ def plotConnectionCount(file_path: str):
     df = pd.DataFrame(data)
 
     # Plot using Seaborn
-    sns.set(style="whitegrid")
-    sns.lineplot(x="timeElapsed", y="connectionCount", data=df)
+    sns.set_theme()
+    sns.lineplot(x="timeElapsed", y="connectionCount", data=df, label='Data Series', linewidth=2)
     plt.title("Connection Count Over Time")
     plt.xlabel("Time Elapsed (seconds)")
     plt.ylabel("Connection Count")
+
+    sns.despine(left=True, bottom=True)  # Remove top and right spines
+    plt.legend(fontsize=12)  # Add a legend
     plt.savefig("./plots/", dpi=1000)
     plt.show()
-
-
 
 def compareChains(file_path1: str, file_path2: str):
     # Read and parse the JSON data from the file
@@ -37,31 +38,15 @@ def compareChains(file_path1: str, file_path2: str):
     # Create a DataFrame
     df_2 = pd.DataFrame(data_2)
 
-    print(df_1)
-    print(df_2)
-
-    # Merge the dataframes and convert timeElapsed to seconds
-    merged_df = df_1.merge(df_2, on='hash', suffixes=('_hash1', '_hash2'))
-    merged_df['timeElapsed'] = merged_df['timeElapsed'].str.rstrip('ns').astype(int) / 1e9
-
-    # Set Seaborn style
-    sns.set_style("whitegrid")
-
-    # Create a figure and axis
-    fig, ax = plt.subplots(figsize=(10, 6))
-
-    # Loop through unique hashes and plot their block numbers over time
-    for hash_value, group in merged_df.groupby('hash'):
-        sns.lineplot(x='timeElapsed', y='blockCount_hash1', data=group, label=f'Block Count - {hash_value} (Hash 1)')
-        sns.lineplot(x='timeElapsed', y='blockCount_hash2', data=group, label=f'Block Count - {hash_value} (Hash 2)')
-
-    # Set labels and title
-    ax.set_xlabel('Time (seconds)')
-    ax.set_ylabel('Block Number')
-    ax.set_title('Comparison of Hashes Over Time')
-
-    # Add legend outside the plot
-    ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-
-    # Show the plot
+    # Plot blockCount over time
+    sns.set_theme()
+    sns.lineplot(x="timeElapsed", y="blockCount", data=df_1, label='Line 1', linewidth=2, marker='o', markersize=8, alpha=0.7)
+    sns.lineplot(x="timeElapsed", y="blockCount", data=df_2, label='Line 2', linewidth=2, marker='s', markersize=8, alpha=0.7)
+    sns.despine(left=True, bottom=True)  # Remove top and right spines
+    plt.legend(fontsize=12)  # Add a legend
+    plt.xlabel('Time Elapsed (seconds)')
+    plt.ylabel('Block Count')
+    plt.title('Block Count Over Time')
+    plt.tight_layout()  # Ensure the plot fits nicely in the figure
+    # plt.grid(True)
     plt.show()

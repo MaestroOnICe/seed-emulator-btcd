@@ -54,6 +54,9 @@ for asn in range(120, 124):
 #     btcd.createNode(as_)
 as130 = maker.createTier3AS(1, 130, issuer=102)
 btcd.createNode(as130)
+btcd.createNode(as130)
+btcd.createNode(as130)
+btcd.createNode(as130)
 
 # Links
 ###############################################################################
@@ -101,13 +104,15 @@ path_checker.deploy()
 
 experiment.measureDataPoints()
 
-print("Sleeping for 60 seconds until hijack")
-time.sleep(10)
+print("Sleeping for 120 seconds until hijack")
+time.sleep(120)
 
 print("Hijacking AS, sleeping for 5 minutes")
 experiment.hijackAS(100)
 time.sleep(300)
 
 experiment.endHijack(100)
-print("Hijack ended, sleep for another 60 seconds")
+print("Hijack ended, sleep for another 120 seconds")
+time.sleep(120)
 
+experiment.down()
