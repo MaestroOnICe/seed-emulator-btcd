@@ -2,7 +2,7 @@
 
 filename="/etc/bird/bird.conf"
 
-command="/bin/cat <<EOM >>$filename
+command="/bin/cat <<EOM >>/etc/bird/bird.conf
 protocol static hijacks {
     ipv4 {
         table t_bgp;

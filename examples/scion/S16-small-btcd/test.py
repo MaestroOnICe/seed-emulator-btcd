@@ -35,11 +35,11 @@ as100 = maker.createTier1AS(1, 100)
 as101 = maker.createTier1AS(1, 101)
 as102 = maker.createTier1AS(1, 102)
 
-stub_100 = []
-for asn in range(110, 114):
-    as_ = maker.createTier3AS(1, asn, issuer=100)
-    stub_100.append(asn)
-    btcd.createNode(as_)
+# stub_100 = []
+# for asn in range(110, 114):
+#     as_ = maker.createTier3AS(1, asn, issuer=100)
+#     stub_100.append(asn)
+#     btcd.createNode(as_)
 
 stub_101 = []
 for asn in range(120, 124):
@@ -47,11 +47,13 @@ for asn in range(120, 124):
     stub_101.append(asn)
     btcd.createNode(as_)
 
-stub_102 = []
-for asn in range(130, 134):
-    as_ = maker.createTier3AS(1, asn, issuer=102)
-    stub_102.append(asn)
-    btcd.createNode(as_)
+# stub_102 = []
+# for asn in range(130, 134):
+#     as_ = maker.createTier3AS(1, asn, issuer=102)
+#     stub_102.append(asn)
+#     btcd.createNode(as_)
+as130 = maker.createTier3AS(1, 130, issuer=102)
+btcd.createNode(as130)
 
 # Links
 ###############################################################################
@@ -63,14 +65,15 @@ ixp_connector.IXPConnect(21, 100)
 ixp_connector.IXPConnect(21, 101)
 ixp_connector.IXPConnect(21, 102)
 
-for asn in stub_100:
-    cross_connector.XConnect(100, asn, "provider")
+# for asn in stub_100:
+#     cross_connector.XConnect(100, asn, "provider")
 
 for asn in stub_101:
     cross_connector.XConnect(101, asn, "provider")
 
-for asn in stub_102:
-    cross_connector.XConnect(102, asn, "provider")
+# for asn in stub_102:
+#     cross_connector.XConnect(102, asn, "provider")
+cross_connector.XConnect(102, 130, "provider")
 
 # Bootstrap
 ###############################################################################
@@ -99,12 +102,12 @@ path_checker.deploy()
 experiment.measureDataPoints()
 
 print("Sleeping for 60 seconds until hijack")
-time.sleep(60)
+time.sleep(10)
 
 print("Hijacking AS, sleeping for 5 minutes")
 experiment.hijackAS(100)
 time.sleep(300)
 
 experiment.endHijack(100)
-print("Hijack ended")
+print("Hijack ended, sleep for another 60 seconds")
 

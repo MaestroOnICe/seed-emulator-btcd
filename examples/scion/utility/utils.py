@@ -106,8 +106,8 @@ class PathChecker:
             # client: docker.DockerClient = docker.from_env()
             # ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
 
-            # Sleep for 15 seconds to up the paths
-            self._log("Sleeping 15 seconds, waiting for the topology and links to come up")
+            # Sleep for 10 seconds to up the paths
+            self._log("Sleeping 10 seconds, waiting for the topology and links to come up")
             time.sleep(10)
 
         except KeyboardInterrupt:
