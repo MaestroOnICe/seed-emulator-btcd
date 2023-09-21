@@ -27,19 +27,26 @@ def measureDataPoints():
         print(f"An unexpected error occurred: {e}")
         whales.compose.down()
 
-def hijackAS(attacker_asn: int):
+def hijackAS(attacker_asn: int, victim_asn: int):
     try:
         whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
         client: docker.DockerClient = docker.from_env()
         ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
 
-        attacker_node = f'as{attacker_asn}r-br0-10.{attacker_asn}.0.254'
+        attacker_router = f'as{attacker_asn}r-br0-10.{attacker_asn}.0.254'
+        victim_router = f'as{victim_asn}r-br0-10.{victim_asn}.0.254'
 
-        attacker_container = ctrs[attacker_node]
-        attacker_container.exec_run("cp /etc/bird/bird.conf /etc/bird/bird.bak")
+        attacker_container = ctrs[attacker_router]
+        victim_container = ctrs[victim_router]
 
-        subprocess.run("./hijack.sh", stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-  
+        # XXX this route needs to be added so that SCION works inside the AS, due to forwarding
+        # we do this before the hijack
+        victim_container.exec_run(f"ip route add 10.{victim_asn}.0.0/25 dev net0 metric 10")
+        victim_container.exec_run(f"ip route add 10.{victim_asn}.0.128/25 dev net0 metric 10")
+
+        # save config, add hijack and execute
+        attacker_container.exec_run(" [ ! -e /etc/bird/bird.bak ] && cp /etc/bird/bird.conf /etc/bird/bird.bak")
+        subprocess.run(f"./hijack.sh {victim_asn}", stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         attacker_container.exec_run("birdc configure")
 
     except KeyboardInterrupt:
