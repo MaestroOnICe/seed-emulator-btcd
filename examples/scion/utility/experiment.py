@@ -8,7 +8,7 @@ command_measure = "nohup /shared/measure &"
 #command_hijack = "./home/justus/seed-emulator/examples/scion/S16-small-btcd/hijack.sh"
 
 def measureDataPoints():      
-    measuring_node = ["as130h-node_130_100-10.130.0.100", "as101h-node_101_100-10.101.0.200"]
+    measuring_node = ["as125h-node_125_100-10.125.0.100", "as176h-node_176_100-10.176.0.100"]
     try:
         whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
         client: docker.DockerClient = docker.from_env()

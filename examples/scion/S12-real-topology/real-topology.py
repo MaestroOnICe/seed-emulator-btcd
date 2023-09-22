@@ -671,13 +671,14 @@ path_checker.deploy()
 experiment.measureDataPoints()
 
 print("Sleeping for 120 seconds until hijack")
-time.sleep(10)
+time.sleep(120)
 
 print("Hijacking AS, sleeping for 5 minutes")
-experiment.hijackAS(100, 130)
+# attacker, victim
+experiment.hijackAS(139, 125)
 time.sleep(300)
 
-experiment.endHijack(100)
+experiment.endHijack(139)
 print("Hijack ended, sleep for another 120 seconds")
 time.sleep(120)
 
