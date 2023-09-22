@@ -512,10 +512,6 @@ cross_connector.XConnect(151, 162, "core")
 cross_connector.XConnect(150, 162, "core")
 
 
-
-
-
-
 ###############################################################################
 # Rendering
 ixp_connector.addScionIXPConnections()

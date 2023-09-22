@@ -29,7 +29,6 @@ project-words.txt
 examples/scion/*/logs
 examples/scion/*/scripts
 examples/scion/*/binary
-examples/scion/*/bin
 examples/scion/*/scion
 examples/scion/*/bgp
 examples/scion/old/*
