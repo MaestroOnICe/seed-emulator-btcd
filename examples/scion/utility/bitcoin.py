@@ -100,7 +100,7 @@ class btcd:
         host.importFile(self.__wd+'/configs/node_scion.conf', '/root/.btcd/btcd.conf')
 
         # on start up wait 10 seconds afterwards start the node
-        host.appendStartCommand(f'btcd --configfile /root/.btcd/btcd.conf --listen {isd}-{asn},10.{asn}.0.50 --listen 0.0.0.0:8333', True)
+        host.appendStartCommand(f'btcd --configfile /root/.btcd/btcd.conf --listen {isd}-{asn},10.{asn}.0.50:8666 --listen 0.0.0.0:8333', True)
 
 
 ###############################################################################

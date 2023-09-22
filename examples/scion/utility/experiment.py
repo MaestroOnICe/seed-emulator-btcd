@@ -5,6 +5,7 @@ import docker
 import subprocess
 
 command_measure = "nohup /shared/measure &"
+#command_hijack = "./home/justus/seed-emulator/examples/scion/S16-small-btcd/hijack.sh"
 
 def measureDataPoints():      
     measuring_node = ["as130h-node_130_100-10.130.0.100", "as101h-node_101_100-10.101.0.200"]
@@ -48,7 +49,7 @@ def hijackAS(attacker_asn: int, victim_asn: int):
         #attacker_container.exec_run("[! -e /etc/bird/bird.bak] && cp /etc/bird/bird.conf /etc/bird/bird.bak")
         attacker_container.exec_run("cp /etc/bird/bird.conf /etc/bird/bird.bak")
 
-        subprocess.run("sh ./hijack.sh")
+        subprocess.run([f"echo $(./hijack.sh {str(victim_asn)} {str(attacker_asn)})"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
         attacker_container.exec_run("birdc configure")
 
     except KeyboardInterrupt:
