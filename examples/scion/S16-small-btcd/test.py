@@ -28,7 +28,7 @@ path_checker = utils.PathChecker()
 cross_connector = utils.CrossConnector(base, scion_isd, ebgp, scion, path_checker)
 ixp_connector = utils.IXPConnector(base, scion_isd, ebgp, scion, path_checker)
 maker = utils.AutonomousSystemMaker(base, scion_isd)
-btcd = bitcoin.btcd()
+btcd = bitcoin.btcd(scion_isd)
 
 
 as100 = maker.createTier1AS(1, 100)
@@ -105,10 +105,10 @@ path_checker.deploy()
 experiment.measureDataPoints()
 
 print("Sleeping for 120 seconds until hijack")
-time.sleep(120)
+time.sleep(10)
 
 print("Hijacking AS, sleeping for 5 minutes")
-experiment.hijackAS(100)
+experiment.hijackAS(100, 130)
 time.sleep(300)
 
 experiment.endHijack(100)

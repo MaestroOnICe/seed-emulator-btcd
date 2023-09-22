@@ -45,8 +45,10 @@ def hijackAS(attacker_asn: int, victim_asn: int):
         victim_container.exec_run(f"ip route add 10.{victim_asn}.0.128/25 dev net0 metric 10")
 
         # save config, add hijack and execute
-        attacker_container.exec_run(" [ ! -e /etc/bird/bird.bak ] && cp /etc/bird/bird.conf /etc/bird/bird.bak")
-        subprocess.run(f"./hijack.sh {victim_asn}", stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        #attacker_container.exec_run("[! -e /etc/bird/bird.bak] && cp /etc/bird/bird.conf /etc/bird/bird.bak")
+        attacker_container.exec_run("cp /etc/bird/bird.conf /etc/bird/bird.bak")
+
+        subprocess.run("sh ./hijack.sh")
         attacker_container.exec_run("birdc configure")
 
     except KeyboardInterrupt:

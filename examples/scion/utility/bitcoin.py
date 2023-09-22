@@ -1,15 +1,17 @@
 import os
 import shutil
 from seedemu.core import Node, ScionAutonomousSystem
+from seedemu.layers import ScionIsd
 import re
 
 ###############################################################################
 # btcd
 class btcd:
-    def __init__(self):
+    def __init__(self, scion_isd: ScionIsd):
         self.__wd = os.getcwd()
         self.__nodeNames = {}
         self.log_path = self.creatLoggingDirectory()
+        self.scion_isd = scion_isd
 
     # Nodes begin at .100 and the ascend per ASN
     def createNode(self, as_: ScionAutonomousSystem):
@@ -30,22 +32,21 @@ class btcd:
         host = as_.createHost(f'node_{asn}_{node_number}').joinNetwork("net0", address=f"10.{asn}.0.200")
         self.__addBootstrapNode(host)
 
+    # Bootstrap nodes are always .50 ip addresses
+    def createScionNode(self, as_: ScionAutonomousSystem):
+        asn = as_.getAsn()
 
-    def createNodeName(self, asn: int) -> int:
-        if asn not in self.__nodeNames:
-            self.__nodeNames[asn] = [int]
-            self.__nodeNames[asn].append(99)
-            
-        # get the list of already created nodes in the AS, create the next with ascending number and append
-        asn_node_list = self.__nodeNames[asn]
-        newest_node_in_as = asn_node_list[len(asn_node_list)-1]
+        as_isd_ = self.scion_isd.getAsIsds(asn)[0]
+        as_isd = as_isd_[0]
 
-        node_number = newest_node_in_as + 1
-        self.__nodeNames[asn].append(node_number)
-        return node_number
+        # creates the host in the seed emulator
+        host = as_.createHost(f'node_{asn}_{50}').joinNetwork("net0", address=f"10.{asn}.0.50")
+        self.__addScionNode(host, as_isd, asn)
+
 
 
 ###############################################################################
+    
     # adds IP version of btcd to the host  
     def __addNode(self, host: Node):
         # add logging folder
@@ -82,6 +83,27 @@ class btcd:
         # on start up wait 10 seconds afterwards start the node
         host.appendStartCommand('btcd --configfile /root/.btcd/btcd.conf', True)
 
+    # adds IP version of btcd to the host with Bootstrap configuration
+    def __addScionNode(self, host: Node, isd: int, asn: int):
+        # add logging folder
+        name = host.getName()
+
+        log_path = self.createNodeDirectory(name)
+        host.addSharedFolder('/root/.btcd/logs/mainnet', log_path)
+        
+        # add binary and config from the shared folder, make it executable
+        host.addSharedFolder('/shared/',self.__wd+'/bin/')
+        host.appendStartCommand("cp /shared/btcd_scion /bin/btcd", False)
+        host.appendStartCommand("chmod +x /bin/btcd", False)
+
+        # import the config file for a default IP client
+        host.importFile(self.__wd+'/configs/node_scion.conf', '/root/.btcd/btcd.conf')
+
+        # on start up wait 10 seconds afterwards start the node
+        host.appendStartCommand(f'btcd --configfile /root/.btcd/btcd.conf --listen {isd}-{asn},10.{asn}.0.50 --listen 0.0.0.0:8333', True)
+
+
+###############################################################################
     def creatLoggingDirectory(self) -> str:
         base_path = '/home/justus/seed-emulator/examples/scion/data'
         
@@ -112,6 +134,19 @@ class btcd:
             shutil.rmtree(full_path)
         os.mkdir(full_path)
         return full_path
+    
+    def createNodeName(self, asn: int) -> int:
+        if asn not in self.__nodeNames:
+            self.__nodeNames[asn] = [int]
+            self.__nodeNames[asn].append(99)
+            
+        # get the list of already created nodes in the AS, create the next with ascending number and append
+        asn_node_list = self.__nodeNames[asn]
+        newest_node_in_as = asn_node_list[len(asn_node_list)-1]
+
+        node_number = newest_node_in_as + 1
+        self.__nodeNames[asn].append(node_number)
+        return node_number
 
 
         
