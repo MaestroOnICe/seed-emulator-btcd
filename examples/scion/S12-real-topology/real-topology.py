@@ -2,10 +2,12 @@
 
 from seedemu.compiler import Docker, Graphviz
 from seedemu.core import Emulator
-from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ospf, Ebgp, PeerRelationship 
+from seedemu.layers import ScionBase, ScionRouting, ScionIsd, Scion, Ebgp
 from seedemu.layers.Scion import LinkType as ScLinkType
 import examples.scion.utility.utils as utils
-
+import examples.scion.utility.bitcoin as bitcoin
+import examples.scion.utility.experiment as experiment
+import time
 
 ###############################################################################
 # Numbering:
@@ -98,7 +100,7 @@ path_checker = utils.PathChecker()
 cross_connector = utils.CrossConnector(base, scion_isd, ebgp, scion, path_checker)
 ixp_connector = utils.IXPConnector(base, scion_isd, ebgp, scion, path_checker)
 maker = utils.AutonomousSystemMaker(base, scion_isd)
-
+btcd = bitcoin.btcd(scion_isd)
 
 ###############################################################################
 # Europe ISD 1 (100 to 122)
@@ -512,6 +514,137 @@ cross_connector.XConnect(151, 162, "core")
 cross_connector.XConnect(150, 162, "core")
 
 
+
+###############################################################################
+# Bitcoin node Placement
+# 48 Nodes in total
+# 24 in Stub ASes and 24 in the Cloud
+
+# Cloud EU
+btcd.createNode(ovh_cloud) #123-100
+btcd.createNode(ovh_cloud) #123-101
+btcd.createNode(ovh_cloud) #123-102
+btcd.createNode(ovh_cloud) #123-103
+
+btcd.createNode(contabo_cloud) #124-100
+btcd.createNode(contabo_cloud) #124-101
+btcd.createNode(contabo_cloud) #124-102
+
+btcd.createNode(hetzner_cloud) #125-100
+btcd.createNode(hetzner_cloud) #125-101
+btcd.createNode(hetzner_cloud) #125-102
+btcd.createNode(hetzner_cloud) #125-103
+btcd.createNode(hetzner_cloud) #125-104
+
+# Cloud Asia
+btcd.createNode(alibab_cloud) # 139-100
+
+# Cloud NA
+btcd.createNode(aws_cloud) # 176-100
+btcd.createNode(aws_cloud) # 176-101
+btcd.createNode(aws_cloud) # 176-102
+
+btcd.createNode(google_cloud) # 177-100
+btcd.createNode(google_cloud) # 177-101
+btcd.createNode(google_cloud) # 177-102
+
+btcd.createNode(digital_ocean_cloud) # 178-100
+btcd.createNode(digital_ocean_cloud) # 178-101
+
+
+# In the stubs, every seconds AS has a node
+# Stub EU
+counter = 1
+for asn in stub_groupA_isd1:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+for asn in stub_groupB_isd1:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+# Stub Asia
+for asn in stub_groupA_isd3:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+for asn in stub_groupB_isd3:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+# Stub Africa
+for asn in stub_groupA_isd5:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+# Stub South America
+for asn in stub_groupA_isd6:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+for asn in stub_groupB_isd6:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+# Stub North America
+for asn in stub_groupA_isd7:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+for asn in stub_groupB_isd7:
+    if counter % 2 == 0:
+        as_ = base.getAutonomousSystem(asn)
+        btcd.createNode(as_)
+        counter += 1
+    else:
+        counter += 1
+
+
+# Bootstrap Nodes
+# EU Node 10.124.0.200
+btcd.createBootstrap(contabo_cloud)
+
+# Asia Node 10.139.0.200
+btcd.createBootstrap(alibab_cloud)
+
+# NA Node 10.177.0.200
+btcd.createBootstrap(google_cloud)
+
+
+
+
 ###############################################################################
 # Rendering
 ixp_connector.addScionIXPConnections()
@@ -530,4 +663,22 @@ emu.compile(Graphviz(), "./output/graphs", override=True)
 
 ###############################################################################
 # Deploy and check all paths
-path_checker.deployAndCheck()
+path_checker.deploy()
+
+
+###############################################################################
+# Experiment
+experiment.measureDataPoints()
+
+print("Sleeping for 120 seconds until hijack")
+time.sleep(10)
+
+print("Hijacking AS, sleeping for 5 minutes")
+experiment.hijackAS(100, 130)
+time.sleep(300)
+
+experiment.endHijack(100)
+print("Hijack ended, sleep for another 120 seconds")
+time.sleep(120)
+
+experiment.down()
