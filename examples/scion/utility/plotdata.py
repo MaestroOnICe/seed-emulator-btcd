@@ -43,6 +43,9 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     # Create a DataFrame
     df_2 = pd.DataFrame(data_2)
 
+    df_1 = df_1.iloc[1:]
+    df_2 = df_2.iloc[2:]
+
     # Plot blockCount over time
     sns.set_theme()
     sns.lineplot(x="timeElapsed", y="blockCount", data=df_1, label='Blockchain 1', linewidth=2, marker='o', markersize=6, alpha=1)
@@ -55,7 +58,7 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     plt.tight_layout()  # Ensure the plot fits nicely in the figure
 
     fig_path = saveFigurePath(log_number)
-    plt.savefig(fig_path)
+    plt.savefig(fig_path,dpi=300)
     plt.clf()
 
 

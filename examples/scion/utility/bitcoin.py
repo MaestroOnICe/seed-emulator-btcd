@@ -93,7 +93,7 @@ class btcd:
         
         # add binary and config from the shared folder, make it executable
         host.addSharedFolder('/shared/',self.__wd+'/bin/')
-        host.appendStartCommand("cp /shared/btcd_scion /bin/btcd", False)
+        host.appendStartCommand("cp /shared/btcd-scion /bin/btcd", False)
         host.appendStartCommand("chmod +x /bin/btcd", False)
 
         # import the config file for a default IP client
