@@ -134,12 +134,16 @@ def moveLogs():
     # Sort the log folders
     log_folders.sort(key=lambda x: int(x.split("_")[1]))
 
+
     if not log_folders:
         print("No log folders found in data directory.")
         return
+    
+    print(log_folders)
 
     # Get the newest log folder
     newest_log_folder = os.path.join(data_dir, log_folders[-1])
+    print("Newest log folder", newest_log_folder)
 
     # Prepare the destination folder name in old_logs
     destination_folder_name = log_folders[-1]
@@ -153,6 +157,7 @@ def moveLogs():
         index += 1
 
     # Copy the newest log folder to old_logs_dir
+    print(f"copying {newest_log_folder} to {destination_path}")
     shutil.copytree(newest_log_folder, destination_path)
 
     # Clear the contents of the newest log folder
