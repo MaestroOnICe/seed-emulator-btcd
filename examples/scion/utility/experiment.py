@@ -3,6 +3,8 @@ import python_on_whales
 import subprocess
 import docker
 import subprocess
+import os
+import shutil
 
 # command_measure = "nohup /shared/measure &"
 
@@ -85,3 +87,68 @@ def endHijack(attacker_asn: int):
 def down():
     whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
     whales.compose.down()
+
+def deploy():
+    try:
+        whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
+        whales.compose.build()
+        whales.compose.up(detach=True)    
+
+    except KeyboardInterrupt:
+        print("Keyboard interrupt received. Cleaning up...")
+        whales.compose.down()
+    except Exception as e:
+        print(e)
+        whales.compose.down()
+
+def up():
+    try:
+        whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
+        whales.compose.up(detach=True)    
+
+    except KeyboardInterrupt:
+        print("Keyboard interrupt received. Cleaning up...")
+        whales.compose.down()
+    except Exception as e:
+        print(e)
+        whales.compose.down()
+
+def moveLogs():
+    data_dir = "/home/justus/seed-emulator/examples/scion/data"
+    old_logs = "/home/justus/seed-emulator/examples/scion/old_logs"
+    # Get a list of all log folders in data_dir
+    log_folders = [f for f in os.listdir(data_dir) if f.startswith("logs_") and os.path.isdir(os.path.join(data_dir, f))]
+
+    # Sort the log folders
+    log_folders.sort(key=lambda x: int(x.split("_")[1]))
+
+    if not log_folders:
+        print("No log folders found in data directory.")
+        return
+
+    # Get the newest log folder
+    newest_log_folder = os.path.join(data_dir, log_folders[-1])
+
+    # Prepare the destination folder name in old_logs
+    destination_folder_name = log_folders[-1]
+    destination_path = os.path.join(old_logs, destination_folder_name)
+
+    # Handle the case where the destination folder already exists
+    index = 1
+    while os.path.exists(destination_path):
+        destination_folder_name = f"{log_folders[-1]}_{index}"
+        destination_path = os.path.join(old_logs, destination_folder_name)
+        index += 1
+
+    # Copy the newest log folder to old_logs_dir
+    shutil.copytree(newest_log_folder, destination_path)
+
+    # Clear the contents of the newest log folder
+    node_dirs = os.listdir(newest_log_folder)
+    for dir in node_dirs:
+        for item in os.listdir(os.path.join(newest_log_folder, dir)):
+            item_path = os.path.join(newest_log_folder, dir, item)
+
+            if os.path.isfile(item_path):
+                os.remove(item_path)
+        
