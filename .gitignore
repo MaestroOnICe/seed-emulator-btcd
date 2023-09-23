@@ -32,6 +32,6 @@ examples/scion/*/binary
 examples/scion/*/scion
 examples/scion/*/bgp
 examples/scion/old/*
-examples/scion/data/*
+
 examples/scion/plots/*
 examples/scion/old_logs/*
