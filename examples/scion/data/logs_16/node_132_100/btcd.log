@@ -1,0 +1,112 @@
+2023-09-22 22:05:21.852 [INF] BTCD: Version 0.23.3-beta
+2023-09-22 22:05:22.226 [INF] BTCD: Loading block database from '/root/.btcd/data/mainnet/blocks_ffldb'
+2023-09-22 22:05:28.124 [INF] BTCD: Block database loaded
+2023-09-22 22:05:28.127 [INF] INDX: Committed filter index is enabled
+2023-09-22 22:05:28.129 [DBG] INDX: Current committed filter index tip (height -1, hash 0000000000000000000000000000000000000000000000000000000000000000)
+2023-09-22 22:05:28.129 [INF] INDX: Catching up indexes from height -1 to 0
+2023-09-22 22:05:28.129 [INF] INDX: Indexes caught up to height 0
+2023-09-22 22:05:28.129 [INF] CHAN: Chain state (height 0, hash 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, totaltx 1, work 2)
+2023-09-22 22:05:28.129 [INF] RPCS: Generating TLS certificates...
+2023-09-22 22:05:28.137 [INF] RPCS: Done generating TLS certificates
+2023-09-22 22:05:28.138 [WRN] RPCS: Can't listen on [::1]:8334: listen tcp6 [::1]:8334: bind: cannot assign requested address
+2023-09-22 22:05:28.138 [INF] MINR: CPU miner started
+2023-09-22 22:05:28.138 [INF] AMGR: Loaded 0 addresses from file '/root/.btcd/data/mainnet/peers.json'
+2023-09-22 22:05:28.138 [INF] RPCS: RPC server listening on 127.0.0.1:8334
+2023-09-22 22:05:28.138 [INF] CMGR: Server listening on 0.0.0.0:8333
+2023-09-22 22:05:28.138 [INF] CMGR: Server listening on [::]:8333
+2023-09-22 22:05:28.138 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:05:28.138 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:05:28.138 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:05:31.192 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 5s
+2023-09-22 22:05:31.192 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 5s
+2023-09-22 22:05:31.192 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 5s
+2023-09-22 22:05:36.196 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:05:36.197 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:05:36.197 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:05:39.252 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 10s
+2023-09-22 22:05:39.252 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 10s
+2023-09-22 22:05:39.252 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 10s
+2023-09-22 22:05:49.253 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:05:49.253 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:05:49.253 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:05:49.253 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 15s
+2023-09-22 22:05:49.253 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 15s
+2023-09-22 22:05:52.281 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 15s
+2023-09-22 22:06:04.256 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:06:04.256 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:06:04.256 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 20s
+2023-09-22 22:06:04.256 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 20s
+2023-09-22 22:06:07.282 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:06:07.282 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 20s
+2023-09-22 22:06:24.256 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:06:24.256 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 25s
+2023-09-22 22:06:24.256 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:06:24.256 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 25s
+2023-09-22 22:06:27.284 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:06:27.284 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 25s
+2023-09-22 22:06:49.259 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:06:49.259 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 30s
+2023-09-22 22:06:49.259 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:06:49.259 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 30s
+2023-09-22 22:06:52.285 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:06:52.285 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 30s
+2023-09-22 22:07:19.260 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:07:19.260 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 35s
+2023-09-22 22:07:19.260 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:07:19.260 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 35s
+2023-09-22 22:07:22.286 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:07:22.286 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 35s
+2023-09-22 22:07:54.260 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:07:54.261 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 40s
+2023-09-22 22:07:54.261 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:07:54.261 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 40s
+2023-09-22 22:07:57.287 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:07:57.287 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 40s
+2023-09-22 22:08:34.261 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:08:34.261 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 45s
+2023-09-22 22:08:34.261 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:08:34.262 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 45s
+2023-09-22 22:08:37.287 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:08:37.287 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 45s
+2023-09-22 22:09:19.263 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:09:19.264 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 50s
+2023-09-22 22:09:19.264 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:09:19.264 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 50s
+2023-09-22 22:09:22.288 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:09:22.288 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 50s
+2023-09-22 22:10:09.264 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:10:09.264 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 55s
+2023-09-22 22:10:09.264 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:10:09.265 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 55s
+2023-09-22 22:10:12.289 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:10:12.289 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 55s
+2023-09-22 22:11:04.265 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:11:04.265 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 1m0s
+2023-09-22 22:11:04.265 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:11:04.265 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 1m0s
+2023-09-22 22:11:07.290 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:11:07.291 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 1m0s
+2023-09-22 22:12:04.267 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:12:04.267 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 1m5s
+2023-09-22 22:12:04.267 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:12:04.267 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 1m5s
+2023-09-22 22:12:07.292 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:12:07.292 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 1m5s
+2023-09-22 22:13:09.268 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:13:09.268 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:13:12.292 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:13:25.556 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 1m10s
+2023-09-22 22:13:25.556 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 1m10s
+2023-09-22 22:13:27.604 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 1m10s
+2023-09-22 22:14:35.557 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:14:35.557 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:14:35.557 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 1m15s
+2023-09-22 22:14:35.557 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 1m15s
+2023-09-22 22:14:37.604 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:14:37.611 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 1m15s
+2023-09-22 22:15:50.557 [DBG] CMGR: Attempting to connect to 10.177.0.200:8333 (reqid 1)
+2023-09-22 22:15:50.558 [DBG] CMGR: Attempting to connect to 10.124.0.200:8333 (reqid 2)
+2023-09-22 22:15:50.558 [DBG] CMGR: Retrying connection to 10.124.0.200:8333 (reqid 2) in 1m20s
+2023-09-22 22:15:50.558 [DBG] CMGR: Retrying connection to 10.177.0.200:8333 (reqid 1) in 1m20s
+2023-09-22 22:15:52.612 [DBG] CMGR: Attempting to connect to 10.139.0.200:8333 (reqid 3)
+2023-09-22 22:15:52.612 [DBG] CMGR: Retrying connection to 10.139.0.200:8333 (reqid 3) in 1m20s

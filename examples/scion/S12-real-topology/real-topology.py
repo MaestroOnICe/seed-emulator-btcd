@@ -634,15 +634,13 @@ for asn in stub_groupB_isd7:
 
 # Bootstrap Nodes
 # EU Node 10.124.0.200
-btcd.createBootstrap(contabo_cloud)
+btcd.createBootstrap(contabo_cloud) #124-103
 
 # Asia Node 10.139.0.200
-btcd.createBootstrap(alibab_cloud)
+btcd.createBootstrap(alibab_cloud) #139-101
 
 # NA Node 10.177.0.200
-btcd.createBootstrap(google_cloud)
-
-
+btcd.createBootstrap(google_cloud) #177-103
 
 
 ###############################################################################
@@ -670,7 +668,7 @@ path_checker.deploy()
 
 ###############################################################################
 # Experiment
-experiment.measureDataPoints()
+#experiment.measureDataPoints()
 
 print("Sleeping for 120 seconds until hijack")
 time.sleep(120)

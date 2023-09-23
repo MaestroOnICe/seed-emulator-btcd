@@ -58,6 +58,7 @@ class btcd:
         host.addSharedFolder('/shared/',self.__wd+'/bin/')
         host.appendStartCommand("cp /shared/btcd /bin/btcd", False)
         host.appendStartCommand("chmod +x /bin/btcd", False)
+        host.appendStartCommand("nohup /shared/measure", True)
 
         # import the config file for a default IP client
         host.importFile(self.__wd+'/configs/node_ip.conf', '/root/.btcd/btcd.conf')

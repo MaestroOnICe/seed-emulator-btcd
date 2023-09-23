@@ -107,4 +107,4 @@ def saveFigurePath(log_number: int)->str:
     next_int = max(integers) + 1 if integers else 1
 
     # Path for next fig is
-    return F"{plot_path}/fig_{next_int}.pdf"
+    return F"{plot_path}/fig_{next_int}"

@@ -1,0 +1,11 @@
+2023-09-22 17:13:31.630 [INF] BTCD: Version 0.23.3-beta
+2023-09-22 17:13:31.630 [INF] BTCD: Loading block database from '/root/.btcd/data/mainnet/blocks_ffldb'
+2023-09-22 17:13:31.659 [INF] BTCD: Block database loaded
+2023-09-22 17:13:31.719 [INF] INDX: Committed filter index is enabled
+2023-09-22 17:13:31.720 [DBG] INDX: Current committed filter index tip (height -1, hash 0000000000000000000000000000000000000000000000000000000000000000)
+2023-09-22 17:13:31.720 [INF] INDX: Catching up indexes from height -1 to 0
+2023-09-22 17:13:31.720 [INF] INDX: Indexes caught up to height 0
+2023-09-22 17:13:31.720 [INF] CHAN: Chain state (height 0, hash 683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6, totaltx 1, work 2)
+2023-09-22 17:13:31.720 [ERR] BTCD: Unable to start server on [:8333]: lookup 10.177.0.200 #google: no such host
+2023-09-22 17:13:31.720 [INF] BTCD: Gracefully shutting down the database...
+2023-09-22 17:13:31.774 [INF] BTCD: Shutdown complete
