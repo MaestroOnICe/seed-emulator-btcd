@@ -43,7 +43,7 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     # Create a DataFrame
     df_2 = pd.DataFrame(data_2)
 
-    df_1 = df_1.iloc[1:]
+    df_1 = df_1.iloc[2:]
     df_2 = df_2.iloc[2:]
 
     # Plot blockCount over time
