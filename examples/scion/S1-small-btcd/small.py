@@ -84,23 +84,25 @@ for asn in stub_101:
 for asn in stub_102:
     cross_connector.XConnect(102, asn, "provider")
 
-# if sys.argv[1] == str(1):
-# Rendering 
-###############################################################################
-ixp_connector.addScionIXPConnections()
-emu.addLayer(base)
-emu.addLayer(routing)
-emu.addLayer(scion_isd)
-emu.addLayer(scion)
-emu.addLayer(ebgp)
+if sys.argv[1] == str(1):
+    # Rendering 
+    ###############################################################################
+    ixp_connector.addScionIXPConnections()
+    emu.addLayer(base)
+    emu.addLayer(routing)
+    emu.addLayer(scion_isd)
+    emu.addLayer(scion)
+    emu.addLayer(ebgp)
 
-emu.render()
+    emu.render()
 
-# Compilation
-###############################################################################
-emu.compile(Docker(), './output', override=True)
-emu.compile(Graphviz(), "./output/graphs", override=True)
-experiment.deploy()
+    # Compilation
+    ###############################################################################
+    emu.compile(Docker(), './output', override=True)
+    emu.compile(Graphviz(), "./output/graphs", override=True)
+    experiment.build()
+
+experiment.up()
 
 print("Sleeping for 120 seconds until hijack")
 time.sleep(120)

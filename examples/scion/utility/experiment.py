@@ -113,6 +113,18 @@ def up():
         print(e)
         whales.compose.down()
 
+def build():
+    try:
+        whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
+        whales.compose.build()
+        
+    except KeyboardInterrupt:
+        print("Keyboard interrupt received. Cleaning up...")
+        whales.compose.down()
+    except Exception as e:
+        print(e)
+        whales.compose.down()
+
 def moveLogs():
     data_dir = "/home/justus/seed-emulator/examples/scion/data"
     old_logs = "/home/justus/seed-emulator/examples/scion/old_logs"
