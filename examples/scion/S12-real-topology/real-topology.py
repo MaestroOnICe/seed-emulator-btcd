@@ -520,6 +520,16 @@ cross_connector.XConnect(150, 162, "core")
 # 48 Nodes in total
 # 24 in Stub ASes and 24 in the Cloud
 
+# Bootstrap Nodes
+# EU Node 10.124.0.200
+btcd.createBootstrap(contabo_cloud) #124-103
+
+# Asia Node 10.139.0.200
+btcd.createBootstrap(alibab_cloud) #139-101
+
+# NA Node 10.177.0.200
+btcd.createBootstrap(google_cloud) #177-103
+
 # Cloud EU
 btcd.createNode(ovh_cloud) #123-100
 btcd.createNode(ovh_cloud) #123-101
@@ -630,17 +640,6 @@ for asn in stub_groupB_isd7:
         counter += 1
     else:
         counter += 1
-
-
-# Bootstrap Nodes
-# EU Node 10.124.0.200
-btcd.createBootstrap(contabo_cloud) #124-103
-
-# Asia Node 10.139.0.200
-btcd.createBootstrap(alibab_cloud) #139-101
-
-# NA Node 10.177.0.200
-btcd.createBootstrap(google_cloud) #177-103
 
 
 ###############################################################################
