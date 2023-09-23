@@ -22,7 +22,6 @@ class btcd:
         host = as_.createHost(f'node_{asn}_{node_number}').joinNetwork("net0", address=f"10.{asn}.0.{node_number}")
         self.__addNode(host)
     
-
     # Bootstrap nodes are always .200 ip addresses
     def createBootstrap(self, as_: ScionAutonomousSystem):
         asn = as_.getAsn()
@@ -44,7 +43,6 @@ class btcd:
         self.__addScionNode(host, as_isd, asn)
 
 
-
 ###############################################################################
     
     # adds IP version of btcd to the host  
@@ -54,17 +52,25 @@ class btcd:
         log_path = self.createNodeDirectory(name)
         host.addSharedFolder('/root/.btcd/logs/mainnet', log_path)
 
-        # add binary and config from the shared folder, make it executable
+        # add shared folder
         host.addSharedFolder('/shared/',self.__wd+'/bin/')
+
+        # copy measuring binary, make it executable
+        host.appendStartCommand("cp /shared/measure /bin/measure", False)
+        host.appendStartCommand("chmod +x /bin/measure", False)
+
+        # add btcd binary from the shared folder, make it executable
         host.appendStartCommand("cp /shared/btcd /bin/btcd", False)
         host.appendStartCommand("chmod +x /bin/btcd", False)
-        host.appendStartCommand("nohup /shared/measure", True)
 
         # import the config file for a default IP client
         host.importFile(self.__wd+'/configs/node_ip.conf', '/root/.btcd/btcd.conf')
 
-        # on start up wait 15 seconds afterwards start the node
+        # start the node
         host.appendStartCommand('btcd --configfile /root/.btcd/btcd.conf', True)
+
+        # start the measuring tool
+        host.appendStartCommand('measure', True)
 
     # adds IP version of btcd to the host with Bootstrap configuration
     def __addBootstrapNode(self, host: Node):
@@ -73,35 +79,52 @@ class btcd:
         log_path = self.createNodeDirectory(name)
         host.addSharedFolder('/root/.btcd/logs/mainnet', log_path)
         
-        # add binary and config from the shared folder, make it executable
+        # add shared folder
         host.addSharedFolder('/shared/',self.__wd+'/bin/')
+
+        # copy measuring binary, make it executable
+        host.appendStartCommand("cp /shared/measure /bin/measure", False)
+        host.appendStartCommand("chmod +x /bin/measure", False)
+
+        # add btcd binary from the shared folder, make it executable
         host.appendStartCommand("cp /shared/btcd /bin/btcd", False)
         host.appendStartCommand("chmod +x /bin/btcd", False)
 
         # import the config file for a default IP client
         host.importFile(self.__wd+'/configs/bootstrap_ip.conf', '/root/.btcd/btcd.conf')
 
-        # on start up wait 10 seconds afterwards start the node
+        # start the node
         host.appendStartCommand('btcd --configfile /root/.btcd/btcd.conf', True)
+        
+        # start the measuring tool
+        host.appendStartCommand('measure', True)
 
     # adds IP version of btcd to the host with Bootstrap configuration
     def __addScionNode(self, host: Node, isd: int, asn: int):
         # add logging folder
         name = host.getName()
-
         log_path = self.createNodeDirectory(name)
         host.addSharedFolder('/root/.btcd/logs/mainnet', log_path)
         
-        # add binary and config from the shared folder, make it executable
+        # add shared folder
         host.addSharedFolder('/shared/',self.__wd+'/bin/')
+
+        # copy measuring binary, make it executable
+        host.appendStartCommand("cp /shared/measure /bin/measure", False)
+        host.appendStartCommand("chmod +x /bin/measure", False)
+
+        # add binary from the shared folder, make it executable
         host.appendStartCommand("cp /shared/btcd-scion /bin/btcd", False)
         host.appendStartCommand("chmod +x /bin/btcd", False)
 
         # import the config file for a default IP client
         host.importFile(self.__wd+'/configs/node_scion.conf', '/root/.btcd/btcd.conf')
 
-        # on start up wait 10 seconds afterwards start the node
+        # start the node
         host.appendStartCommand(f'btcd --configfile /root/.btcd/btcd.conf --listen {isd}-{asn},10.{asn}.0.50:8666 --listen 0.0.0.0:8333', True)
+
+        # start the measuring tool
+        host.appendStartCommand('measure', True)
 
 
 ###############################################################################
@@ -127,7 +150,6 @@ class btcd:
             shutil.rmtree(log_path)
         os.mkdir(log_path)
         return log_path
-
 
     def createNodeDirectory(self, name: str) -> str:
         full_path = os.path.join(self.log_path, name)

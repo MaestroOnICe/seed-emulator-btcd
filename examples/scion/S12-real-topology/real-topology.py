@@ -660,14 +660,10 @@ emu.compile(Graphviz(), "./output/graphs", override=True)
 
 ###############################################################################
 # Deploy and check all paths
-#path_checker.deploy()
-print("lets go")
 path_checker.deploy()
-
 
 ###############################################################################
 # Experiment
-#experiment.measureDataPoints()
 
 print("Sleeping for 120 seconds until hijack")
 time.sleep(120)

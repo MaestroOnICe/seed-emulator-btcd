@@ -4,29 +4,28 @@ import subprocess
 import docker
 import subprocess
 
-command_measure = "nohup /shared/measure &"
-#command_hijack = "./home/justus/seed-emulator/examples/scion/S16-small-btcd/hijack.sh"
+# command_measure = "nohup /shared/measure &"
 
-def measureDataPoints():      
-    measuring_node = ["as125h-node_125_100-10.125.0.100", "as176h-node_176_100-10.176.0.100","as124h-node_124_100-10.124.0.100", "as139h-node_139_100-10.139.0.100"]
-    try:
-        whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
-        client: docker.DockerClient = docker.from_env()
-        ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
+# def measureDataPoints():      
+#     measuring_node = ["as125h-node_125_100-10.125.0.100", "as176h-node_176_100-10.176.0.100","as124h-node_124_100-10.124.0.100", "as139h-node_139_100-10.139.0.100"]
+#     try:
+#         whales = python_on_whales.DockerClient(compose_files=["./output/docker-compose.yml"])
+#         client: docker.DockerClient = docker.from_env()
+#         ctrs = {ctr.name: client.containers.get(ctr.id) for ctr in whales.compose.ps()}
 
-        for node in measuring_node:
-            container = ctrs[node]
-            container.exec_run(cmd = command_measure, detach = True)
+#         for node in measuring_node:
+#             container = ctrs[node]
+#             container.exec_run(cmd = command_measure, detach = True)
 
-    except KeyboardInterrupt:
-        print("Keyboard interrupt received. Cleaning up...")
-        whales.compose.down()
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing command in container: {e}")
-        whales.compose.down()
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        whales.compose.down()
+#     except KeyboardInterrupt:
+#         print("Keyboard interrupt received. Cleaning up...")
+#         whales.compose.down()
+#     except subprocess.CalledProcessError as e:
+#         print(f"Error executing command in container: {e}")
+#         whales.compose.down()
+#     except Exception as e:
+#         print(f"An unexpected error occurred: {e}")
+#         whales.compose.down()
 
 def hijackAS(attacker_asn: int, victim_asn: int):
     try:
