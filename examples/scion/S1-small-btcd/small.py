@@ -84,8 +84,8 @@ for asn in stub_101:
 for asn in stub_102:
     cross_connector.XConnect(102, asn, "provider")
 
-if sys.argv[1] == str(1):
-    # Rendering 
+if len(sys.argv) > 1 and sys.argv[1] == str(1):
+    # Rendering s
     ###############################################################################
     ixp_connector.addScionIXPConnections()
     emu.addLayer(base)
@@ -100,9 +100,13 @@ if sys.argv[1] == str(1):
     ###############################################################################
     emu.compile(Docker(), './output', override=True)
     emu.compile(Graphviz(), "./output/graphs", override=True)
-    experiment.build()
+    experiment.deploy()
 
-experiment.up()
+else:
+    experiment.moveLogs()
+    experiment.up()
+
+
 
 print("Sleeping for 120 seconds until hijack")
 time.sleep(120)

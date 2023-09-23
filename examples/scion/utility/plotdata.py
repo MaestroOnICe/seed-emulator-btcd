@@ -50,6 +50,11 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     sns.set_theme()
     sns.lineplot(x="timeElapsed", y="blockCount", data=df_1, label='Blockchain 1', linewidth=2, marker='o', markersize=6, alpha=1)
     sns.lineplot(x="timeElapsed", y="blockCount", data=df_2, label='Blockchain 2', linewidth=2, marker='s', markersize=6, alpha=0.7)
+
+    plt.axvline(x=120, color='red', linestyle='--', label='Hijack start')
+    plt.axvline(x=420, color='blue', linestyle='--', label='Hijack end')
+
+
     sns.despine(left=True, bottom=True)  # Remove top and right spines
     plt.legend(fontsize=12)  # Add a legend
     plt.xlabel('Time Elapsed (seconds)')
