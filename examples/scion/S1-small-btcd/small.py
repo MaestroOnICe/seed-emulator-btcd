@@ -24,9 +24,9 @@ ix20 = base.createInternetExchange(20)
 ix21 = base.createInternetExchange(21)
 
 
-#path_checker = utils.PathChecker()
-cross_connector = utils.CrossConnector(base, scion_isd, ebgp, scion)
-ixp_connector = utils.IXPConnector(base, scion_isd, ebgp, scion)
+path_checker = utils.PathChecker()
+cross_connector = utils.CrossConnector(base, scion_isd, ebgp, scion, path_checker)
+ixp_connector = utils.IXPConnector(base, scion_isd, ebgp, scion, path_checker)
 maker = utils.AutonomousSystemMaker(base, scion_isd)
 btcd = bitcoin.btcd(scion_isd)
 
@@ -84,8 +84,8 @@ for asn in stub_101:
 for asn in stub_102:
     cross_connector.XConnect(102, asn, "provider")
 
-
-if sys.argv[1] == 1:
+if sys.argv[1] == str(1):
+    print("building and upping")
     # Rendering 
     ###############################################################################
     ixp_connector.addScionIXPConnections()
@@ -104,6 +104,7 @@ if sys.argv[1] == 1:
     experiment.deploy()
 
 else:
+    print("upping")
     experiment.moveLogs()
     experiment.up()
 
