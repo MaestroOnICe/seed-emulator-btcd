@@ -15,14 +15,16 @@ def plotConnectionCount(file_path: str, log_number: int):
     # Create a DataFrame
     df = pd.DataFrame(data)
 
+    df["uniqueConCount"] = df["connectedPeers"].apply(countUniques)
+
     # Plot using Seaborn
     sns.set_theme()
-    sns.lineplot(x="timeElapsed", y="connectionCount", data=df, label='Data Series', linewidth=2)
+    sns.lineplot(x="timeElapsed", y="uniqueConCount", data=df, label='uniqueConCount', linewidth=2)
 
-    plt.axvline(x=120, color='red', linestyle='--', label='Hijack start')
-    plt.axvline(x=420, color='blue', linestyle='--', label='Hijack end')
+    plt.axvline(x=120, color='red', linestyle='--', label='Start')
+    plt.axvline(x=420, color='blue', linestyle='--', label='End')
 
-    plt.title("Connection Count Over Time")
+    plt.title(f"Connection Count Over Time")
     plt.xlabel("Time Elapsed (seconds)")
     plt.ylabel("Connection Count")
 
@@ -34,6 +36,8 @@ def plotConnectionCount(file_path: str, log_number: int):
     plt.savefig(fig_path)
     plt.clf()
 
+
+###############################################################################
 def compareChains(file_path1: str, file_path2: str, log_number: int):
     # Read and parse the JSON data from the file
     with open(file_path1, 'r') as json_file:
@@ -47,16 +51,16 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     # Create a DataFrame
     df_2 = pd.DataFrame(data_2)
 
-    df_1 = df_1.iloc[2:]
-    df_2 = df_2.iloc[2:]
+    df_1 = df_1.iloc[1:]
+    df_2 = df_2.iloc[1:]
 
     # Plot blockCount over time
     sns.set_theme()
     sns.lineplot(x="timeElapsed", y="blockCount", data=df_1, label='Blockchain 1', linewidth=2, marker='o', markersize=6, alpha=1)
     sns.lineplot(x="timeElapsed", y="blockCount", data=df_2, label='Blockchain 2', linewidth=2, marker='s', markersize=6, alpha=0.7)
 
-    plt.axvline(x=110, color='red', linestyle='--', label='Hijack start')
-    plt.axvline(x=410, color='blue', linestyle='--', label='Hijack end')
+    plt.axvline(x=120, color='red', linestyle='--', label='Hijack start')
+    plt.axvline(x=420, color='blue', linestyle='--', label='Hijack end')
 
 
     sns.despine(left=True, bottom=True)  # Remove top and right spines
@@ -71,6 +75,7 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     plt.clf()
 
 
+###############################################################################
 def plotCDF(file_path: str, log_number: int):
     # Read and parse the JSON data from the file
     with open(file_path, 'r') as json_file:
@@ -96,6 +101,7 @@ def plotCDF(file_path: str, log_number: int):
     # plt.savefig(fig_path)
     # plt.clf()
 
+###############################################################################
 def saveFigurePath(log_number: int)->str:
     base_path = '/home/justus/seed-emulator/examples/scion/plots'
     plot_path = f'{base_path}/plot_{log_number}'
@@ -117,3 +123,14 @@ def saveFigurePath(log_number: int)->str:
 
     # Path for next fig is
     return F"{plot_path}/fig_{next_int}"
+
+###############################################################################
+def countUniques(ips):
+    unique_entries = set()  # Initialize an empty set to store unique combinations
+
+    for entry in ips:
+        ip = entry.split(':')[0]
+        if ip not in unique_entries:
+            unique_entries.add(ip)  # Add the unique entry to the set
+    
+    return len(unique_entries)  # Return the count of unique entries

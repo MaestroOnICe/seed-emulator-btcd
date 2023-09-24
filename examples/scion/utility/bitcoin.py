@@ -70,7 +70,7 @@ class btcd:
         host.appendStartCommand('btcd --configfile /root/.btcd/btcd.conf', True)
 
         # start the measuring tool
-        host.appendStartCommand('sleep 2 && measure &> /root/.btcd/logs/mainnet/measure.log', True)
+        host.appendStartCommand('sleep 10 && measure &> /root/.btcd/logs/mainnet/measure.log', True)
 
     # adds IP version of btcd to the host with Bootstrap configuration
     def __addBootstrapNode(self, host: Node):
