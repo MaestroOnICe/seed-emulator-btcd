@@ -111,9 +111,9 @@ else:
 print("Sleeping for 120 seconds until hijack")
 time.sleep(120)
 
-print("Hijacking AS, sleeping for 5 minutes")
+print("Hijacking AS, sleeping for 8 minutes")
 experiment.hijackAS(100, 130)
-time.sleep(300)
+time.sleep(480)
 
 experiment.endHijack(100)
 print("Hijack ended, sleep for another 120 seconds")

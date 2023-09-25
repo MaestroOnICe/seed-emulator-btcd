@@ -32,7 +32,7 @@ class btcd:
         self.__addBootstrapNode(host)
 
     # Bootstrap nodes are always .50 ip addresses
-    def createScionNode(self, as_: ScionAutonomousSystem):
+    def createScionNode(self, as_: ScionAutonomousSystem, scion_peer_address: str):
         asn = as_.getAsn()
 
         as_isd_ = self.scion_isd.getAsIsds(asn)[0]
@@ -40,7 +40,7 @@ class btcd:
 
         # creates the host in the seed emulator
         host = as_.createHost(f'node_{asn}_{50}').joinNetwork("net0", address=f"10.{asn}.0.50")
-        self.__addScionNode(host, as_isd, asn)
+        self.__addScionNode(host, as_isd, asn, scion_peer_address)
 
 
 ###############################################################################
@@ -100,7 +100,7 @@ class btcd:
         host.appendStartCommand('sleep 2 && measure &> /root/.btcd/logs/mainnet/measure.log', True)
 
     # adds IP version of btcd to the host with Bootstrap configuration
-    def __addScionNode(self, host: Node, isd: int, asn: int):
+    def __addScionNode(self, host: Node, isd: int, asn: int, scion_peer_address: str):
         # add logging folder
         name = host.getName()
         log_path = self.createNodeDirectory(name)
@@ -121,10 +121,11 @@ class btcd:
         host.importFile(self.__wd+'/configs/node_scion.conf', '/root/.btcd/btcd.conf')
 
         # start the node
+        host.appendStartCommand(f'echo addpeer={scion_peer_address} >> /root/.btcd/btcd.conf')
         host.appendStartCommand(f'btcd --configfile /root/.btcd/btcd.conf --listen {isd}-{asn},10.{asn}.0.50:8666 --listen 0.0.0.0:8333', True)
 
         # start the measuring tool
-        host.appendStartCommand('sleep 2 && measure &> /root/.btcd/logs/mainnet/measure.log', True)
+        host.appendStartCommand('sleep 10 && measure &> /root/.btcd/logs/mainnet/measure.log', True)
 
 
 ###############################################################################

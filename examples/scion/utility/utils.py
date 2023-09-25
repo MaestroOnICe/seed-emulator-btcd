@@ -215,7 +215,7 @@ xc_nets = CrossConnectNetAssigner()
 ebgp_types = {
     "peer": PeerRelationship.Peer,
     "provider": PeerRelationship.Provider,
-    "core": PeerRelationship.Peer
+    "core": PeerRelationship.Provider
 }
 
 sclink_type = {

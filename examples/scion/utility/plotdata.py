@@ -7,29 +7,42 @@ import os
 import re
 
 
-def plotConnectionCount(file_path: str, log_number: int):
+def plotConnectionCount(file_path1: str, file_path2: str, node_1: str, node_2: str, log_number: int, ):
     # Read and parse the JSON data from the file
-    with open(file_path, 'r') as json_file:
-        data = json.load(json_file)["data"]
-    
+    with open(file_path1, 'r') as json_file:
+        data_1 = json.load(json_file)["data"]
     # Create a DataFrame
-    df = pd.DataFrame(data)
+    df_1 = pd.DataFrame(data_1)
 
-    df["uniqueConCount"] = df["connectedPeers"].apply(countUniques)
+    # Read and parse the JSON data from the file
+    with open(file_path2, 'r') as json_file:
+        data_2 = json.load(json_file)["data"]
+    # Create a DataFrame
+    df_2 = pd.DataFrame(data_2)
+
+    # start after 10 seconds to omit ramp up
+    df_1 = df_1.iloc[1:]
+    df_2 = df_2.iloc[1:]
+
+    # count unique connections
+    df_1["uniqueConCount"] = df_1["connectedPeers"].apply(countUniques)
+    df_2["uniqueConCount"] = df_2["connectedPeers"].apply(countUniques)
 
     # Plot using Seaborn
     sns.set_theme()
-    sns.lineplot(x="timeElapsed", y="uniqueConCount", data=df, label='uniqueConCount', linewidth=2)
 
-    plt.axvline(x=120, color='red', linestyle='--', label='Start')
-    plt.axvline(x=420, color='blue', linestyle='--', label='End')
+    #fig = plt.subplot(figsize=())
+    sns.lineplot(x="timeElapsed", y="uniqueConCount", data=df_1, label=node_1, linewidth=2,)
+    sns.lineplot(x="timeElapsed", y="uniqueConCount", data=df_2, label=node_2, linewidth=2,)
+
+    plt.axvline(x=100, color='red', linestyle='--', label='Start')
+    plt.axvline(x=400, color='blue', linestyle='--', label='End')
+
 
     plt.title(f"Connection Count Over Time")
     plt.xlabel("Time Elapsed (seconds)")
     plt.ylabel("Connection Count")
 
-    sns.despine(left=True, bottom=True)  # Remove top and right spines
-    plt.legend(fontsize=12)  # Add a legend
 
 
     fig_path = saveFigurePath(log_number)
@@ -55,15 +68,12 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     df_2 = df_2.iloc[1:]
 
     # Plot blockCount over time
-    sns.set_theme()
+    sns.set_style("whitegrid")
     sns.lineplot(x="timeElapsed", y="blockCount", data=df_1, label='Blockchain 1', linewidth=2, marker='o', markersize=6, alpha=1)
     sns.lineplot(x="timeElapsed", y="blockCount", data=df_2, label='Blockchain 2', linewidth=2, marker='s', markersize=6, alpha=0.7)
+    plt.axvline(x=100, color='red', linestyle='--', label='Start')
+    plt.axvline(x=400, color='blue', linestyle='--', label='End')
 
-    plt.axvline(x=120, color='red', linestyle='--', label='Hijack start')
-    plt.axvline(x=420, color='blue', linestyle='--', label='Hijack end')
-
-
-    sns.despine(left=True, bottom=True)  # Remove top and right spines
     plt.legend(fontsize=12)  # Add a legend
     plt.xlabel('Time Elapsed (seconds)')
     plt.ylabel('Block Count')
