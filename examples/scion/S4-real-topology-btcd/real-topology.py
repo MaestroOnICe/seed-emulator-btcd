@@ -669,15 +669,15 @@ else:
     experiment.up()
 
 print("Sleeping for 120 seconds until hijack")
-time.sleep(600)
+time.sleep(120)
 
-# print("Hijacking AS, sleeping for 5 minutes")
+print("Hijacking AS, sleeping for 5 minutes")
 # attacker, victim
-# experiment.hijackAS(139, 125)
-# time.sleep(300)
+experiment.hijackAS(139, 125)
+time.sleep(300)
 
-# experiment.endHijack(139)
-# print("Hijack ended, sleep for another 120 seconds")
-# time.sleep(120)
+experiment.endHijack(139)
+print("Hijack ended, sleep for another 120 seconds")
+time.sleep(120)
 
 experiment.down()

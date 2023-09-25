@@ -173,6 +173,32 @@ class btcd:
         return node_number
 
 
-        
+def creatMeasuringNode(self, as_: ScionAutonomousSystem, address: str):
+    asn = as_.getAsn()
+    
+    # creates the host in the seed emulator
+    host = as_.createHost(f'node_{asn}_{80}').joinNetwork("net0", address=f"10.{asn}.0.80")
+    host.addSharedFolder("/shared/", "./logs/")
+    host.addSharedFolder("/shared_bin/", "./bin/")
+
+    # copy measuring binary, make it executable
+    host.appendStartCommand("cp /shared/failover_client /bin/failover", False)
+    host.appendStartCommand("chmod +x /bin/failover", False)
+    #host.appendStartCommand(f'sleep 10 && failover --connect {address} &> /shared/failover_client.log', True)
 
 
+def creatMeasuringServer(self, as_: ScionAutonomousSystem):
+    asn = as_.getAsn()
+    
+    as_isd_ = self.scion_isd.getAsIsds(asn)[0]
+    as_isd = as_isd_[0]
+
+    # creates the host in the seed emulator
+    host = as_.createHost(f'node_{asn}_{80}').joinNetwork("net0", address=f"10.{asn}.0.80")
+    host.addSharedFolder("/shared/", "./logs/")
+    host.addSharedFolder("/shared_bin/", "./bin/")
+
+    # copy measuring binary, make it executable
+    host.appendStartCommand("cp /shared/failover_server /bin/failover", False)
+    host.appendStartCommand("chmod +x /bin/failover", False)
+    #host.appendStartCommand(f'sleep 10 && failover --listen {as_isd}-{asn},10.{asn}.0.80:8666 &> /shared/failover_server.log', True)
