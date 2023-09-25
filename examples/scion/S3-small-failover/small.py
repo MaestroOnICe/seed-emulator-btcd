@@ -45,8 +45,10 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     cross_connector.XConnect(100,130, "provider")
     cross_connector.XConnect(101,131, "provider")
 
+    btcd.creatMeasuringNode(as130, "1-131,10.131.0.80:8666")
+    btcd.creatMeasuringServer(as131)
 
-    # Rendering s
+    # Rendering
     ###############################################################################
     ixp_connector.addScionIXPConnections()
     emu.addLayer(base)
@@ -61,11 +63,10 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     ###############################################################################
     emu.compile(Docker(), './output', override=True)
     emu.compile(Graphviz(), "./output/graphs", override=True)
-    experiment.deploy()
+    #experiment.deploy()
 
-else:
-    time.sleep(2)
-    experiment.up()
+# else:
+#     time.sleep(2)
+#     experiment.up()
 
-
-experiment.down()
+# experiment.down()
