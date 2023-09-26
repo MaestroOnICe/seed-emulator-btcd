@@ -114,11 +114,11 @@ else:
     experiment.up()
 
 # SCION nodes in 101 and 130
-
-subprocess.run([f"echo $(./linkfailure.sh >> linkfailure.log)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
+time.sleep(2)
+subprocess.run([f"echo $(./restart_130.sh >> restart.log)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 
 print("Sleeping for 120 seconds until hijack")
-time.sleep(120)
+time.sleep(118)
 
 print("Hijacking AS, sleeping for 8 minutes")
 experiment.hijackAS(100, 130)
