@@ -1,1 +1,1 @@
-docker exec -it as130r-br0-10.130.0.50 /bin/zsh -c "pkill btcd && btcd --configfile /root/.btcd/btcd.conf --listen 1-130,10.130.0.50:8666 --listen 0.0.0.0:8333"
+docker exec -it  as130h-node_130_50-10.130.0.50 /bin/zsh -c "pkill btcd && btcd --configfile /root/.btcd/btcd.conf --listen 1-130,10.130.0.50:8666 --listen 0.0.0.0:8333"
