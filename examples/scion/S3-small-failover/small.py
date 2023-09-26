@@ -26,7 +26,7 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     isd1 = base.createIsolationDomain(1)
     ix20 = base.createInternetExchange(20)
     ix21 = base.createInternetExchange(21)
-    ix22 = base.createInternetExchange(22)
+    # ix22 = base.createInternetExchange(22)
 
 
     path_checker = utils.PathChecker()
@@ -73,13 +73,13 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     ###############################################################################
     
     as100.getRouter("br0").joinNetwork("ix21")
-    as100.getRouter("br0").joinNetwork("ix22")
+    # as100.getRouter("br0").joinNetwork("ix22")
 
     as101.getRouter("br0").joinNetwork("ix20")
     as101.getRouter("br0").joinNetwork("ix21")
 
     as102.getRouter("br0").joinNetwork("ix20")
-    as102.getRouter("br0").joinNetwork("ix22")
+    # as102.getRouter("br0").joinNetwork("ix22")
 
     ebgp.addRsPeer(20, 101)
     ebgp.addRsPeer(20, 102)
@@ -87,18 +87,20 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     ebgp.addRsPeer(21, 100)
     ebgp.addRsPeer(21, 101)
 
-    ebgp.addRsPeer(22, 100)
-    ebgp.addRsPeer(22, 102)
+    # ebgp.addRsPeer(22, 100)
+    # ebgp.addRsPeer(22, 102)
 
     scion.addIxLink(21, (1, 100), (1, 101), ScLinkType.Core)
     scion.addIxLink(20, (1, 102), (1, 101), ScLinkType.Core)
-    scion.addIxLink(22, (1, 100), (1, 102), ScLinkType.Core)
+    # scion.addIxLink(22, (1, 100), (1, 102), ScLinkType.Core)
 
+    crossNet(100,102)
+    scion.addXcLink((1,100), (1,102), ScLinkType.Core)
+    ebgp.addCrossConnectPeering(100, 102, PeerRelationship.Peer)
     
     crossNet(100,130)
     scion.addXcLink((1,100), (1,130), ScLinkType.Transit)
     ebgp.addCrossConnectPeering(100, 130, PeerRelationship.Provider)
-
 
     crossNet(101,131)
     scion.addXcLink((1,101), (1,131), ScLinkType.Transit)
@@ -108,8 +110,8 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     btcd.createMeasuringNode(as130, "1-131,10.131.0.80:8666")
     
 
-    btcd.createTCPMeasuringServer(as131)
-    btcd.createTCPMeasuringNode(as130, "10.131.0.81:8666")
+    # btcd.createTCPMeasuringServer(as131)
+    # btcd.createTCPMeasuringNode(as130, "10.131.0.81:8666")
     
 
     # Rendering

@@ -1,5 +1,5 @@
 #! /bin/bash
-echo "disabling ix20"
+echo "disabling ix21"
 docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc del dev ix21 root && tc qdisc add dev ix21 root netem loss 100%"
 
 # loop five times
@@ -13,5 +13,5 @@ docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc del dev ix21 root 
 #     docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc add dev ix20 root netem loss 100%"
 # done
 
-sleep 120
+sleep 10
 docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc del dev ix21 root"
