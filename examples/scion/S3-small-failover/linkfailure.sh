@@ -14,4 +14,4 @@ do
 done
 
 sleep 2
-docker exec -it as200r-br0-10.200.0.254 /bin/zsh -c "tc qdisc del dev ix10 root"
+docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc del dev ix20 root"

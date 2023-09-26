@@ -119,8 +119,10 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
 
 time.sleep(20)
 
+print("Brining link down")
 subprocess.run([f"echo $(./linkfailure.sh)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 
+print("link failure over")
+time.sleep(20)
 
-
-# experiment.down()
+experiment.down()
