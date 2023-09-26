@@ -173,7 +173,7 @@ class btcd:
         return node_number
 
 
-    def creatMeasuringNode(self, as_: ScionAutonomousSystem, address: str):
+    def createMeasuringNode(self, as_: ScionAutonomousSystem, address: str):
         asn = as_.getAsn()
         
         # creates the host in the seed emulator
@@ -187,7 +187,7 @@ class btcd:
         host.appendStartCommand(f'sleep 10 && /shared_bin/failover --remote {address} --architecture 1 &> /shared/failover_client.log', True)
 
 
-    def creatMeasuringServer(self, as_: ScionAutonomousSystem):
+    def createMeasuringServer(self, as_: ScionAutonomousSystem):
         asn = as_.getAsn()
         
         as_isd_ = self.scion_isd.getAsIsds(asn)[0]
@@ -202,3 +202,24 @@ class btcd:
         #host.appendStartCommand("cp /shared_bin/failover /bin/failover", False)
         #host.appendStartCommand("chmod +x /bin/failover", False)
         host.appendStartCommand(f'sleep 10 && ./shared_bin/failover --listen {as_isd}-{asn},10.{asn}.0.80:8666 --architecture 1 &> /shared/failover_server.log', True)
+
+    def createTCPMeasuringNode(self, as_: ScionAutonomousSystem, address: str):
+        asn = as_.getAsn()
+        
+        # creates the host in the seed emulator
+        host = as_.createHost(f'node_{asn}_{81}').joinNetwork("net0", address=f"10.{asn}.0.81")
+        host.addSharedFolder("/shared/", " /home/justus/seed-emulator/examples/scion/S3-small-failover/logs/")
+        host.addSharedFolder("/shared_bin/", " /home/justus/seed-emulator/examples/scion/S3-small-failover/bin/")
+
+        host.appendStartCommand(f'sleep 10 && /shared_bin/failover --remote {address} --architecture 0 &> /shared/failover_tcp_client.log', True)
+
+
+    def createTCPMeasuringServer(self, as_: ScionAutonomousSystem):
+        asn = as_.getAsn()
+        
+        # creates the host in the seed emulator
+        host = as_.createHost(f'node_{asn}_{81}').joinNetwork("net0", address=f"10.{asn}.0.81")
+        host.addSharedFolder("/shared/", " /home/justus/seed-emulator/examples/scion/S3-small-failover/logs/")
+        host.addSharedFolder("/shared_bin/", " /home/justus/seed-emulator/examples/scion/S3-small-failover/bin/")
+
+        host.appendStartCommand(f'sleep 10 && ./shared_bin/failover --listen 10.{asn}.0.81:8666 --architecture 0 &> /shared/failover_tcp_server.log', True)

@@ -91,8 +91,11 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     scion.addXcLink((1,101), (1,131), ScLinkType.Transit)
     ebgp.addCrossConnectPeering(101, 131, PeerRelationship.Provider)
 
-    btcd.creatMeasuringNode(as130, "1-131,10.131.0.80:8666")
-    btcd.creatMeasuringServer(as131)
+    btcd.createMeasuringNode(as130, "1-131,10.131.0.80:8666")
+    btcd.createMeasuringServer(as131)
+
+    btcd.createTCPMeasuringNode(as130, "10.131.0.81:8666")
+    btcd.createTCPMeasuringServer(as131)
 
     # Rendering
     ###############################################################################
@@ -111,8 +114,8 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     emu.compile(Graphviz(), "./output/graphs", override=True)
     experiment.deploy()
 
-# else:
-#     time.sleep(2)
-#     experiment.up()
+time.sleep(5)
+
+
 
 # experiment.down()

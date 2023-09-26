@@ -1,12 +1,17 @@
-#!/bin/bash
-command="/bin/cat <<EOM >>/etc/bird/bird.conf
-protocol static hijacks {
-    ipv4 {
-        table t_bgp;
-    };
-    route 10.$1.0.0/25 blackhole   { bgp_large_community.add(LOCAL_COMM); };
-    route 10.$1.0.128/25 blackhole { bgp_large_community.add(LOCAL_COMM); };
-}
-EOM"
+#! /bin/bash
+echo "disabling ix20"
+docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc del dev ix20 root && tc qdisc add dev ix20 root netem loss 100%"
 
-docker exec -it as${2}r-br0-10.${2}.0.254 /bin/zsh -c "$command"
+# loop five times
+for i in {1..49}
+do
+    sleep 5
+    echo "enabling ix20"
+    docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc del dev ix20 root"
+    sleep 5
+    echo "disabling ix20"
+    docker exec -it as100r-br0-10.100.0.254 /bin/zsh -c "tc qdisc add dev ix20 root netem loss 100%"
+done
+
+sleep 2
+docker exec -it as200r-br0-10.200.0.254 /bin/zsh -c "tc qdisc del dev ix10 root"
