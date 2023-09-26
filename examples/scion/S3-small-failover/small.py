@@ -109,7 +109,7 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     ###############################################################################
     emu.compile(Docker(), './output', override=True)
     emu.compile(Graphviz(), "./output/graphs", override=True)
-    #experiment.deploy()
+    experiment.deploy()
 
 # else:
 #     time.sleep(2)
