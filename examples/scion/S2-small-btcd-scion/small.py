@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 
+import subprocess
 import time
 from seedemu.layers import ScionBase, ScionRouting, Ebgp, ScionIsd, Scion
 from seedemu.compiler import Docker, Graphviz
@@ -90,7 +91,7 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
         cross_connector.XConnect(102, asn, "provider")
 
 
-    # Rendering s
+    # Rendering
     ###############################################################################
     ixp_connector.addScionIXPConnections()
     emu.addLayer(base)
@@ -112,12 +113,16 @@ else:
     time.sleep(2)
     experiment.up()
 
+# SCION nodes in 101 and 130
+
+subprocess.run([f"echo $(./linkfailure.sh >> linkfailure.log)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
+
 print("Sleeping for 120 seconds until hijack")
 time.sleep(120)
 
-print("Hijacking AS, sleeping for 5 minutes")
+print("Hijacking AS, sleeping for 8 minutes")
 experiment.hijackAS(100, 130)
-time.sleep(300)
+time.sleep(480)
 
 experiment.endHijack(100)
 print("Hijack ended, sleep for another 120 seconds")

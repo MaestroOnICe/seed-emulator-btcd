@@ -26,6 +26,7 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     isd1 = base.createIsolationDomain(1)
     ix20 = base.createInternetExchange(20)
     ix21 = base.createInternetExchange(21)
+    ix22 = base.createInternetExchange(22)
 
 
     path_checker = utils.PathChecker()
@@ -64,25 +65,36 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
 
     as100 = maker.createTier1AS(1, 100)
     as101 = maker.createTier1AS(1, 101)
+    as102 = maker.createTier1AS(1, 102)
 
     as130 = maker.createTier3AS(1, 130, issuer=101)
     as131 = maker.createTier3AS(1, 131, issuer=101)
     # Links
     ###############################################################################
     
-    as100.getRouter("br0").joinNetwork("ix20")
     as100.getRouter("br0").joinNetwork("ix21")
+    as100.getRouter("br0").joinNetwork("ix22")
+
     as101.getRouter("br0").joinNetwork("ix20")
     as101.getRouter("br0").joinNetwork("ix21")
-    ebgp.addRsPeer(20, 100)
+
+    as102.getRouter("br0").joinNetwork("ix20")
+    as102.getRouter("br0").joinNetwork("ix22")
+
     ebgp.addRsPeer(20, 101)
+    ebgp.addRsPeer(20, 102)
 
     ebgp.addRsPeer(21, 100)
     ebgp.addRsPeer(21, 101)
 
-    scion.addIxLink(20, (1, 100), (1, 101), ScLinkType.Core)
-    scion.addIxLink(21, (1, 100), (1, 101), ScLinkType.Core)
+    ebgp.addRsPeer(22, 100)
+    ebgp.addRsPeer(22, 102)
 
+    scion.addIxLink(21, (1, 100), (1, 101), ScLinkType.Core)
+    scion.addIxLink(20, (1, 102), (1, 101), ScLinkType.Core)
+    scion.addIxLink(22, (1, 100), (1, 102), ScLinkType.Core)
+
+    
     crossNet(100,130)
     scion.addXcLink((1,100), (1,130), ScLinkType.Transit)
     ebgp.addCrossConnectPeering(100, 130, PeerRelationship.Provider)
@@ -115,14 +127,14 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     ###############################################################################
     emu.compile(Docker(), './output', override=True)
     emu.compile(Graphviz(), "./output/graphs", override=True)
-    experiment.deploy()
+    #experiment.deploy()
 
-time.sleep(20)
+# time.sleep(20)
 
-print("Brining link down")
-subprocess.run([f"echo $(./linkfailure.sh >> linkfailure.log)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
+# print("Brining link down")
+# subprocess.run([f"echo $(./linkfailure.sh >> linkfailure.log)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 
-print("link failure over")
-time.sleep(20)
+# print("link failure over")
+# time.sleep(20)
 
-experiment.down()
+# experiment.down()

@@ -31,11 +31,11 @@ for sequence_number in sequence_numbers[1:]:
 failover_df = pd.DataFrame({'Failover Time (ms)': failover_times})
 print(failover_df)
 
-# Step 4: Plot a CDF of the failover times
-sns.set_style("whitegrid")
-plt.figure(figsize=(10, 6))
-sns.ecdfplot(data=failover_df, x='Failover Time (ms)', complementary=True)
-plt.title('Cumulative Distribution Function of Failover Times')
-plt.xlabel('Failover Time (ms)')
-plt.ylabel('CDF')
-plt.savefig("./plot/fig_3")
+# # Step 4: Plot a CDF of the failover times
+# sns.set_style("whitegrid")
+# plt.figure(figsize=(10, 6))
+# sns.ecdfplot(data=failover_df, x='Failover Time (ms)', complementary=True)
+# plt.title('Cumulative Distribution Function of Failover Times')
+# plt.xlabel('Failover Time (ms)')
+# plt.ylabel('CDF')
+# plt.savefig("./plot/fig_3")

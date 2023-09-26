@@ -106,7 +106,7 @@ def plotVictimConnectionCount(log_path: str,  log_number: int):
 
 
     fig_path = saveFigurePath(log_number)
-    plt.savefig(fig_path)
+    plt.savefig(fig_path,format="pdf")
     plt.clf()
 
 
@@ -149,7 +149,7 @@ def compareChains(file_path1: str, file_path2: str, log_number: int):
     plt.tight_layout()  # Ensure the plot fits nicely in the figure
 
     fig_path = saveFigurePath(log_number)
-    plt.savefig(fig_path,dpi=300)
+    plt.savefig(fig_path,format="pdf")
     plt.clf()
 
 

@@ -22,10 +22,10 @@ plotdata.plotConnectionCount(node_1_dir,node_2_dir, node_1_number, node_2_number
 plotdata.compareChains(node_1_dir, node_2_dir, int(log_number))
 
 
-path_components = node_1_dir.split(os.sep)
-general_log_path = path_components[:-2]
-new_path = os.path.join(*general_log_path)
+# path_components = node_1_dir.split(os.sep)
+# general_log_path = path_components[:-2]
+# new_path = os.path.join(*general_log_path)
 
-plotdata.plotVictimConnectionCount(f"/{new_path}", int(log_number))
+# plotdata.plotVictimConnectionCount(f"/{new_path}", int(log_number))
 
 #plotdata.plotCDF(f"../data/logs_{log_number}/node_101_100/log.json",log_number)
