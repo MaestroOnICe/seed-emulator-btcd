@@ -184,7 +184,7 @@ class btcd:
         # copy measuring binary, make it executable
         #host.appendStartCommand("cp /shared_bin/failover /bin/failover", False)
         #host.appendStartCommand("chmod +x /bin/failover", False)
-        host.appendStartCommand(f'sleep 10 && /shared_bin/failover --remote {address} &> /shared/failover_client.log', True)
+        host.appendStartCommand(f'sleep 10 && /shared_bin/failover --remote {address} --architecture 1 &> /shared/failover_client.log', True)
 
 
     def creatMeasuringServer(self, as_: ScionAutonomousSystem):
@@ -201,4 +201,4 @@ class btcd:
         # copy measuring binary, make it executable
         #host.appendStartCommand("cp /shared_bin/failover /bin/failover", False)
         #host.appendStartCommand("chmod +x /bin/failover", False)
-        host.appendStartCommand(f'sleep 10 && ./shared_bin/failover --listen {as_isd}-{asn},10.{asn}.0.80:8666 &> /shared/failover_server.log', True)
+        host.appendStartCommand(f'sleep 10 && ./shared_bin/failover --listen --architecture 1 {as_isd}-{asn},10.{asn}.0.80:8666 &> /shared/failover_server.log', True)
