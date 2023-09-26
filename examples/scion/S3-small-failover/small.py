@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 from ipaddress import IPv4Network
+import subprocess
 import time
 from seedemu.layers import ScionBase, ScionRouting, Ebgp, ScionIsd, Scion, PeerRelationship
 from seedemu.compiler import Docker, Graphviz
@@ -91,11 +92,13 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     scion.addXcLink((1,101), (1,131), ScLinkType.Transit)
     ebgp.addCrossConnectPeering(101, 131, PeerRelationship.Provider)
 
-    btcd.createMeasuringNode(as130, "1-131,10.131.0.80:8666")
     btcd.createMeasuringServer(as131)
+    btcd.createMeasuringNode(as130, "1-131,10.131.0.80:8666")
+    
 
-    btcd.createTCPMeasuringNode(as130, "10.131.0.81:8666")
     btcd.createTCPMeasuringServer(as131)
+    btcd.createTCPMeasuringNode(as130, "10.131.0.81:8666")
+    
 
     # Rendering
     ###############################################################################
@@ -114,7 +117,9 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     emu.compile(Graphviz(), "./output/graphs", override=True)
     experiment.deploy()
 
-time.sleep(5)
+time.sleep(20)
+
+subprocess.run([f"echo $(./linkfailure.sh)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 
 
 

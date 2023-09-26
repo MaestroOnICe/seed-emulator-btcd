@@ -184,7 +184,7 @@ class btcd:
         # copy measuring binary, make it executable
         #host.appendStartCommand("cp /shared_bin/failover /bin/failover", False)
         #host.appendStartCommand("chmod +x /bin/failover", False)
-        host.appendStartCommand(f'sleep 10 && /shared_bin/failover --remote {address} --architecture 1 &> /shared/failover_client.log', True)
+        host.appendStartCommand(f'sleep 11 && /shared_bin/failover --remote {address} --architecture 1 &> /shared/failover_client.log', True)
 
 
     def createMeasuringServer(self, as_: ScionAutonomousSystem):
@@ -211,12 +211,12 @@ class btcd:
         host.addSharedFolder("/shared/", " /home/justus/seed-emulator/examples/scion/S3-small-failover/logs/")
         host.addSharedFolder("/shared_bin/", " /home/justus/seed-emulator/examples/scion/S3-small-failover/bin/")
 
-        host.appendStartCommand(f'sleep 10 && /shared_bin/failover --remote {address} --architecture 0 &> /shared/failover_tcp_client.log', True)
+        host.appendStartCommand(f'sleep 11 && /shared_bin/failover --remote {address} --architecture 0 &> /shared/failover_tcp_client.log', True)
 
 
     def createTCPMeasuringServer(self, as_: ScionAutonomousSystem):
         asn = as_.getAsn()
-        
+
         # creates the host in the seed emulator
         host = as_.createHost(f'node_{asn}_{81}').joinNetwork("net0", address=f"10.{asn}.0.81")
         host.addSharedFolder("/shared/", " /home/justus/seed-emulator/examples/scion/S3-small-failover/logs/")
