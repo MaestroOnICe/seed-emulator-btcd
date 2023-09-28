@@ -22,6 +22,8 @@ EbgpFileTemplates["rs_bird_peer"] =  """
     rs client;
     local {localAddress} as {localAsn};
     neighbor {peerAddress} as {peerAsn};
+    hold time 90;
+    bfd graceful;
 """
 
 EbgpFileTemplates["rnode_bird_peer"] = """
@@ -37,6 +39,8 @@ EbgpFileTemplates["rnode_bird_peer"] = """
     }};
     local {localAddress} as {localAsn};
     neighbor {peerAddress} as {peerAsn};
+    hold time 90;
+    bfd graceful;
 """
 
 class PeerRelationship(Enum):

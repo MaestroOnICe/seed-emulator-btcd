@@ -8,6 +8,13 @@ RoutingFileTemplates["rs_bird"] = """\
 router id {routerId};
 protocol device {{
 }}
+protocol bfd {{
+    interface "-net*", "*" {{
+        min rx interval 200ms;
+        min tx interval 200ms;
+        multiplier 3;
+    }};    
+}}
 """
 
 RoutingFileTemplates["rnode_bird_direct_interface"] = """
@@ -18,6 +25,13 @@ RoutingFileTemplates["rnode_bird"] = """\
 router id {routerId};
 ipv4 table t_direct;
 protocol device {{
+}}
+protocol bfd {{
+    interface "-net*", "*" {{
+        min rx interval 200ms;
+        min tx interval 200ms;
+        multiplier 3;
+    }};    
 }}
 protocol kernel {{
     ipv4 {{

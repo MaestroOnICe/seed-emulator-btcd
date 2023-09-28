@@ -13,6 +13,8 @@ import examples.scion.utility.experiment as experiment
 import sys
 from seedemu.layers.Scion import LinkType as ScLinkType
 
+from seedemu.components import BgpAttackerComponent
+
 if len(sys.argv) > 1 and sys.argv[1] == str(1):
     # Initialize the emulator and layers
     ###############################################################################
@@ -61,11 +63,9 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
         br_b.crossConnect(asn_a, as_a_router, xc_nets._next_addr(f'{asn_a}-{asn_b}'))
 
 
-
-
     as100 = maker.createTier1AS(1, 100)
     as101 = maker.createTier1AS(1, 101)
-    as102 = maker.createTier1AS(1, 102)
+    # as102 = maker.createTier1AS(1, 102)
 
     as130 = maker.createTier3AS(1, 130, issuer=101)
     as131 = maker.createTier3AS(1, 131, issuer=101)
@@ -73,16 +73,16 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     ###############################################################################
     
     as100.getRouter("br0").joinNetwork("ix21")
-    # as100.getRouter("br0").joinNetwork("ix22")
+    as100.getRouter("br0").joinNetwork("ix20")
 
     as101.getRouter("br0").joinNetwork("ix20")
     as101.getRouter("br0").joinNetwork("ix21")
 
-    as102.getRouter("br0").joinNetwork("ix20")
+    # as102.getRouter("br0").joinNetwork("ix20")
     # as102.getRouter("br0").joinNetwork("ix22")
 
     ebgp.addRsPeer(20, 101)
-    ebgp.addRsPeer(20, 102)
+    ebgp.addRsPeer(20, 100)
 
     ebgp.addRsPeer(21, 100)
     ebgp.addRsPeer(21, 101)
@@ -91,12 +91,13 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     # ebgp.addRsPeer(22, 102)
 
     scion.addIxLink(21, (1, 100), (1, 101), ScLinkType.Core)
-    scion.addIxLink(20, (1, 102), (1, 101), ScLinkType.Core)
+    scion.addIxLink(20, (1, 100), (1, 101), ScLinkType.Core)
+    # scion.addIxLink(20, (1, 102), (1, 101), ScLinkType.Core)
     # scion.addIxLink(22, (1, 100), (1, 102), ScLinkType.Core)
 
-    crossNet(100,102)
-    scion.addXcLink((1,100), (1,102), ScLinkType.Core)
-    ebgp.addCrossConnectPeering(100, 102, PeerRelationship.Peer)
+    # crossNet(100,101)
+    # scion.addXcLink((1,100), (1,101), ScLinkType.Core)
+    # ebgp.addCrossConnectPeering(100, 101, PeerRelationship.Peer)
     
     crossNet(100,130)
     scion.addXcLink((1,100), (1,130), ScLinkType.Transit)
@@ -129,14 +130,14 @@ if len(sys.argv) > 1 and sys.argv[1] == str(1):
     ###############################################################################
     emu.compile(Docker(), './output', override=True)
     emu.compile(Graphviz(), "./output/graphs", override=True)
-    #experiment.deploy()
+    experiment.deploy()
 
-# time.sleep(20)
+time.sleep(15)
 
-# print("Brining link down")
-# subprocess.run([f"echo $(./linkfailure.sh >> linkfailure.log)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
+print("Brining link down")
+subprocess.run([f"echo $(./linkfailure.sh >> linkfailure.log)"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
 
-# print("link failure over")
-# time.sleep(20)
+print("link failure over")
+time.sleep(10)
 
-# experiment.down()
+experiment.down()

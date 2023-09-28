@@ -35,3 +35,4 @@ examples/scion/old/*
 examples/scion/data/*
 examples/scion/plots/*
 examples/scion/old_logs/*
+examples/scion/*/plot
